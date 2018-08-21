@@ -19,7 +19,7 @@ public class ClosedAccountsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_closed_accounts);
-        setTitle("Closed Accounts");
+        setTitle("Closed Account");
 
         startClosedAccountsFragment();
     }
