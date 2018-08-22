@@ -1,5 +1,6 @@
 package com.sapicons.deepak.tbd.Fragments;
 
+import android.app.DatePickerDialog;
 import android.app.ListFragment;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -16,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -30,6 +32,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.sapicons.deepak.tbd.Adapters.ClosedAccountAdapter;
+import com.sapicons.deepak.tbd.AddAccountActivity;
 import com.sapicons.deepak.tbd.Objects.AccountItem;
 import com.sapicons.deepak.tbd.R;
 
@@ -53,6 +56,11 @@ public class ClosedAccountsDisplayFragment extends ListFragment implements Searc
 
     ProgressDialog progressDialog;
     String TAG = "TAG";
+
+    Calendar startCalendar = Calendar.getInstance(),
+            endCalendar = Calendar.getInstance();
+    DatePickerDialog.OnDateSetListener startDate,endDate;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -204,7 +212,7 @@ public class ClosedAccountsDisplayFragment extends ListFragment implements Searc
         byDateRangeTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mContext, "By date range sort ", Toast.LENGTH_SHORT).show();
+                sortByRange(3);
                 dialog.dismiss();
             }
         });
@@ -270,33 +278,80 @@ public class ClosedAccountsDisplayFragment extends ListFragment implements Searc
 
     public void sortByRange(int choice){
         Calendar calendar = Calendar.getInstance();
-        long currTime = calendar.getTimeInMillis();
-        long endTime = 0l;
+        long currTime = calendar.getTimeInMillis(); // start from today
+        long startTime = 0l; //end at a particular time frame in past
 
         // if choice is by week
         if(choice == 1){
-            endTime= currTime - (1000*60*60*24*7);
+            startTime= currTime - (1000*60*60*24*7);
+            filterAccountsByClosedDate(startTime,currTime);
 
         }
         else if(choice == 2){
-            endTime= currTime - (2592000000l);
+            startTime= currTime - (2592000000l);
+            filterAccountsByClosedDate(startTime,currTime);
+        }
+        else if(choice == 3){
+
+
+
+            endDate = new DatePickerDialog.OnDateSetListener() {
+                @Override
+                public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
+                    endCalendar.set(Calendar.YEAR, year);
+                    endCalendar.set(Calendar.MONTH, monthOfYear);
+                    endCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                    //Log.d("DATE RANGE")
+                    filterAccountsByClosedDate(startCalendar.getTimeInMillis(),endCalendar.getTimeInMillis());
+
+                }
+            };
+
+            startDate = new DatePickerDialog.OnDateSetListener() {
+
+                @Override
+                public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                      int dayOfMonth) {
+
+                    startCalendar.set(Calendar.YEAR, year);
+                    startCalendar.set(Calendar.MONTH, monthOfYear);
+                    startCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+                    Toast.makeText(mContext, "Select End Date", Toast.LENGTH_SHORT).show();
+                    new DatePickerDialog(getActivity(), endDate, endCalendar
+                            .get(Calendar.YEAR), endCalendar.get(Calendar.MONTH),
+                            endCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                }
+
+            };
+
+            Toast.makeText(mContext, "Select Start Date", Toast.LENGTH_SHORT).show();
+
+            new DatePickerDialog(getActivity(), startDate, startCalendar
+                    .get(Calendar.YEAR), startCalendar.get(Calendar.MONTH),
+                    startCalendar.get(Calendar.DAY_OF_MONTH)).show();
+
         }
 
-        filterAccountsByClosedDate(currTime,endTime);
+
 
 
     }
 
-    void  filterAccountsByClosedDate(long currTime,long endTime){
-        Log.d("DATE RANGE","ct: "+currTime+"  Et: "+endTime);
+    void  filterAccountsByClosedDate(long startTime,long endTime){
+        Log.d("DATE RANGE","ct: "+startTime+"  Et: "+endTime);
         List<AccountItem> filteredValues = new ArrayList<AccountItem>(list);
         for (AccountItem value : list) {
 
             long endDate = Long.parseLong(value.getEndDate());
-            Log.d("DATE RANGE","daterangea: "+endDate);
+            Log.d("DATE RANGE","endDate of acc : "+endDate);
 
             //remove accounts with closed date other than the range
-            if(endDate<endTime || endDate >currTime )
+            if(endDate>=startTime && endDate<= endTime ) {
+
+                Log.d("DATE RANGE"," In range");
+            }
+            else
                 filteredValues.remove(value);
         }
 

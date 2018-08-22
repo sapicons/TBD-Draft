@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:textAlignment="center"
-        android:text="All"
+        android:text="Remove filters"
         android:id="@+id/custom_sort_all"
         android:clickable="true"/>
 

@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<RelativeLayout
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     xmlns:fancy="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
@@ -11,25 +21,28 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_margin="16dp"
-        android:layout_above="@id/profit_rev_ll">
+        android:layout_alignParentTop="true">
 
         <mehdi.sakout.fancybuttons.FancyButton
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="48dp"
             android:id="@+id/frag_dash_due_today_btn"
             android:layout_marginRight="32dp"
             android:layout_marginLeft="32dp"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
             fancy:fb_text="Due Today"
             fancy:fb_radius="20dp"
             fancy:fb_focusColor="#5577bd"
-            fancy:fb_defaultColor="#2e7d32"/>
+            fancy:fb_defaultColor="#2e7d32"
+            android:layout_gravity="center_horizontal"/>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_gravity="center_horizontal"
         android:layout_marginLeft="48dp"
         android:layout_marginRight="48dp"
         android:layout_marginBottom="16dp"
@@ -45,8 +58,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
-                android:layout_marginTop="16dp"
-                android:text="Total Profit:    "/>
+                android:text="Profit:    "/>
 
             <TextView
                 android:layout_width="0dp"
@@ -55,7 +67,7 @@
                 android:textAlignment="textEnd"
                 android:layout_gravity="end"
                 android:id="@+id/fd_total_profit_tv"
-                android:textSize="28sp"
+                android:textSize="18sp"
                 android:text="24,000.00"
                 android:textColor="#2e7d32"/>
         </LinearLayout>
@@ -69,8 +81,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:layout_marginTop="16dp"
-                android:text="Total Expenses:    "/>
+                android:text="Expenses:    "/>
 
             <TextView
                 android:layout_width="0dp"
@@ -79,7 +90,7 @@
                 android:textAlignment="textEnd"
                 android:layout_gravity="end"
                 android:id="@+id/fd_total_expenses_tv"
-                android:textSize="28sp"
+                android:textSize="18sp"
                 android:text="24,000.00"
                 android:textColor="#d50000"/>
         </LinearLayout>
@@ -93,7 +104,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:layout_marginTop="16dp"
                 android:text="Revenue:"/>
 
             <TextView
@@ -104,17 +114,21 @@
                 android:textAlignment="textEnd"
                 android:layout_gravity="end"
                 android:id="@+id/fd_total_revenue_tv"
-                android:textSize="28sp"
+                android:textSize="18sp"
                 android:text="24,000.00"
                 android:textColor="#2962ff"/>
         </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:orientation="vertical"
-        android:layout_margin="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="16dp"
         android:layout_alignParentBottom="true"
         android:id="@+id/fd_ll">
 
@@ -122,13 +136,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_marginBottom="8dp"
             android:weightSum="2">
             <mehdi.sakout.fancybuttons.FancyButton
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="72dp"
                 android:id="@+id/frag_dash_add_customer_btn"
-                android:layout_marginLeft="32dp"
                 android:layout_marginRight="4dp"
                 fancy:fb_text="Add Customer"
                 fancy:fb_focusColor="#5577bd"
@@ -139,7 +153,6 @@
                 android:layout_height="72dp"
                 android:layout_weight="1"
                 android:id="@+id/frag_dash_collect_btn"
-                android:layout_marginRight="32dp"
                 android:layout_marginLeft="4dp"
                 fancy:fb_text="Collect"
                 fancy:fb_focusColor="#5577bd"
@@ -153,8 +166,6 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:id="@+id/frag_dash_add_account_btn"
-            android:layout_marginRight="32dp"
-            android:layout_marginLeft="32dp"
             android:layout_marginTop="8dp"
             fancy:fb_text="Add Account"
             fancy:fb_radius="20dp"
@@ -164,8 +175,6 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:id="@+id/frag_dash_c_manager_btn"
-            android:layout_marginRight="32dp"
-            android:layout_marginLeft="32dp"
             android:layout_marginTop="8dp"
             fancy:fb_text="C Manager"
             fancy:fb_radius="20dp"
@@ -175,8 +184,6 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:id="@+id/frag_dash_add_expense_btn"
-            android:layout_marginRight="32dp"
-            android:layout_marginLeft="32dp"
             android:layout_marginTop="8dp"
             fancy:fb_text="Add Expense"
             fancy:fb_radius="20dp"
@@ -187,7 +194,6 @@
     </LinearLayout>
 
 
-
-
-
+</LinearLayout>
+</ScrollView>
 </RelativeLayout>
