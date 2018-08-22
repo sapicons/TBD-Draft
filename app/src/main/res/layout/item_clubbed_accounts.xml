@@ -36,7 +36,6 @@
                 android:layout_toRightOf="@id/item_clubbed_account_customer_pic_iv"
                 android:layout_centerVertical="true"
                 android:text="First Last"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                 android:id="@+id/item_clubbed_account_customer_name"
                 android:layout_margin="8dp"
                 android:textStyle="bold"

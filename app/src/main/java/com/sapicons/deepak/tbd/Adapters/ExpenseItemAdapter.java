@@ -2,6 +2,7 @@ package com.sapicons.deepak.tbd.Adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.icu.text.NumberFormat;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.sapicons.deepak.tbd.R;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by Deepak Prasad on 19-08-2018.
@@ -50,7 +52,18 @@ public class ExpenseItemAdapter extends ArrayAdapter<ExpenseItem> {
         dateTv.setText(dateFormatter.format(s));
         typeTv.setText(item.getType());
         descriptionTv.setText(item.getDescription());
-        amountTv.setText(item.getAmount());
+        //amountTv.setText(item.getAmount());
+
+
+        Float dA = Float.parseFloat(item.getAmount());
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            NumberFormat numberFormat = NumberFormat.getCurrencyInstance(new Locale("en","in"));
+            amountTv.setText(numberFormat.format(dA));
+        }else {
+
+            java.text.NumberFormat numberFormat = java.text.NumberFormat.getNumberInstance(Locale.US);
+            amountTv.setText(numberFormat.format(dA));
+        }
 
 
         return  convertView;

@@ -34,7 +34,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="First Last"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:id="@+id/item_closed_account_customer_name"
                     android:layout_margin="8dp"
                     android:textStyle="bold"
@@ -89,7 +88,6 @@
                 android:layout_gravity="center_vertical"
                 android:id="@+id/item_closed_account_amount_tv"
                 android:text="5000"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                 android:textStyle="bold"
                 android:layout_centerVertical="true"
                 android:textColor="#000000"/>

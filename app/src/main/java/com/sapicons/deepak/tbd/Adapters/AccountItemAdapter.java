@@ -2,6 +2,7 @@ package com.sapicons.deepak.tbd.Adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.icu.text.NumberFormat;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -19,6 +20,7 @@ import com.sapicons.deepak.tbd.R;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -65,7 +67,15 @@ public class AccountItemAdapter extends ArrayAdapter<AccountItem> {
         customerNameTv.setText(accountItem.getFirstName()+" "+accountItem.getLastName());
         accTypeTv.setText(accountItem.getAccoutType());
 
-        dueAmountTv.setText(accountItem.getDueAmt());
+        Float dA = Float.parseFloat(accountItem.getDueAmt());
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            NumberFormat numberFormat = NumberFormat.getCurrencyInstance(new Locale("en","in"));
+            dueAmountTv.setText(numberFormat.format(dA));
+        }else {
+
+            java.text.NumberFormat numberFormat = java.text.NumberFormat.getNumberInstance(Locale.US);
+            dueAmountTv.setText(numberFormat.format(dA));
+        }
 
         Log.d("TAG","I: "+i);
 
