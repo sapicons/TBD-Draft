@@ -12,11 +12,11 @@ import java.util.Comparator;
 public class AccountItem implements Serializable{
     String accountNumber, startDate,accoutType,firstName, lastName, phoneNumber, amount,interestPct;
     String actualAmt,dueAmt,accountStatus,endDate,customerPicUrl;
-    String loanAmt,actualLoanAmt,totalCollectedAmt;
+    String loanAmt,actualLoanAmt,totalCollectedAmt,latestCollectionTimestamp;
     public AccountItem(){}
     public AccountItem(String accountNumber, String startDate,String endDate, String accoutType, String firstName, String lastName,
                        String phoneNumber, String amount,String actualAmt,String dueAmt, String interestPct,String accountStatus,
-                       String customerPicUrl,String loanAmt, String actualLoanAmt){
+                       String customerPicUrl,String loanAmt, String actualLoanAmt,String totalCollectedAmt,String latestCollectionTimestamp){
         this.accountNumber = accountNumber;
         this.startDate = startDate;
         this.accoutType = accoutType;
@@ -32,7 +32,8 @@ public class AccountItem implements Serializable{
         this.customerPicUrl=customerPicUrl;
         this.loanAmt= loanAmt;
         this.actualLoanAmt = actualLoanAmt;
-        this.totalCollectedAmt="0";
+        this.totalCollectedAmt=totalCollectedAmt;
+        this.latestCollectionTimestamp=latestCollectionTimestamp;
     }
 
     public String getLoanAmt() {
@@ -162,6 +163,14 @@ public class AccountItem implements Serializable{
 
     public void setTotalCollectedAmt(String totalCollectedAmt) {
         this.totalCollectedAmt = totalCollectedAmt;
+    }
+
+    public String getLatestCollectionTimestamp() {
+        return latestCollectionTimestamp;
+    }
+
+    public void setLatestCollectionTimestamp(String latestCollectionTimestamp) {
+        this.latestCollectionTimestamp = latestCollectionTimestamp;
     }
 
     public static Comparator<AccountItem> AccountNameComparator = new Comparator<AccountItem>() {

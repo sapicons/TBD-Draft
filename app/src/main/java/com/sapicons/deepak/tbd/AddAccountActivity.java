@@ -337,7 +337,7 @@ public class AddAccountActivity extends AppCompatActivity implements AdapterView
                 .collection("accounts").document(accNumber);
 
         AccountItem accountItem = new AccountItem(accNumber,startDate,endDate,accountType,firstName,
-                lastName,phoneNumber,amount,actualAmt,dueAmt,interestPct,accoutStatus,customerPicUrl,loanAmt,actualLoanAmt);
+                lastName,phoneNumber,amount,actualAmt,dueAmt,interestPct,accoutStatus,customerPicUrl,loanAmt,actualLoanAmt,"0","0");
 
         newAccRef.set(accountItem)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {

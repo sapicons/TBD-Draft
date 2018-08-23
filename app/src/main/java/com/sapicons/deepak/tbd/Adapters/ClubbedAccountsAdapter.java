@@ -366,6 +366,24 @@ public class ClubbedAccountsAdapter  extends ArrayAdapter<CustomerItem> {
 
 
 
+
+        updateTotalCollectedAmt(item,collectedAmount);
+
+        //reset the user interface
+        //resetUI();
+    }
+
+    private void resetUI(){
+
+        custItem = new ArrayList<>();
+        accItem = new ArrayList<>();
+        findAccountsOfCustomer(customerItem,holder);
+    }
+
+    private  void updateTotalCollectedAmt(AccountItem item,String collectedAmount){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
         // update total collected amount
         String totalAmtCollected = item.getTotalCollectedAmt();
         if(totalAmtCollected == null) totalAmtCollected ="0.0";
@@ -382,16 +400,14 @@ public class ClubbedAccountsAdapter  extends ArrayAdapter<CustomerItem> {
                         Log.d("COLLECT","Failed to update totalCollectedAmt: "+e);
                     }
                 });
+        accRef.update("latestCollectionTimestamp",Calendar.getInstance().getTimeInMillis()+"")
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d("COLLECT","Failed to update latestCollectionTimestamp: "+e);
+                    }
+                });
 
 
-        //reset the user interface
-        resetUI();
-    }
-
-    private void resetUI(){
-
-        custItem = new ArrayList<>();
-        accItem = new ArrayList<>();
-        findAccountsOfCustomer(customerItem,holder);
     }
 }
