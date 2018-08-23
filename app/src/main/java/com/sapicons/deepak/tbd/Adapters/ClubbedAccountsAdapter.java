@@ -90,7 +90,7 @@ public class ClubbedAccountsAdapter  extends ArrayAdapter<CustomerItem> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
         customerItem = getItem(position);
-        //if(convertView == null) {
+        if(convertView == null) {
             convertView = ((Activity) getContext()).getLayoutInflater().inflate(R.layout.item_clubbed_accounts, parent, false);
 
             holder = new ViewHolder();
@@ -102,9 +102,10 @@ public class ClubbedAccountsAdapter  extends ArrayAdapter<CustomerItem> {
             findAccountsOfCustomer(customerItem,holder);
 
 
-        //}else{
-         //   holder=(ViewHolder)convertView.getTag();
-        //}
+        }else{
+            holder=(ViewHolder)convertView.getTag();
+
+        }
 
 
         holder.custName.setText(customerItem.getFirstName().toString() + " " + customerItem.getLastName().toString());
@@ -153,6 +154,7 @@ public class ClubbedAccountsAdapter  extends ArrayAdapter<CustomerItem> {
                                 Log.d("CAA",item.getFirstName());
 
                                 list.add(item);
+
                             }
                         }else {
                             Log.d("TAG", "Error getting documents: ", task.getException());
@@ -160,6 +162,8 @@ public class ClubbedAccountsAdapter  extends ArrayAdapter<CustomerItem> {
 
                         //  club the accounts
 
+                        //if(accItem.isEmpty())
+                            //holder.accLL.setVisibility(View.GONE);
                         clubAccounts(list,holder);
                     }
                 });
@@ -168,8 +172,13 @@ public class ClubbedAccountsAdapter  extends ArrayAdapter<CustomerItem> {
     }
 
     public void clubAccounts(List<AccountItem> list,ViewHolder holder){
+
+        Log.d("CAA","No. of acc: "+list.size());
+
+        if(list.size()==0)
+            holder.accLL.setVisibility(View.GONE);
         for(final AccountItem item: list) {
-            Log.d("TAG", "Name: " + item.getFirstName() + " NO: " + item.getAccountNumber());
+            Log.d("CAA", "Name: " + item.getFirstName() + " NO: " + item.getAccountNumber());
 
             LayoutInflater layoutInflater =  (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View view;
