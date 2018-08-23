@@ -31,7 +31,7 @@
             android:layout_marginLeft="32dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
-            fancy:fb_text="Due Today"
+            fancy:fb_text="Collections Today"
             fancy:fb_radius="20dp"
             fancy:fb_focusColor="#5577bd"
             fancy:fb_defaultColor="#2e7d32"

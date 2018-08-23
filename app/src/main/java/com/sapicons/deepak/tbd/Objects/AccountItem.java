@@ -12,7 +12,7 @@ import java.util.Comparator;
 public class AccountItem implements Serializable{
     String accountNumber, startDate,accoutType,firstName, lastName, phoneNumber, amount,interestPct;
     String actualAmt,dueAmt,accountStatus,endDate,customerPicUrl;
-    String loanAmt,actualLoanAmt;
+    String loanAmt,actualLoanAmt,totalCollectedAmt;
     public AccountItem(){}
     public AccountItem(String accountNumber, String startDate,String endDate, String accoutType, String firstName, String lastName,
                        String phoneNumber, String amount,String actualAmt,String dueAmt, String interestPct,String accountStatus,
@@ -32,6 +32,7 @@ public class AccountItem implements Serializable{
         this.customerPicUrl=customerPicUrl;
         this.loanAmt= loanAmt;
         this.actualLoanAmt = actualLoanAmt;
+        this.totalCollectedAmt="0";
     }
 
     public String getLoanAmt() {
@@ -155,6 +156,13 @@ public class AccountItem implements Serializable{
     }
 
 
+    public String getTotalCollectedAmt() {
+        return totalCollectedAmt;
+    }
+
+    public void setTotalCollectedAmt(String totalCollectedAmt) {
+        this.totalCollectedAmt = totalCollectedAmt;
+    }
 
     public static Comparator<AccountItem> AccountNameComparator = new Comparator<AccountItem>() {
         @Override

@@ -70,6 +70,7 @@ public class ClubbedAccountsAdapter  extends ArrayAdapter<CustomerItem> {
     ViewHolder holder;
     CustomerItem customerItem;
 
+
     public ClubbedAccountsAdapter(@NonNull Context context, int resource, @NonNull List<CustomerItem> objects,int isCollect) {
         super(context, resource, objects);
         this.context = context;
@@ -89,7 +90,7 @@ public class ClubbedAccountsAdapter  extends ArrayAdapter<CustomerItem> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
         customerItem = getItem(position);
-        if(convertView == null) {
+        //if(convertView == null) {
             convertView = ((Activity) getContext()).getLayoutInflater().inflate(R.layout.item_clubbed_accounts, parent, false);
 
             holder = new ViewHolder();
@@ -101,9 +102,9 @@ public class ClubbedAccountsAdapter  extends ArrayAdapter<CustomerItem> {
             findAccountsOfCustomer(customerItem,holder);
 
 
-        }else{
-            holder=(ViewHolder)convertView.getTag();
-        }
+        //}else{
+         //   holder=(ViewHolder)convertView.getTag();
+        //}
 
 
         holder.custName.setText(customerItem.getFirstName().toString() + " " + customerItem.getLastName().toString());
@@ -349,6 +350,7 @@ public class ClubbedAccountsAdapter  extends ArrayAdapter<CustomerItem> {
 
 
 
+        // update collection table for the given account
         collectRef.add(collectItem)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
@@ -362,6 +364,24 @@ public class ClubbedAccountsAdapter  extends ArrayAdapter<CustomerItem> {
             }
         });
 
+
+
+        // update total collected amount
+        String totalAmtCollected = item.getTotalCollectedAmt();
+        if(totalAmtCollected == null) totalAmtCollected ="0.0";
+
+        totalAmtCollected = (Float.parseFloat(totalAmtCollected) + Float.parseFloat(collectedAmount))+"";
+        DocumentReference accRef = db.collection("users").document(user.getEmail())
+                .collection("accounts").document(item.getAccountNumber());
+
+        accRef.update("totalCollectedAmt",totalAmtCollected)
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                        Log.d("COLLECT","Failed to update totalCollectedAmt: "+e);
+                    }
+                });
 
 
         //reset the user interface

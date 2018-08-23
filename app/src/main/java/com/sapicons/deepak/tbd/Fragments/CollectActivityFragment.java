@@ -263,38 +263,11 @@ public class CollectActivityFragment extends ListFragment implements SearchView.
         String newAmt = (Float.parseFloat(accountItem.getDueAmt()) - Float.parseFloat(amount))+"";
         //accountItem.setDueAmt(newAmt);
 
-        // set customer pic if pic is null
-        if(accountItem.getCustomerPicUrl().length()<10){
-            DocumentReference cusRefDOc = db.collection("users").document(user.getEmail())
-                    .collection("customers").document(accountItem.getPhoneNumber());
-
-            cusRefDOc.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-
-                    if (task.isSuccessful()) {
-                        DocumentSnapshot document = task.getResult();
-                        if (document.exists()) {
-                            Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-                            AccountItem i = document.toObject(AccountItem.class);
-                            accountItem.setCustomerPicUrl(i.getCustomerPicUrl());
-
-                        } else {
-                            Log.d(TAG, "No such document");
-                        }
-                    } else {
-                        Log.d(TAG, "get failed with ", task.getException());
-                    }
-                }
-            });
-
-        }
-
         //update the new info to db
-        DocumentReference accRef = db.collection("users").document(user.getEmail())
+        DocumentReference collectionRef = db.collection("users").document(user.getEmail())
                 .collection("accounts").document(accountItem.getAccountNumber());
 
-        accRef.update("dueAmt",newAmt)
+        collectionRef.update("dueAmt",newAmt)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -309,6 +282,7 @@ public class CollectActivityFragment extends ListFragment implements SearchView.
         });
 
 
+        //DocumentReference
 
     }
 

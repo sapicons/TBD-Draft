@@ -103,7 +103,7 @@ public class AccountsDisplayFragment extends ListFragment implements SearchView.
     private void initialiseViews(View view){
         list = new ArrayList<>();
 
-        adapter = new AccountItemAdapter(mContext,R.layout.item_account,list,2);
+        adapter = new AccountItemAdapter(mContext,R.layout.item_account,list,1);
 
         listView.setAdapter(adapter);
 
@@ -251,7 +251,7 @@ public class AccountsDisplayFragment extends ListFragment implements SearchView.
 
                         }
                         list = new_list;
-                        adapter = new AccountItemAdapter(mContext,R.layout.item_account,new_list,2);
+                        adapter = new AccountItemAdapter(mContext,R.layout.item_account,new_list,1);
                         adapter.notifyDataSetChanged();
                         listView.setAdapter(adapter);
                         progressDialog.dismiss();
@@ -312,7 +312,7 @@ public class AccountsDisplayFragment extends ListFragment implements SearchView.
         return false;
     }
     public void resetSearch() {
-        adapter = new AccountItemAdapter(mContext,R.layout.item_account,list,2);
+        adapter = new AccountItemAdapter(mContext,R.layout.item_account,list,1);
         adapter.notifyDataSetChanged();
         listView.setAdapter(adapter);
         //listenToChanges();
@@ -364,7 +364,8 @@ public class AccountsDisplayFragment extends ListFragment implements SearchView.
             newCal.setTimeInMillis(startDate);
 
 
-            if((todaysDate - startDate) >= 1000*60*60*24 &&
+            long day=1000*60*60*24;
+            if((todaysDate - startDate) >= day  &&
                     todaysDate<endDate &&
                     Float.parseFloat(item.getDueAmt())>0 &&
                     item.getAccountStatus().equalsIgnoreCase("open"))
