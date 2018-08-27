@@ -154,15 +154,20 @@ public class AccountItemAdapter extends ArrayAdapter<AccountItem> {
         }
         else if(accountItem.getAccoutType().contains("M")){
 
-            long lastCollectionDate =0l;
+            long lastCollectionDate ;
 
-            if(accountItem.getLatestCollectionTimestamp() != null)
+            if( accountItem.getLatestCollectionTimestamp() ==null || Long.parseLong(accountItem.getLatestCollectionTimestamp()) == 0)
+                lastCollectionDate = Long.parseLong(accountItem.getStartDate());
+            else
                 lastCollectionDate = Long.parseLong(accountItem.getLatestCollectionTimestamp());
-            int noOfDays = (int)(lastCollectionDate/(day));
+
+            int noOfDays = (int)((currTime-lastCollectionDate)/(day));
+            Log.d("AIA","NO of days: "+noOfDays);
+            Log.d("AIA","last collection date: "+lastCollectionDate);
 
             if(noOfDays>= 35)
                 collectButton.setBackgroundColor(Color.parseColor(COLOR_RED));
-            else if(noOfDays>=31 && noOfDays<35)
+            else if(noOfDays>31 && noOfDays<35)
                 collectButton.setBackgroundColor(Color.parseColor(COLOR_YELLOW));
             else
                 collectButton.setBackgroundColor(Color.parseColor(COLOR_GREEN));

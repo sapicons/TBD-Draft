@@ -325,7 +325,7 @@ public class AccountsDisplayFragment extends ListFragment implements SearchView.
         //for M account
         if(item.getAccoutType().contains("M")){
 
-            //get this month and this month's date
+            /*//get this month and this month's date
             int todaysDayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
             int monthOfYear = calendar.get(Calendar.MONTH);
             Log.d("CALENDAR","todaysDate: "+todaysDayOfMonth+ " monthOfYear: "+monthOfYear);
@@ -343,13 +343,24 @@ public class AccountsDisplayFragment extends ListFragment implements SearchView.
 
             //if the start day was 31st , make it 30th
             if(startDay == 31)
-                startDay = 30;
+                startDay = 30;*/
+            long currTime = calendar.getTimeInMillis();
+            long day = 1000 * 60 * 60 * 24;   // a day
+            long lastCollectionDate ;
 
+            if( item.getLatestCollectionTimestamp() ==null || Long.parseLong(item.getLatestCollectionTimestamp()) == 0)
+                lastCollectionDate = Long.parseLong(item.getStartDate());
+            else
+                lastCollectionDate = Long.parseLong(item.getLatestCollectionTimestamp());
+            int noOfDays = (int)((currTime-lastCollectionDate)/(day));
+
+            Log.d("ADF","NO of days: "+noOfDays);
+            Log.d("ADF","last collection date: "+lastCollectionDate);
             // if started on the same day of the previous months and account is open return true
-            if((startDay - todaysDayOfMonth) == 0 &&
-                    item.getAccountStatus().equalsIgnoreCase("open") &&
-                    (startMonth<monthOfYear))
+            if(noOfDays >=30 &&
+                    item.getAccountStatus().equalsIgnoreCase("open")) {
                 return true;
+            }
 
         }
 
