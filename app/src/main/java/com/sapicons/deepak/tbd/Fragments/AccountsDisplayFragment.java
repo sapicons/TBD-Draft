@@ -325,25 +325,7 @@ public class AccountsDisplayFragment extends ListFragment implements SearchView.
         //for M account
         if(item.getAccoutType().contains("M")){
 
-            /*//get this month and this month's date
-            int todaysDayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
-            int monthOfYear = calendar.get(Calendar.MONTH);
-            Log.d("CALENDAR","todaysDate: "+todaysDayOfMonth+ " monthOfYear: "+monthOfYear);
 
-            //get startdate of the account and create a new calendar instance
-            long startDate = Long.parseLong(item.getStartDate());
-            Calendar newCal = Calendar.getInstance();
-            newCal.setTimeInMillis(startDate);
-
-
-            //get the start month of the year and start day of the month
-            int startDay = newCal.get(Calendar.DAY_OF_MONTH);
-            int startMonth = newCal.get(Calendar.MONTH);
-            Log.d("CALENDAR","startDate: "+startDay+" startMonth: "+startMonth);
-
-            //if the start day was 31st , make it 30th
-            if(startDay == 31)
-                startDay = 30;*/
             long currTime = calendar.getTimeInMillis();
             long day = 1000 * 60 * 60 * 24;   // a day
             long lastCollectionDate ;
@@ -374,9 +356,16 @@ public class AccountsDisplayFragment extends ListFragment implements SearchView.
             Calendar newCal = Calendar.getInstance();
             newCal.setTimeInMillis(startDate);
 
+            long lastCollectionDate ;
+
+            if( item.getLatestCollectionTimestamp() ==null || Long.parseLong(item.getLatestCollectionTimestamp()) == 0)
+                lastCollectionDate = Long.parseLong(item.getStartDate());
+            else
+                lastCollectionDate = Long.parseLong(item.getLatestCollectionTimestamp());
+
 
             long day=1000*60*60*24;
-            if((todaysDate - startDate) >= day  &&
+            if((todaysDate - lastCollectionDate) >= day  &&
                     todaysDate<endDate &&
                     Float.parseFloat(item.getDueAmt())>0 &&
                     item.getAccountStatus().equalsIgnoreCase("open"))
