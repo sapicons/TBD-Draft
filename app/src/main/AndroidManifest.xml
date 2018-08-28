@@ -46,7 +46,8 @@
         <activity android:name=".BalanceReportActivity" />
         <activity android:name=".AddExpenseActivity" />
         <activity android:name=".TodaysDueActivity" />
-        <activity android:name=".ClosedAccountsActivity"></activity>
+        <activity android:name=".ClosedAccountsActivity" />
+        <activity android:name=".CollectionsReportsActivity"></activity>
     </application>
 
 </manifest>

@@ -39,6 +39,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginTop="8dp"
+                android:id="@+id/frag_reports_collections_report_btn"
+                fancy:fb_text="Collections Report"
+                fancy:fb_radius="20dp"
+                fancy:fb_focusColor="#5577bd"
+                fancy:fb_defaultColor="#6a1b9a"/>
+
+            <mehdi.sakout.fancybuttons.FancyButton
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
                 android:id="@+id/frag_reports_closed_accounts_reports_btn"
                 fancy:fb_text="Closed Accounts Reports"
                 fancy:fb_radius="20dp"

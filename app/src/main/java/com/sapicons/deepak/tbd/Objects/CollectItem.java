@@ -1,6 +1,7 @@
 package com.sapicons.deepak.tbd.Objects;
 
 import java.io.Serializable;
+import java.util.Comparator;
 
 /**
  * Created by Deepak Prasad on 20-08-2018.
@@ -57,4 +58,17 @@ public class CollectItem implements Serializable {
     public void setAccountType(String accountType) {
         this.accountType = accountType;
     }
+
+    public static Comparator<CollectItem> CollectDateComparator = new Comparator<CollectItem>() {
+        @Override
+        public int compare(CollectItem i1, CollectItem i2) {
+
+            long sd1 = Long.parseLong(i1.getTimestamp());
+            long sd2 = Long.parseLong(i2.getTimestamp());
+
+            //ascending order
+            return (int)(sd2-sd1);
+        }
+    };
+
 }

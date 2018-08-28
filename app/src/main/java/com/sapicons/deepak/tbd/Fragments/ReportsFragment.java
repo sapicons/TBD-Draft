@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.sapicons.deepak.tbd.BalanceReportActivity;
 import com.sapicons.deepak.tbd.ClosedAccountsActivity;
+import com.sapicons.deepak.tbd.CollectionsReportsActivity;
 import com.sapicons.deepak.tbd.DisplayAccountsListActivity;
 import com.sapicons.deepak.tbd.DisplayCustomerListActivity;
 import com.sapicons.deepak.tbd.R;
@@ -42,7 +43,8 @@ public class ReportsFragment extends Fragment {
         FancyButton customerAccBtn = view.findViewById(R.id.frag_reports_customer_accounts_btn),
         balanceReportBtn = view.findViewById(R.id.frag_reports_balance_report_btn),
         profitStatementBtn = view.findViewById(R.id.frag_reports_profit_statement_btn),
-        closedAccRepBtn = view.findViewById(R.id.frag_reports_closed_accounts_reports_btn);
+        closedAccRepBtn = view.findViewById(R.id.frag_reports_closed_accounts_reports_btn),
+        collectionsReportsBtn = view.findViewById(R.id.frag_reports_collections_report_btn);
 
 
 
@@ -74,6 +76,13 @@ public class ReportsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), ClosedAccountsActivity.class));
+            }
+        });
+
+        collectionsReportsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), CollectionsReportsActivity.class));
             }
         });
     }

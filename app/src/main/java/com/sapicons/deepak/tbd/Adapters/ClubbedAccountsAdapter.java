@@ -119,6 +119,7 @@ public class ClubbedAccountsAdapter  extends ArrayAdapter<CustomerItem> {
 
 
     public void findAccountsOfCustomer(CustomerItem item,final ViewHolder holder){
+
         List<AccountItem> accounts = new ArrayList<>();
 
         getAccountsFromFirebase(item,accounts,holder);
@@ -233,6 +234,7 @@ public class ClubbedAccountsAdapter  extends ArrayAdapter<CustomerItem> {
 
 
         }
+
 
     }
 
