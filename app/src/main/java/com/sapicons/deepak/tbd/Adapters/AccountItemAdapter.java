@@ -275,15 +275,17 @@ public class AccountItemAdapter extends ArrayAdapter<AccountItem> {
     }
 
     private void addCollectionToFirestore(AccountItem item, String collectedAmount){
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        CollectionReference collectRef = db.collection("users").document(user.getEmail())
-                .collection("collections");
 
         Date date = new Date();
         String timestamp = date.getTime()+"";
         String profit = "0";
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        DocumentReference collectRef = db.collection("users").document(user.getEmail())
+                .collection("collections").document(timestamp);
+
 
         // profit for D account is zero
         // profit for M account is (loanAmt * interestPct/100)
@@ -297,20 +299,12 @@ public class AccountItemAdapter extends ArrayAdapter<AccountItem> {
 
 
         // update collection table for the given account
-        collectRef.add(collectItem)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
+        collectRef.set(collectItem).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Log.d("TAG","Failed to write collection amount. "+e);
             }
         });
-
-
 
 
         updateTotalCollectedAmt(item,collectedAmount);

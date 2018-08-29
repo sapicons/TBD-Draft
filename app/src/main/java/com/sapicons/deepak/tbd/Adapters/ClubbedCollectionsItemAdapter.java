@@ -3,24 +3,31 @@ package com.sapicons.deepak.tbd.Adapters;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.icu.text.NumberFormat;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -29,6 +36,8 @@ import com.sapicons.deepak.tbd.Objects.AccountItem;
 import com.sapicons.deepak.tbd.Objects.CollectItem;
 import com.sapicons.deepak.tbd.Objects.CustomerItem;
 import com.sapicons.deepak.tbd.R;
+
+import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -145,6 +154,7 @@ public class ClubbedCollectionsItemAdapter extends ArrayAdapter<AccountItem> {
                                 list.add(item);
 
                             }
+
                         }else {
                             Log.d("TAG", "Error getting documents: ", task.getException());
                         }
@@ -174,14 +184,12 @@ public class ClubbedCollectionsItemAdapter extends ArrayAdapter<AccountItem> {
             view = layoutInflater.inflate(R.layout.item_single_collection_in_club, linearLayout, false);
             final TextView collectionDateTV = view.findViewById(R.id.single_collection_date_tv),
                     collectionAmtTv = view.findViewById(R.id.single_collection_amt_tv);
+            final FancyButton editBtn  = view.findViewById(R.id.single_collection_edit_btn);
 
-            Calendar calendar = Calendar.getInstance();
             SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yy");
             long collectionDate = Long.parseLong(item.getTimestamp());
             //set the textviews
             collectionDateTV.setText("Collected On: "+dateFormatter.format(collectionDate));
-
-
 
             Float dA = Float.parseFloat(item.getAmountCollected());
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
@@ -193,13 +201,120 @@ public class ClubbedCollectionsItemAdapter extends ArrayAdapter<AccountItem> {
                 collectionAmtTv.setText(numberFormat.format(dA));
             }
 
+
+            editBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    setupPopupWindow(item,collectionAmtTv);
+                }
+            });
             holder.accLL.addView(view);
-
-
         }
+
 
 
     }
 
 
+    public void setupPopupWindow(final CollectItem collectItem, final TextView collectionAmtTv){
+        progressDialog  = new ProgressDialog(context);
+        progressDialog.setMessage("Please Wait ...");
+
+        AlertDialog.Builder alertDialog=new AlertDialog.Builder(getContext());
+        LayoutInflater inflater =(LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        View customView=inflater.inflate(R.layout.custom_collect_popup,null);
+        final EditText amtEt = customView.findViewById(R.id.custom_collect_amt_et);
+
+        alertDialog.setTitle("Edit Amount")
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                }).setPositiveButton("Edit", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                //float originalCollectionAmt = Float.parseFloat(collectItem.getAmountCollected());
+                String eA = amtEt.getText().toString();
+                if(!eA.isEmpty()) {
+                    float enteredAmt = Float.parseFloat(eA);
+
+                    progressDialog.show();
+
+                    editCollectionAmount(collectItem, amtEt.getText().toString(),collectionAmtTv);
+
+                }
+
+
+            }
+        });
+        alertDialog.setView(customView)
+                .create().show();
+    }
+
+
+    public void editCollectionAmount(CollectItem collectItem,String updatedAmount, TextView collectionAmtTv){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        //update local info
+        String originalCollectedAmt= collectItem.getAmountCollected();
+        collectItem.setAmountCollected(updatedAmount);
+        //collectionAmtTv.setText(updatedAmount);
+        float dA=Float.parseFloat(updatedAmount);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            NumberFormat numberFormat = NumberFormat.getCurrencyInstance(new Locale("en","in"));
+            collectionAmtTv.setText("₹ "+numberFormat.format(dA));
+        }else {
+
+            java.text.NumberFormat numberFormat = java.text.NumberFormat.getNumberInstance(Locale.US);
+            collectionAmtTv.setText("₹ "+numberFormat.format(dA));
+        }
+
+        //update the new info to db
+        DocumentReference collectRef = db.collection("users").document(user.getEmail())
+                .collection("collections").document(collectItem.getTimestamp());
+        collectRef.update("amountCollected",updatedAmount)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(context, "Amount Updated!", Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("TAG","error updating amt: "+e);
+            }
+        });
+
+        updateAccountInfo(originalCollectedAmt,updatedAmount);
+    }
+    public void updateAccountInfo(String originalCollectedAmt, String updatedAmount){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        float difference = Float.parseFloat(updatedAmount)-Float.parseFloat(originalCollectedAmt);
+
+        String newDueAmt = (Float.parseFloat(originalCollectedAmt)+difference)+"";
+        String newTotalCollectedAmt = (Float.parseFloat(accountItem.getTotalCollectedAmt())+difference)+"";
+
+        accountItem.setDueAmt(newDueAmt);
+        accountItem.setTotalCollectedAmt(newTotalCollectedAmt);
+
+
+        DocumentReference accRef = db.collection("users").document(user.getEmail())
+                .collection("accounts").document(accountItem.getAccountNumber());
+
+        accRef.update("dueAmt",newDueAmt,
+                        "totalCollectedAmt",newTotalCollectedAmt)
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d("TAG","Failed to write collection amount. "+e);
+                    }
+                });
+    }
 }

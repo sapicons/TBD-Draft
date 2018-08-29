@@ -157,6 +157,7 @@ public class ClubbedAccountsAdapter  extends ArrayAdapter<CustomerItem> {
                                 list.add(item);
 
                             }
+                            clubAccounts(list,holder);
                         }else {
                             Log.d("TAG", "Error getting documents: ", task.getException());
                         }
@@ -165,7 +166,7 @@ public class ClubbedAccountsAdapter  extends ArrayAdapter<CustomerItem> {
 
                         //if(accItem.isEmpty())
                             //holder.accLL.setVisibility(View.GONE);
-                        clubAccounts(list,holder);
+
                     }
                 });
 
@@ -340,15 +341,17 @@ public class ClubbedAccountsAdapter  extends ArrayAdapter<CustomerItem> {
     }
 
     private void addCollectionToFirestore(AccountItem item, String collectedAmount){
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        CollectionReference collectRef = db.collection("users").document(user.getEmail())
-                .collection("collections");
 
         Date date = new Date();
         String timestamp = date.getTime()+"";
         String profit = "0";
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        DocumentReference collectRef = db.collection("users").document(user.getEmail())
+                .collection("collections").document(timestamp);
+
 
         // profit for D account is zero
         // profit for M account is (loanAmt * interestPct/100)
@@ -362,20 +365,12 @@ public class ClubbedAccountsAdapter  extends ArrayAdapter<CustomerItem> {
 
 
         // update collection table for the given account
-        collectRef.add(collectItem)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
+        collectRef.set(collectItem).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Log.d("TAG","Failed to write collection amount. "+e);
             }
         });
-
-
 
 
         updateTotalCollectedAmt(item,collectedAmount);
@@ -403,7 +398,8 @@ public class ClubbedAccountsAdapter  extends ArrayAdapter<CustomerItem> {
         DocumentReference accRef = db.collection("users").document(user.getEmail())
                 .collection("accounts").document(item.getAccountNumber());
 
-        accRef.update("totalCollectedAmt",totalAmtCollected)
+        accRef.update("totalCollectedAmt",totalAmtCollected,
+                "latestCollectionTimestamp",Calendar.getInstance().getTimeInMillis()+"")
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
@@ -411,13 +407,13 @@ public class ClubbedAccountsAdapter  extends ArrayAdapter<CustomerItem> {
                         Log.d("COLLECT","Failed to update totalCollectedAmt: "+e);
                     }
                 });
-        accRef.update("latestCollectionTimestamp",Calendar.getInstance().getTimeInMillis()+"")
+        /*accRef.update()
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.d("COLLECT","Failed to update latestCollectionTimestamp: "+e);
                     }
-                });
+                });*/
 
 
     }

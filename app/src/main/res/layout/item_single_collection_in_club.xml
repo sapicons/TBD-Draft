@@ -1,23 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:padding="16dp">
+
+    <mehdi.sakout.fancybuttons.FancyButton
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_weight="1"
+        android:id="@+id/single_collection_edit_btn"
+        android:layout_marginRight="8dp"
+        fancy:fb_textSize="10sp"
+        fancy:fb_text="Edit"
+        fancy:fb_radius="8dp"
+        fancy:fb_focusColor="#5577bd"
+        fancy:fb_defaultColor="#2e7d32"/>
 
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="2"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="3"
         android:text="Collected On: 12/08/18"
         android:id="@+id/single_collection_date_tv"/>
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textAlignment="textEnd"
-        android:layout_gravity="end"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="2"
         android:text="5000000"
-        android:id="@+id/single_collection_amt_tv"/>
+        android:textAlignment="textEnd"
+        android:id="@+id/single_collection_amt_tv"
+        tools:ignore="RtlCompat" />
 </LinearLayout>
