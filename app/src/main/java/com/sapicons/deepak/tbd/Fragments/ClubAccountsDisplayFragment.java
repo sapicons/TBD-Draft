@@ -100,6 +100,7 @@ public class ClubAccountsDisplayFragment extends ListFragment implements SearchV
         adapter = new ClubbedAccountsAdapter(mContext,R.layout.item_clubbed_accounts,list,isCollect);
 
         listView.setAdapter(adapter);
+        listView.setEmptyView(view.findViewById(R.id.empty_customers_tv));
 
         progressDialog = new ProgressDialog(mContext);
         progressDialog.setMessage("Please Wait ...");

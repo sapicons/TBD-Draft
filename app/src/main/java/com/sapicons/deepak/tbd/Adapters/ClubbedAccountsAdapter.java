@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.icu.text.NumberFormat;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -190,10 +191,13 @@ public class ClubbedAccountsAdapter  extends ArrayAdapter<CustomerItem> {
                     dueAmtTv = view.findViewById(R.id.single_acc_due_amt),
                     startDateTv = view.findViewById(R.id.single_account_start_date_tv),
                     endDateTv =  view.findViewById(R.id.single_account_end_date_tv);
-            FancyButton collectBtn = view.findViewById(R.id.single_acc_collect_btn);
+            final FancyButton collectBtn = view.findViewById(R.id.single_acc_collect_btn);
 
-            if(isCollect == 0)
-                collectBtn.setVisibility(View.INVISIBLE);
+            if(isCollect == 0) {
+                //collectBtn.setVisibility(View.INVISIBLE);
+                collectBtn.setText("Close");
+                collectBtn.setBackgroundColor(Color.parseColor("#c56000"));
+            }
 
 
 
@@ -225,11 +229,19 @@ public class ClubbedAccountsAdapter  extends ArrayAdapter<CustomerItem> {
 
 
             holder.accLL.addView(view);
+
+            final View singleAccView = view;
             collectBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
+                public void onClick(View v) {
                     Log.d("TAG","Amt: "+item.getDueAmt());
-                    setUpPopupWindow(item,dueAmtTv);
+
+                    if(isCollect ==0) {
+                        //view.setVisibility(View.GONE);
+                        displayPopupToCloseAccount(item,dueAmtTv,singleAccView,collectBtn);
+                    }
+                    else
+                        setUpPopupWindow(item,dueAmtTv,singleAccView,collectBtn);
                 }
             });
 
@@ -239,9 +251,13 @@ public class ClubbedAccountsAdapter  extends ArrayAdapter<CustomerItem> {
 
     }
 
+
+
+
     // collect functionality
 
-    public void setUpPopupWindow(final AccountItem item, final TextView dueAmtTv){
+    public void setUpPopupWindow(final AccountItem item, final TextView dueAmtTv,
+                                 final View singleAccView, final FancyButton collectBtn){
         progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("Please Wait ...");
 
@@ -270,7 +286,7 @@ public class ClubbedAccountsAdapter  extends ArrayAdapter<CustomerItem> {
                     } else {
                         progressDialog.show();
 
-                        deductAmountFromAccount(item, amtEt.getText().toString(),dueAmtTv);
+                        deductAmountFromAccount(item, amtEt.getText().toString(),dueAmtTv,singleAccView,collectBtn);
                     }
                 }
 
@@ -282,17 +298,36 @@ public class ClubbedAccountsAdapter  extends ArrayAdapter<CustomerItem> {
                 .create().show();
     }
 
-    private void deductAmountFromAccount(final AccountItem accountItem, String amount,TextView dueAmtTv){
+    private void deductAmountFromAccount(final AccountItem accountItem, String amount,TextView dueAmtTv,
+                                         final View singleAccView, final FancyButton collectBtn){
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
         String newAmt = (Float.parseFloat(accountItem.getDueAmt()) - Float.parseFloat(amount))+"";
+        float amtZero = Float.parseFloat(newAmt);
+
 
         if(accountItem.getAccoutType().contains("M"))
             newAmt = accountItem.getDueAmt();
-        dueAmtTv.setText(newAmt);
+
+
+        if(amtZero <1){
+            collectBtn.setEnabled(false);
+            dueAmtTv.setText("Closed");
+
+        }else {
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                NumberFormat numberFormat = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
+                dueAmtTv.setText(numberFormat.format(Float.parseFloat(newAmt)));
+            } else {
+
+                java.text.NumberFormat numberFormat = java.text.NumberFormat.getNumberInstance(Locale.US);
+                dueAmtTv.setText(numberFormat.format(Float.parseFloat(newAmt)));
+            }
+        }
+        //dueAmtTv.setText(newAmt);
         accountItem.setDueAmt(newAmt);
 
 
@@ -417,4 +452,53 @@ public class ClubbedAccountsAdapter  extends ArrayAdapter<CustomerItem> {
 
 
     }
+
+
+    private void displayPopupToCloseAccount(final AccountItem accountItem, final TextView dueAmtTv,
+                                            final View singleAccView, final FancyButton collectBtn){
+
+        float dueAmt = Float.parseFloat(accountItem.getDueAmt());
+
+        progressDialog = new ProgressDialog(context);
+        progressDialog.setMessage("Please Wait ...");
+
+        AlertDialog.Builder alertDialog=new AlertDialog.Builder(getContext());
+        LayoutInflater inflater =(LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        View customView=inflater.inflate(R.layout.custom_close_account_popup,null);
+        //final Te amtEt = customView.findViewById(R.id.custom_collect_amt_et);
+        final TextView amtTv = customView.findViewById(R.id.custom_close_account_amt_tv);
+        //set dueAmtTv
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            NumberFormat numberFormat = NumberFormat.getCurrencyInstance(new Locale("en","in"));
+            amtTv.setText(numberFormat.format(dueAmt));
+        }else {
+
+            java.text.NumberFormat numberFormat = java.text.NumberFormat.getNumberInstance(Locale.US);
+            amtTv.setText(numberFormat.format(dueAmt));
+        }
+
+        alertDialog.setTitle("Collect Amount")
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                }).setPositiveButton("Collect", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                        progressDialog.show();
+                        deductAmountFromAccount(accountItem, accountItem.getDueAmt(),dueAmtTv,singleAccView,collectBtn);
+
+            }
+        });
+
+        alertDialog.setView(customView)
+                .create().show();
+
+    }
+
+
+
 }

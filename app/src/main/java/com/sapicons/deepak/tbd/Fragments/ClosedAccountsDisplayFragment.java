@@ -103,6 +103,7 @@ public class ClosedAccountsDisplayFragment extends ListFragment implements Searc
         adapter = new ClosedAccountAdapter(mContext,R.layout.item_closed_account,list);
 
         listView.setAdapter(adapter);
+        listView.setEmptyView(view.findViewById(R.id.empty_closed_accounts_tv));
 
         progressDialog = new ProgressDialog(mContext);
         progressDialog.setMessage("Please Wait ...");

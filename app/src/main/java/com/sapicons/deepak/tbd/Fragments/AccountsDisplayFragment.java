@@ -106,6 +106,7 @@ public class AccountsDisplayFragment extends ListFragment implements SearchView.
         adapter = new AccountItemAdapter(mContext,R.layout.item_account,list,1);
 
         listView.setAdapter(adapter);
+        listView.setEmptyView(view.findViewById(R.id.empty_accounts_tv));
 
         progressDialog = new ProgressDialog(mContext);
         progressDialog.setMessage("Please Wait ...");

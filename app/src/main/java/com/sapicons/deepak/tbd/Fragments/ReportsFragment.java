@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +46,8 @@ public class ReportsFragment extends Fragment {
         profitStatementBtn = view.findViewById(R.id.frag_reports_profit_statement_btn),
         closedAccRepBtn = view.findViewById(R.id.frag_reports_closed_accounts_reports_btn),
         collectionsReportsBtn = view.findViewById(R.id.frag_reports_collections_report_btn);
+
+
 
 
 

@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -95,9 +96,18 @@ public class ExpensesFragment extends ListFragment implements SearchView.OnQuery
         adapter = new ExpenseItemAdapter(mContext,R.layout.item_expense,list);
 
         listView.setAdapter(adapter);
+        listView.setEmptyView(view.findViewById(R.id.empty_expenses_tv));
 
         progressDialog = new ProgressDialog(mContext);
         progressDialog.setMessage("Please Wait ...");
+
+        FloatingActionButton addExpenseBtn = view.findViewById(R.id.frag_expense_add_fab);
+        addExpenseBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), AddExpenseActivity.class));
+            }
+        });
 
 
     }

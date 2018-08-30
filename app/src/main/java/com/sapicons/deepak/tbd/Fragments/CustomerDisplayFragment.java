@@ -94,6 +94,7 @@ public class CustomerDisplayFragment extends ListFragment implements SearchView.
         adapter = new CustomerItemAdapter(mContext,R.layout.item_customer,list);
 
         listView.setAdapter(adapter);
+        listView.setEmptyView(view.findViewById(R.id.empty_customers_tv));
 
         progressDialog = new ProgressDialog(mContext);
         progressDialog.setMessage("Please Wait ...");

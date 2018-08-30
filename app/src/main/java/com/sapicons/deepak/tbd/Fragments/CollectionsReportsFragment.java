@@ -92,6 +92,7 @@ public class CollectionsReportsFragment extends ListFragment implements SearchVi
         adapter = new ClubbedCollectionsItemAdapter(mContext,R.layout.item_clubbed_collections,list);
 
         listView.setAdapter(adapter);
+        listView.setEmptyView(view.findViewById(R.id.empty_collections_report_tv));
 
         progressDialog = new ProgressDialog(mContext);
         progressDialog.setMessage("Please Wait ...");

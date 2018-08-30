@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.app.Fragment;
+import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -35,6 +36,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.sapicons.deepak.tbd.Adapters.CustomerItemAdapter;
+import com.sapicons.deepak.tbd.AddCustomerActivity;
 import com.sapicons.deepak.tbd.CustomerDetailsActivity;
 import com.sapicons.deepak.tbd.Objects.CustomerItem;
 import com.sapicons.deepak.tbd.R;
@@ -99,6 +101,7 @@ public class CustomerFragment extends ListFragment implements SearchView.OnQuery
         adapter = new CustomerItemAdapter(mContext,R.layout.item_customer,list);
 
         listView.setAdapter(adapter);
+        listView.setEmptyView(view.findViewById(R.id.empty_customers_tv));
 
         progressDialog = new ProgressDialog(mContext);
         progressDialog.setMessage("Please Wait ...");
@@ -115,6 +118,15 @@ public class CustomerFragment extends ListFragment implements SearchView.OnQuery
                 startActivity(intent);
 
                 onDetach();
+            }
+        });
+
+        FloatingActionButton addCustomerBtn = view.findViewById(R.id.frag_customer_add_fab);
+        addCustomerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(getActivity(), AddCustomerActivity.class));
             }
         });
     }

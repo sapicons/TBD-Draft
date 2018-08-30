@@ -97,9 +97,10 @@ public class CollectActivityFragment extends ListFragment implements SearchView.
         list = new ArrayList<>();
 
         adapter = new AccountItemAdapter(mContext,R.layout.item_account,list,1);
-        ll = view.findViewById(R.id.caf_ll);
+        ll = (LinearLayout)view.findViewById(R.id.caf_ll);
 
         listView.setAdapter(adapter);
+        listView.setEmptyView(view.findViewById(R.id.empty_customers_tv));
 
         progressDialog = new ProgressDialog(mContext);
         progressDialog.setMessage("Please Wait ...");
