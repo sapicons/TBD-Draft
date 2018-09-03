@@ -24,51 +24,15 @@
     <list default="true" id="d9e82053-27d3-430c-a852-eb417b04771b" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/fileHashes/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/4.1/fileHashes/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/fileHashes/fileHashes.lock" afterPath="$PROJECT_DIR$/.gradle/4.1/fileHashes/fileHashes.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/fileHashes/resourceHashesCache.bin" afterPath="$PROJECT_DIR$/.gradle/4.1/fileHashes/resourceHashesCache.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/javaCompile/classAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/4.1/javaCompile/classAnalysis.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/javaCompile/jarAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/4.1/javaCompile/jarAnalysis.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/javaCompile/javaCompile.lock" afterPath="$PROJECT_DIR$/.gradle/4.1/javaCompile/javaCompile.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/javaCompile/taskHistory.bin" afterPath="$PROJECT_DIR$/.gradle/4.1/javaCompile/taskHistory.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/javaCompile/taskJars.bin" afterPath="$PROJECT_DIR$/.gradle/4.1/javaCompile/taskJars.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/taskHistory/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/4.1/taskHistory/fileSnapshots.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/taskHistory/taskHistory.bin" afterPath="$PROJECT_DIR$/.gradle/4.1/taskHistory/taskHistory.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/taskHistory/taskHistory.lock" afterPath="$PROJECT_DIR$/.gradle/4.1/taskHistory/taskHistory.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/AccountsDetailsActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/AccountsDetailsActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Adapters/AccountItemAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Adapters/AccountItemAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Adapters/ClosedAccountAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Adapters/ClosedAccountAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Adapters/ClubbedAccountsAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Adapters/ClubbedAccountsAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Adapters/ClubbedCollectionsItemAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Adapters/ClubbedCollectionsItemAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Adapters/CustomerItemAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Adapters/CustomerItemAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Adapters/ExpenseItemAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Adapters/ExpenseItemAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/AddAccountActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/AddAccountActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/AddCustomerActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/AddCustomerActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/AddExpenseActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/AddExpenseActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/BalanceReportActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/BalanceReportActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/ClosedAccountsActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/ClosedAccountsActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/CollectActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/CollectActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/CollectionsReportsActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/CollectionsReportsActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/CustomerDetailsActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/CustomerDetailsActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/DisplayAccountsListActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/DisplayAccountsListActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/DisplayCustomerListActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/DisplayCustomerListActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Fragments/AccountsDisplayFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Fragments/AccountsDisplayFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Fragments/ClosedAccountsDisplayFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Fragments/ClosedAccountsDisplayFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Fragments/ClubAccountsDisplayFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Fragments/ClubAccountsDisplayFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Fragments/CollectActivityFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Fragments/CollectActivityFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Fragments/CollectionsReportsFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Fragments/CollectionsReportsFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Fragments/CustomerDisplayFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Fragments/CustomerDisplayFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Fragments/CustomerFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Fragments/CustomerFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Fragments/DashboardFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Fragments/DashboardFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Fragments/ExpensesFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Fragments/ExpensesFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Fragments/ReportsFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Fragments/ReportsFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Main2Activity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Main2Activity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/PinLockActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/PinLockActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/SignInActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/SignInActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/TodaysDueActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/TodaysDueActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/UserProfile.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/UserProfile.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_pin_lock.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_pin_lock.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -92,30 +56,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ClubbedCollectionsItemAdapter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Adapters/ClubbedCollectionsItemAdapter.java">
+      <file leaf-file-name="PinLockActivity.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/PinLockActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1462">
-              <caret line="86" column="54" lean-forward="false" selection-start-line="86" selection-start-column="54" selection-end-line="86" selection-end-column="54" />
+            <state relative-caret-position="442">
+              <caret line="194" column="64" lean-forward="false" selection-start-line="194" selection-start-column="64" selection-end-line="194" selection-end-column="64" />
               <folding>
-                <element signature="docComment;class#ClubbedCollectionsItemAdapter#0" expanded="false" />
-                <element signature="method#ClubbedCollectionsItemAdapter#0;class#ClubbedCollectionsItemAdapter#0" expanded="false" />
-                <element signature="method#setupPopupWindow#0;class#ClubbedCollectionsItemAdapter#0" expanded="false" />
-                <element signature="method#editCollectionAmount#0;class#ClubbedCollectionsItemAdapter#0" expanded="false" />
-                <element signature="method#updateAccountInfo#0;class#ClubbedCollectionsItemAdapter#0" expanded="false" />
+                <element signature="e#5658#5804#0" expanded="true" />
+                <element signature="e#5803#5804#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AccountItemAdapter.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Adapters/AccountItemAdapter.java">
+      <file leaf-file-name="Main2Activity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Main2Activity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4590">
-              <caret line="397" column="38" lean-forward="false" selection-start-line="397" selection-start-column="31" selection-end-line="397" selection-end-column="38" />
+            <state relative-caret-position="136">
+              <caret line="104" column="5" lean-forward="false" selection-start-line="86" selection-start-column="4" selection-end-line="104" selection-end-column="5" />
               <folding>
-                <element signature="method#AccountItemAdapter#0;class#AccountItemAdapter#0" expanded="false" />
-                <element signature="method#setCollectBtnColor#0;class#AccountItemAdapter#0" expanded="false" />
+                <element signature="method#onCreate#0;class#Main2Activity#0" expanded="false" />
+                <element signature="method#startDashboardFragment#0;class#Main2Activity#0" expanded="false" />
+                <element signature="method#signOut#0;class#Main2Activity#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -1930,7 +1892,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/item_clubbed_accounts.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_dashboard.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/item_account.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Objects/AccountItem.java" />
@@ -1972,7 +1933,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/DisplayAccountsListActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/DisplayCustomerListActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Main2Activity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/PinLockActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/SignInActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/TodaysDueActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/UserProfile.java" />
@@ -1981,6 +1941,8 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Adapters/ClubbedAccountsAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/AddAccountActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Adapters/AccountItemAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_pin_lock.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/PinLockActivity.java" />
       </list>
     </option>
   </component>
@@ -2254,7 +2216,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1535961705136" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1535963338602" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -2302,7 +2264,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1535961705136" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1535963338602" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -2477,7 +2439,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1535961705138" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1535963338603" />
       </method>
     </configuration>
     <list size="1">
@@ -2646,7 +2608,14 @@
       <option name="project" value="LOCAL" />
       <updated>1535649605258</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Crashlytics&#10;removed bug that updated M acc instead of D acc&#10;added some text for empty fields&#10;now the profit is working fine&#10;auto-fill for collection amount">
+      <created>1535961790941</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1535961790941</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TodoView">
@@ -2723,7 +2692,8 @@
     <MESSAGE value="Collections Reports" />
     <MESSAGE value="Edit function in Collections Reports" />
     <MESSAGE value="Close account&#10;profit &#10;revenue&#10;expenses update&#10;added fabs on expenses and customers" />
-    <option name="LAST_COMMIT_MESSAGE" value="Close account&#10;profit &#10;revenue&#10;expenses update&#10;added fabs on expenses and customers" />
+    <MESSAGE value="Crashlytics&#10;removed bug that updated M acc instead of D acc&#10;added some text for empty fields&#10;now the profit is working fine&#10;auto-fill for collection amount" />
+    <option name="LAST_COMMIT_MESSAGE" value="Crashlytics&#10;removed bug that updated M acc instead of D acc&#10;added some text for empty fields&#10;now the profit is working fine&#10;auto-fill for collection amount" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2732,16 +2702,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_single_account_in_club.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="41" lean-forward="true" selection-start-line="7" selection-start-column="4" selection-end-line="21" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Objects/AccountItem.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -3077,24 +3037,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Main2Activity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="56" column="38" lean-forward="false" selection-start-line="56" selection-start-column="38" selection-end-line="56" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/PinLockActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="118" column="41" lean-forward="false" selection-start-line="118" selection-start-column="41" selection-end-line="118" selection-end-column="41" />
-          <folding>
-            <element signature="class#964:3626" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/SignInActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
@@ -3221,6 +3163,44 @@
           <folding>
             <element signature="method#AccountItemAdapter#0;class#AccountItemAdapter#0" expanded="false" />
             <element signature="method#setCollectBtnColor#0;class#AccountItemAdapter#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_pin_lock.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="72" column="63" lean-forward="false" selection-start-line="72" selection-start-column="63" selection-end-line="72" selection-end-column="63" />
+          <folding>
+            <element signature="e#1340#1974#0" expanded="false" />
+            <element signature="e#1987#2396#0" expanded="false" />
+            <element signature="e#2409#3000#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Main2Activity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="104" column="5" lean-forward="false" selection-start-line="86" selection-start-column="4" selection-end-line="104" selection-end-column="5" />
+          <folding>
+            <element signature="method#onCreate#0;class#Main2Activity#0" expanded="false" />
+            <element signature="method#startDashboardFragment#0;class#Main2Activity#0" expanded="false" />
+            <element signature="method#signOut#0;class#Main2Activity#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/PinLockActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="194" column="64" lean-forward="false" selection-start-line="194" selection-start-column="64" selection-end-line="194" selection-end-column="64" />
+          <folding>
+            <element signature="e#5658#5804#0" expanded="true" />
+            <element signature="e#5803#5804#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -2,10 +2,12 @@ package com.sapicons.deepak.tbd;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -14,6 +16,9 @@ import android.widget.Toast;
 import com.andrognito.pinlockview.IndicatorDots;
 import com.andrognito.pinlockview.PinLockListener;
 import com.andrognito.pinlockview.PinLockView;
+import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 public class PinLockActivity extends AppCompatActivity {
 
@@ -22,6 +27,7 @@ public class PinLockActivity extends AppCompatActivity {
     private PinLockView mPinLockView;
     private IndicatorDots mIndicatorDots;
     private TextView instructionTV;
+    private TextView forgotPinLockTv;
 
     SharedPreferences sharedPreferences ;
     SharedPreferences.Editor editor;
@@ -131,6 +137,7 @@ public class PinLockActivity extends AppCompatActivity {
         mPinLockView = (PinLockView) findViewById(R.id.pin_lock_view);
         mIndicatorDots = (IndicatorDots) findViewById(R.id.indicator_dots);
         instructionTV = findViewById(R.id.pin_lock_instruction_tv);
+        forgotPinLockTv = findViewById(R.id.activity_pin_lock_forgot_pin_tv);
 
         // display according to new pin to be entered or log in with existing pin
         if(savedPin.length()>0)
@@ -150,6 +157,14 @@ public class PinLockActivity extends AppCompatActivity {
 
 
         mIndicatorDots.setIndicatorType(IndicatorDots.IndicatorType.FILL_WITH_ANIMATION);
+
+        // forgot pin
+        forgotPinLockTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                signOut();
+            }
+        });
     }
 
     @Override
@@ -161,6 +176,26 @@ public class PinLockActivity extends AppCompatActivity {
     private  void directUser(){
         startActivity(new Intent(PinLockActivity.this, Main2Activity.class));
         finish();
+    }
+
+    public void signOut(){
+        AuthUI.getInstance()
+                .signOut(getApplicationContext())
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    public void onComplete(@NonNull Task<Void> task) {
+                        // ...
+                        SharedPreferences preferences = getSharedPreferences("pin",0);
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.putString("existing_pin","");
+                        editor.apply();
+                        editor.commit();
+                        preferences = getSharedPreferences("remember_me",0);
+                        editor = preferences.edit();
+                        editor.putBoolean("is_checked",false);
+                        startActivity(new Intent(PinLockActivity.this,SignInActivity.class));
+                        finish();
+                    }
+                });
     }
 
 }

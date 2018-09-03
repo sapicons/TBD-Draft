@@ -65,6 +65,16 @@
                app:keypadShowDeleteButton="true"
                app:keypadTextColor="@color/white"
                app:keypadTextSize="18dp" />
+
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="24dp"
+               android:id="@+id/activity_pin_lock_forgot_pin_tv"
+               android:text="Forgot PIN?"
+               android:layout_gravity="center_horizontal"
+               android:fontFamily="sans-serif-thin"
+               android:textColor="@color/white"/>
        </LinearLayout>
    </ScrollView>
 
