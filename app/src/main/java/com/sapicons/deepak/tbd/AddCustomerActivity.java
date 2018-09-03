@@ -58,6 +58,8 @@ public class AddCustomerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_customer);
         setTitle("Add Customer");
 
+        Log.d("ACTIVITY","AddCustomerActivity");
+
         initialiseUI();
     }
     private void initialiseUI(){

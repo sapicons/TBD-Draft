@@ -72,6 +72,7 @@ public class SignInActivity extends AppCompatActivity {
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please Wait ...");
+        Log.d("ACTIVITY","SignInActivity");
 
         signInBtn = findViewById(R.id.sign_in_btn);
         rememberMeCB = findViewById(R.id.remember_me_cb);

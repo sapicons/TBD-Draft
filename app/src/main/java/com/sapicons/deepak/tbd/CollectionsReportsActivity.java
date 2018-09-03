@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.sapicons.deepak.tbd.Fragments.ClubAccountsDisplayFragment;
 import com.sapicons.deepak.tbd.Fragments.CollectionsReportsFragment;
@@ -15,6 +16,7 @@ public class CollectionsReportsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_collections_reports);
+        Log.d("ACTIVITY","CollectionsReportsActivity");
         startCollectionsReportsFragment();
     }
 

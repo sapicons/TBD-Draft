@@ -66,6 +66,7 @@ public class CustomerFragment extends ListFragment implements SearchView.OnQuery
         mContext = getActivity();
         setHasOptionsMenu(true);
         //populateList();
+        Log.d("FRAGMENT","CustomerFragment");
 
     }
 

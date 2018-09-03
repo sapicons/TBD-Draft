@@ -41,6 +41,7 @@ public class UserProfile extends AppCompatActivity {
         setContentView(R.layout.activity_user_profile);
 
         setTitle("Profile");
+        Log.d("ACTIVITY","UserProfileActivity");
 
         initialiseViews();
         getUserAccount();

@@ -59,6 +59,7 @@ public class DashboardFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //return super.onCreateView(inflater, container, savedInstanceState);
+
         return inflater.inflate(R.layout.fragment_dashboard,container,false);
 
     }
@@ -66,6 +67,7 @@ public class DashboardFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getActivity().setTitle("Dashboard");
+        Log.d("FRAGMENT","DashboardFragment");
 
 
         user = FirebaseAuth.getInstance().getCurrentUser();

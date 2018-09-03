@@ -68,6 +68,7 @@ public class ClosedAccountsDisplayFragment extends ListFragment implements Searc
         mContext = getActivity();
         setHasOptionsMenu(true);
         //populateList();
+        Log.d("FRAGMENT","ClosedAccountsDisplayFragment");
 
     }
     @Override

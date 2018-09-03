@@ -72,6 +72,7 @@ public class ExpensesFragment extends ListFragment implements SearchView.OnQuery
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getActivity().setTitle("Expenses");
+        Log.d("FRAGMENT","ExpensesFragment");
 
         View view = inflater.inflate(R.layout.fragment_expenses, container, false);
         listView = view.findViewById(R.id.expenses_frag_list_view);

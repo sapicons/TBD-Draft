@@ -84,6 +84,8 @@ public class ClubbedCollectionsItemAdapter extends ArrayAdapter<AccountItem> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
+        Log.d("ADAPTER","ClubbedCollectionsItemAdapter");
+
         accountItem = getItem(position);
         if(convertView == null) {
             convertView = ((Activity) getContext()).getLayoutInflater().inflate(R.layout.item_clubbed_collections, parent, false);

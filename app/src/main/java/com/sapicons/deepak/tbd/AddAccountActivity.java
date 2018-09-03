@@ -34,6 +34,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.sapicons.deepak.tbd.Objects.AccountItem;
+import com.sapicons.deepak.tbd.Objects.CollectItem;
 import com.sapicons.deepak.tbd.Objects.CustomerItem;
 
 import java.sql.Time;
@@ -69,6 +70,8 @@ public class AddAccountActivity extends AppCompatActivity implements AdapterView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_account);
         setTitle("Add Account");
+
+        Log.d("ACTIVITY","AddAccountActivity");
 
         Intent intent = this.getIntent();
         Bundle bundle = intent.getExtras();
@@ -336,7 +339,7 @@ public class AddAccountActivity extends AppCompatActivity implements AdapterView
         final DocumentReference newAccRef = db.collection("users").document(user.getEmail())
                 .collection("accounts").document(accNumber);
 
-        AccountItem accountItem = new AccountItem(accNumber,startDate,endDate,accountType,firstName,
+        final AccountItem accountItem = new AccountItem(accNumber,startDate,endDate,accountType,firstName,
                 lastName,phoneNumber,amount,actualAmt,dueAmt,interestPct,accoutStatus,customerPicUrl,loanAmt,actualLoanAmt,"0","0");
 
         newAccRef.set(accountItem)
@@ -344,6 +347,7 @@ public class AddAccountActivity extends AppCompatActivity implements AdapterView
                     @Override
                     public void onSuccess(Void aVoid) {
                         Log.d("TAG","Customer added. AccNo: "+ accNumber);
+                        addProfitCollectionForDAcc(accountItem);
 
 
                     }
@@ -402,5 +406,34 @@ public class AddAccountActivity extends AppCompatActivity implements AdapterView
 
 
         return popupWindow;
+    }
+
+    private void addProfitCollectionForDAcc(AccountItem accountItem){
+
+        if(accountItem.getAccoutType().contains("D")){
+
+            Date date = new Date();
+            String timestamp = date.getTime()+"";
+            String profit = (0.1*Float.parseFloat(accountItem.getLoanAmt()))+"";
+            String accNo = accountItem.getAccountNumber();
+            String accType = accountItem.getAccoutType();
+
+            CollectItem collectItem = new CollectItem(accNo,timestamp,"0",profit,accType);
+
+
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+            DocumentReference collectRef = db.collection("users").document(user.getEmail())
+                    .collection("collections").document(timestamp);
+
+            collectRef.set(collectItem).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.d("TAG","Failed to write collection amount. "+e);
+                }
+            });
+        }
+
     }
 }

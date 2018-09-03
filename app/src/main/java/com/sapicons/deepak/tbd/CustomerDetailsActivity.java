@@ -73,6 +73,8 @@ public class CustomerDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_customer_details);
         setTitle("Details");
 
+        Log.d("ACTIVITY","CustomerDetailsActivity");
+
         Intent intent = this.getIntent();
         Bundle bundle = intent.getExtras();
 

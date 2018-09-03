@@ -71,6 +71,8 @@ public class AccountsDisplayFragment extends ListFragment implements SearchView.
         setHasOptionsMenu(true);
         //populateList();
 
+        Log.d("FRAGMENT","AccountsDisplayFragment");
+
     }
 
     @Override

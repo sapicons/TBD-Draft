@@ -56,6 +56,8 @@ public class AddExpenseActivity extends AppCompatActivity implements AdapterView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_expense);
 
+        Log.d("ACTIVITY","AddExpenseActivity");
+
 
         updateUI();
         setDate();

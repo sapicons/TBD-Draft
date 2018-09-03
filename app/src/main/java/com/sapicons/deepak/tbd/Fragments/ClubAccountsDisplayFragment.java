@@ -76,6 +76,8 @@ public class ClubAccountsDisplayFragment extends ListFragment implements SearchV
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getActivity().setTitle("Select Customer");
 
+        Log.d("FRAGMENT","ClubAccountsDisplayFragment");
+
         isCollect = getArguments().getInt("is_collect");
 
         View view = inflater.inflate(R.layout.fragment_customer_display, container, false);
@@ -100,7 +102,7 @@ public class ClubAccountsDisplayFragment extends ListFragment implements SearchV
         adapter = new ClubbedAccountsAdapter(mContext,R.layout.item_clubbed_accounts,list,isCollect);
 
         listView.setAdapter(adapter);
-        listView.setEmptyView(view.findViewById(R.id.empty_customers_tv));
+        listView.setEmptyView(view.findViewById(R.id.empty_customers_display_tv));
 
         progressDialog = new ProgressDialog(mContext);
         progressDialog.setMessage("Please Wait ...");

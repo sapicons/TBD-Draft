@@ -3,6 +3,7 @@ package com.sapicons.deepak.tbd;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -22,6 +23,8 @@ public class AccountsDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accounts_details);
         setTitle("Report");
+
+        Log.d("ACTIVITY","AccountsDetailsActivity");
 
         Intent intent = this.getIntent();
         Bundle bundle = intent.getExtras();

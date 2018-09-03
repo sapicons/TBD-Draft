@@ -68,6 +68,7 @@ public class CollectionsReportsFragment extends ListFragment implements SearchVi
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getActivity().setTitle("Collections Report");
+        Log.d("FRAGMENT","CollectionsReportsFragment");
 
         View view = inflater.inflate(R.layout.fragment_collections_report, container, false);
         listView = view.findViewById(R.id.frag_collections_report_listview);

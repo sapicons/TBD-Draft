@@ -57,6 +57,7 @@ public class AccountItemAdapter extends ArrayAdapter<AccountItem> {
     String COLOR_YELLOW ="#c56000";
     String COLOR_BLUE ="#2962ff";
 
+
     ProgressDialog progressDialog;
 
     public AccountItemAdapter(@NonNull Context context, int resource, @NonNull List<AccountItem> objects,int i) {
@@ -68,6 +69,7 @@ public class AccountItemAdapter extends ArrayAdapter<AccountItem> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        Log.d("ADAPTER","AccountItemAdapter");
         if(convertView == null)
             convertView = ((Activity)getContext()).getLayoutInflater().inflate(R.layout.item_account,parent, false);
 
@@ -136,6 +138,7 @@ public class AccountItemAdapter extends ArrayAdapter<AccountItem> {
         Calendar calendar = Calendar.getInstance();
         long currTime = calendar.getTimeInMillis();
         long day = 1000 * 60 * 60 * 24;   // a day
+
         if(accountItem.getAccoutType().contains("D")) {
 
 
@@ -146,11 +149,24 @@ public class AccountItemAdapter extends ArrayAdapter<AccountItem> {
                 totalCollectedAmt = Float.parseFloat(accountItem.getTotalCollectedAmt()); //get total collected amount till now
 
             float numberOfDays = (currTime - startTime) / (day);             // no of days (yesterday - start day)
-            if (totalCollectedAmt >= (numberOfDays - 1) * (0.01 * loanAmt))          // total amount that must be collected for green button
+            if (totalCollectedAmt >= (numberOfDays - 1) * (0.01 * loanAmt)) {         // total amount that must be collected for green button
                 collectButton.setBackgroundColor(Color.parseColor(COLOR_GREEN));
-            else if (totalCollectedAmt < (numberOfDays - 4) * (0.01 * loanAmt))
+
+            }
+            else if (totalCollectedAmt < (numberOfDays - 4) * (0.01 * loanAmt)) {
                 collectButton.setBackgroundColor(Color.parseColor(COLOR_RED));
-            else collectButton.setBackgroundColor(Color.parseColor(COLOR_YELLOW));
+
+            }
+            else {
+                collectButton.setBackgroundColor(Color.parseColor(COLOR_YELLOW));
+
+
+            }
+
+
+
+
+
         }
         else if(accountItem.getAccoutType().contains("M")){
 
@@ -171,8 +187,50 @@ public class AccountItemAdapter extends ArrayAdapter<AccountItem> {
                 collectButton.setBackgroundColor(Color.parseColor(COLOR_YELLOW));
             else
                 collectButton.setBackgroundColor(Color.parseColor(COLOR_GREEN));
+
         }
 
+
+    }
+
+    public String getAmountToBeCollected(AccountItem accountItem){
+        Calendar calendar = Calendar.getInstance();
+        long currTime = calendar.getTimeInMillis();
+        long day = 1000 * 60 * 60 * 24;   // a day
+
+        String amountToBeCollected="";
+
+        if(accountItem.getAccoutType().contains("D")) {
+
+
+            long startTime = Long.parseLong(accountItem.getStartDate());  //get the start date of the account
+            float loanAmt = Float.parseFloat(accountItem.getLoanAmt());   //get the loan amount
+            float totalCollectedAmt = 0.0f;
+            if (accountItem.getTotalCollectedAmt() != null)
+                totalCollectedAmt = Float.parseFloat(accountItem.getTotalCollectedAmt()); //get total collected amount till now
+
+            float numberOfDays = (currTime - startTime) / (day);             // no of days (yesterday - start day)
+            if (totalCollectedAmt >= (numberOfDays - 1) * (0.01 * loanAmt)) {         // total amount that must be collected for green button
+                amountToBeCollected ="";
+
+            }
+            else if (totalCollectedAmt < (numberOfDays - 4) * (0.01 * loanAmt)) {
+                amountToBeCollected = (((numberOfDays - 4) * (0.01 * loanAmt))-totalCollectedAmt)+"";
+            }
+            else {
+                amountToBeCollected = (((numberOfDays - 1) * (0.01 * loanAmt))-totalCollectedAmt)+"";
+            }
+
+
+        }
+        else if(accountItem.getAccoutType().contains("M")){
+
+            amountToBeCollected = "";
+        }
+
+        if(amountToBeCollected.contains("-"))
+            amountToBeCollected="";
+        return amountToBeCollected;
     }
 
 
@@ -185,6 +243,7 @@ public class AccountItemAdapter extends ArrayAdapter<AccountItem> {
 
         View customView=inflater.inflate(R.layout.custom_collect_popup,null);
         final EditText amtEt = customView.findViewById(R.id.custom_collect_amt_et);
+        amtEt.setText(getAmountToBeCollected(item));
 
         alertDialog.setTitle("Collect Amount")
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

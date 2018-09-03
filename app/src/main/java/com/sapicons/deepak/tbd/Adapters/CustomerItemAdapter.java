@@ -32,6 +32,9 @@ public class CustomerItemAdapter extends ArrayAdapter<CustomerItem>{
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+
+        Log.d("ADAPTER","CustomerItemAdapter");
+
         if(convertView == null)
             convertView = ((Activity)getContext()).getLayoutInflater().inflate(R.layout.item_customer,parent, false);
         ImageView customerIV = convertView.findViewById(R.id.item_customer_image);

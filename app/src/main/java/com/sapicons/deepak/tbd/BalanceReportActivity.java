@@ -42,6 +42,7 @@ public class BalanceReportActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_balance_report);
 
+        Log.d("ACTIVITY","BalanceReportActivity");
         initialiseViews();
         listenToChanges();
     }

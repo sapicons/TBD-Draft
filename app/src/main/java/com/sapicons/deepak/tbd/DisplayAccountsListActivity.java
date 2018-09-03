@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.sapicons.deepak.tbd.Fragments.ClubAccountsDisplayFragment;
 
@@ -16,6 +17,7 @@ public class DisplayAccountsListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_accounts_list);
 
+        Log.d("ACTIVITY","DisplayAccountsListActivity");
         startDisplayAccountsFragement();
 
     }

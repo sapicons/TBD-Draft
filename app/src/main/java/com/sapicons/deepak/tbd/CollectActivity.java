@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.sapicons.deepak.tbd.Fragments.ClubAccountsDisplayFragment;
 
@@ -15,6 +16,7 @@ public class CollectActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_collect);
 
+        Log.d("ACTIVITY","CollectActivity");
         startCollectFragment();
     }
 

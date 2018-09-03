@@ -5,6 +5,7 @@ import android.app.FragmentManager;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.sapicons.deepak.tbd.Fragments.CustomerDisplayFragment;
 
@@ -15,6 +16,8 @@ public class DisplayCustomerListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_customer_list);
+
+        Log.d("ACTIVITY","DisplayCustomerListActivity");
 
         Intent intent = this.getIntent();
         Bundle bundle = intent.getExtras();

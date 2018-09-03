@@ -116,6 +116,8 @@ public class PinLockActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_pin_lock);
 
+        Log.d("ACTIVITY","PinLockActivity");
+
         //Shared preferences to store,validate and create pin
         sharedPreferences = this.getSharedPreferences("pin",0);
         editor = sharedPreferences.edit();

@@ -14,6 +14,7 @@ import android.support.design.widget.Snackbar;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.widget.SearchView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -52,6 +53,8 @@ public class Main2Activity extends AppCompatActivity
         setContentView(R.layout.activity_main2);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Log.d("ACTIVITY","MainActivity");
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

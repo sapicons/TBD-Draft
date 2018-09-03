@@ -35,6 +35,7 @@ public class ClosedAccountAdapter extends ArrayAdapter<AccountItem> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        Log.d("ADAPTER","ClosedAccountAdapter");
         if(convertView == null)
             convertView = ((Activity)getContext()).getLayoutInflater().inflate(R.layout.item_closed_account,parent, false);
 

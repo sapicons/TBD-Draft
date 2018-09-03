@@ -78,6 +78,7 @@ public class CollectActivityFragment extends ListFragment implements SearchView.
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getActivity().setTitle("Select Account");
+        Log.d("FRAGMENT","CollectActivityFragment");
 
         View view = inflater.inflate(R.layout.fragment_collect, container, false);
         listView = view.findViewById(R.id.collect_list_view);

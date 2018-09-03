@@ -65,7 +65,7 @@ public class ClubbedAccountsAdapter  extends ArrayAdapter<CustomerItem> {
     List<AccountItem> accItem = new ArrayList<>();
     int layoutResourceId;
 
-    int isCollect = 0;
+    int isCollect = 0;  // 1: collect 0: close
 
     ProgressDialog progressDialog;
     ViewHolder holder;
@@ -89,6 +89,8 @@ public class ClubbedAccountsAdapter  extends ArrayAdapter<CustomerItem> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+
+        Log.d("ADAPTER","ClubbedAccountAdapter");
 
         customerItem = getItem(position);
         if(convertView == null) {
@@ -193,10 +195,11 @@ public class ClubbedAccountsAdapter  extends ArrayAdapter<CustomerItem> {
                     endDateTv =  view.findViewById(R.id.single_account_end_date_tv);
             final FancyButton collectBtn = view.findViewById(R.id.single_acc_collect_btn);
 
+            // if the adapter is used for closing the account
             if(isCollect == 0) {
                 //collectBtn.setVisibility(View.INVISIBLE);
                 collectBtn.setText("Close");
-                collectBtn.setBackgroundColor(Color.parseColor("#c56000"));
+                collectBtn.setBackgroundColor(Color.parseColor("#c56000"));  //yellow color
             }
 
 
