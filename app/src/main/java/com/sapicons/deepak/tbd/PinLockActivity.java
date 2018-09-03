@@ -1,9 +1,11 @@
 package com.sapicons.deepak.tbd;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -162,8 +164,24 @@ public class PinLockActivity extends AppCompatActivity {
         forgotPinLockTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                signOut();
+                AlertDialog.Builder alertBuilder= new AlertDialog.Builder(PinLockActivity.this);
+                alertBuilder.setTitle("Reset PIN?");
+                alertBuilder.setMessage("You will be logged Out!");
+                alertBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        signOut();
+                    }
+                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+
+                alertBuilder.create().show();
             }
+
         });
     }
 

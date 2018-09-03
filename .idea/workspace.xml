@@ -16,7 +16,6 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="ADAPTER" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="debug" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
   </component>
@@ -32,7 +31,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/taskHistory/taskHistory.lock" afterPath="$PROJECT_DIR$/.gradle/4.1/taskHistory/taskHistory.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/PinLockActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/PinLockActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_pin_lock.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_pin_lock.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -59,11 +57,28 @@
       <file leaf-file-name="PinLockActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/PinLockActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="194" column="64" lean-forward="false" selection-start-line="194" selection-start-column="64" selection-end-line="194" selection-end-column="64" />
+            <state relative-caret-position="266">
+              <caret line="166" column="94" lean-forward="false" selection-start-line="166" selection-start-column="94" selection-end-line="166" selection-end-column="94" />
               <folding>
-                <element signature="e#5658#5804#0" expanded="true" />
-                <element signature="e#5803#5804#0" expanded="true" />
+                <element signature="e#5741#6631#0" expanded="true" />
+                <element signature="e#6109#6335#0" expanded="true" />
+                <element signature="e#6334#6335#0" expanded="true" />
+                <element signature="e#6630#6631#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ClubbedCollectionsItemAdapter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Adapters/ClubbedCollectionsItemAdapter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="177">
+              <caret line="224" column="13" lean-forward="false" selection-start-line="224" selection-start-column="8" selection-end-line="224" selection-end-column="13" />
+              <folding>
+                <element signature="docComment;class#ClubbedCollectionsItemAdapter#0" expanded="false" />
+                <element signature="method#ClubbedCollectionsItemAdapter#0;class#ClubbedCollectionsItemAdapter#0" expanded="false" />
+                <element signature="method#editCollectionAmount#0;class#ClubbedCollectionsItemAdapter#0" expanded="false" />
+                <element signature="method#updateAccountInfo#0;class#ClubbedCollectionsItemAdapter#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -100,6 +115,7 @@
       <find>settext</find>
       <find>NumberFormat</find>
       <find>getview</find>
+      <find>alert</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -2216,7 +2232,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1535963338602" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1535963887343" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -2264,7 +2280,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1535963338602" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1535963887343" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -2439,7 +2455,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1535963338603" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1535963887344" />
       </method>
     </configuration>
     <list size="1">
@@ -2615,7 +2631,14 @@
       <option name="project" value="LOCAL" />
       <updated>1535961790941</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Forgot PIN now works">
+      <created>1535963369845</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1535963369845</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TodoView">
@@ -2693,7 +2716,8 @@
     <MESSAGE value="Edit function in Collections Reports" />
     <MESSAGE value="Close account&#10;profit &#10;revenue&#10;expenses update&#10;added fabs on expenses and customers" />
     <MESSAGE value="Crashlytics&#10;removed bug that updated M acc instead of D acc&#10;added some text for empty fields&#10;now the profit is working fine&#10;auto-fill for collection amount" />
-    <option name="LAST_COMMIT_MESSAGE" value="Crashlytics&#10;removed bug that updated M acc instead of D acc&#10;added some text for empty fields&#10;now the profit is working fine&#10;auto-fill for collection amount" />
+    <MESSAGE value="Forgot PIN now works" />
+    <option name="LAST_COMMIT_MESSAGE" value="Forgot PIN now works" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -3142,20 +3166,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Adapters/ClubbedCollectionsItemAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1462">
-          <caret line="86" column="54" lean-forward="false" selection-start-line="86" selection-start-column="54" selection-end-line="86" selection-end-column="54" />
-          <folding>
-            <element signature="docComment;class#ClubbedCollectionsItemAdapter#0" expanded="false" />
-            <element signature="method#ClubbedCollectionsItemAdapter#0;class#ClubbedCollectionsItemAdapter#0" expanded="false" />
-            <element signature="method#setupPopupWindow#0;class#ClubbedCollectionsItemAdapter#0" expanded="false" />
-            <element signature="method#editCollectionAmount#0;class#ClubbedCollectionsItemAdapter#0" expanded="false" />
-            <element signature="method#updateAccountInfo#0;class#ClubbedCollectionsItemAdapter#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Adapters/AccountItemAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4590">
@@ -3194,13 +3204,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Adapters/ClubbedCollectionsItemAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="224" column="13" lean-forward="false" selection-start-line="224" selection-start-column="8" selection-end-line="224" selection-end-column="13" />
+          <folding>
+            <element signature="docComment;class#ClubbedCollectionsItemAdapter#0" expanded="false" />
+            <element signature="method#ClubbedCollectionsItemAdapter#0;class#ClubbedCollectionsItemAdapter#0" expanded="false" />
+            <element signature="method#editCollectionAmount#0;class#ClubbedCollectionsItemAdapter#0" expanded="false" />
+            <element signature="method#updateAccountInfo#0;class#ClubbedCollectionsItemAdapter#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/PinLockActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="194" column="64" lean-forward="false" selection-start-line="194" selection-start-column="64" selection-end-line="194" selection-end-column="64" />
+        <state relative-caret-position="266">
+          <caret line="166" column="94" lean-forward="false" selection-start-line="166" selection-start-column="94" selection-end-line="166" selection-end-column="94" />
           <folding>
-            <element signature="e#5658#5804#0" expanded="true" />
-            <element signature="e#5803#5804#0" expanded="true" />
+            <element signature="e#5741#6631#0" expanded="true" />
+            <element signature="e#6109#6335#0" expanded="true" />
+            <element signature="e#6334#6335#0" expanded="true" />
+            <element signature="e#6630#6631#0" expanded="true" />
           </folding>
         </state>
       </provider>
