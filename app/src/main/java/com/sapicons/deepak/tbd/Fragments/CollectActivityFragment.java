@@ -45,6 +45,8 @@ import com.sapicons.deepak.tbd.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import es.dmoral.toasty.Toasty;
+
 /**
  * Created by Deepak Prasad on 09-08-2018.
  */
@@ -233,7 +235,6 @@ public class CollectActivityFragment extends ListFragment implements SearchView.
                 }).setPositiveButton("Collect", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                //Toast.makeText(mContext, "Amt collected!", Toast.LENGTH_SHORT).show();
                 float actualAmt = Float.parseFloat(accountItem.getDueAmt());
                 String eA = amtEt.getText().toString();
                 if(!eA.isEmpty()) {
@@ -273,7 +274,7 @@ public class CollectActivityFragment extends ListFragment implements SearchView.
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Toast.makeText(mContext, "Amount Updated!", Toast.LENGTH_SHORT).show();
+                        Toasty.info(mContext, "Amount Updated!").show();
                         progressDialog.dismiss();
                     }
                 }).addOnFailureListener(new OnFailureListener() {

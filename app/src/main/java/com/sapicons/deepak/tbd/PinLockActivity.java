@@ -22,6 +22,8 @@ import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+import es.dmoral.toasty.Toasty;
+
 public class PinLockActivity extends AppCompatActivity {
 
     public static final String TAG = "PinLockView";
@@ -53,8 +55,7 @@ public class PinLockActivity extends AppCompatActivity {
 
                     //pin match. direct user to main activity
                     Log.d("TAG","Success PIN match");
-                    //Toast.makeText(this,"success pin match",Toast.LENGTH_SHORT).show();
-                    Toast.makeText(PinLockActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
+                    Toasty.success(PinLockActivity.this, "Welcome").show();
                     directUser();
                 }
                 else{

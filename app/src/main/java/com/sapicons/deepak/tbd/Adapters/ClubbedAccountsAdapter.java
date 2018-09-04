@@ -51,6 +51,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.sapicons.deepak.tbd.R;
 
+import es.dmoral.toasty.Toasty;
 import mehdi.sakout.fancybuttons.FancyButton;
 
 /**
@@ -279,13 +280,12 @@ public class ClubbedAccountsAdapter  extends ArrayAdapter<CustomerItem> {
                 }).setPositiveButton("Collect", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                //Toast.makeText(mContext, "Amt collected!", Toast.LENGTH_SHORT).show();
                 float actualAmt = Float.parseFloat(item.getDueAmt());
                 String eA = amtEt.getText().toString();
                 if(!eA.isEmpty()) {
                     float enteredAmt = Float.parseFloat(eA);
                     if (enteredAmt > actualAmt) {
-                        Toast.makeText(context, "Amount collected is more than Due.", Toast.LENGTH_LONG).show();
+                        Toasty.error(context, "Amount collected is more than Due.").show();
                     } else {
                         progressDialog.show();
 
@@ -342,7 +342,7 @@ public class ClubbedAccountsAdapter  extends ArrayAdapter<CustomerItem> {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Toast.makeText(context, "Amount Updated!", Toast.LENGTH_SHORT).show();
+                        Toasty.success(context, "Amount Updated!").show();
                         progressDialog.dismiss();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -355,15 +355,14 @@ public class ClubbedAccountsAdapter  extends ArrayAdapter<CustomerItem> {
 
         //close account id dueAmt = zero
         if(Float.parseFloat(newAmt)  < 1.0){
-            Toast.makeText(context, "Account is Closed!", Toast.LENGTH_SHORT).show();
+            Toasty.info(context, "Account is Closed!").show();
             accountItem.setAccountStatus("closed");
 
             accRef.update("accountStatus","closed")
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            //Toast.makeText(context, "Amount Updated!", Toast.LENGTH_SHORT).show();
-                            //progressDialog.dismiss();
+
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                 @Override

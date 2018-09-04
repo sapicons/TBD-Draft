@@ -38,6 +38,8 @@ import com.sapicons.deepak.tbd.Fragments.DashboardFragment;
 import com.sapicons.deepak.tbd.Fragments.ExpensesFragment;
 import com.sapicons.deepak.tbd.Fragments.ReportsFragment;
 
+import es.dmoral.toasty.Toasty;
+
 public class Main2Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -199,7 +201,7 @@ public class Main2Activity extends AppCompatActivity
         }
 
         this.doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+        Toasty.info(this, "Please click BACK again to exit").show();
 
         new Handler().postDelayed(new Runnable() {
 

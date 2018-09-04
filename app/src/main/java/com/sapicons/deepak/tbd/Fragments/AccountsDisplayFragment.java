@@ -41,14 +41,13 @@ import com.sapicons.deepak.tbd.Adapters.AccountItemAdapter;
 import com.sapicons.deepak.tbd.Adapters.CustomerItemAdapter;
 import com.sapicons.deepak.tbd.AddAccountActivity;
 import com.sapicons.deepak.tbd.Objects.AccountItem;
-import com.sapicons.deepak.tbd.Objects.CustomerItem;
 import com.sapicons.deepak.tbd.R;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
+
 import java.util.List;
+
 
 /**
  * Created by Deepak Prasad on 04-08-2018.
@@ -113,118 +112,10 @@ public class AccountsDisplayFragment extends ListFragment implements SearchView.
         progressDialog = new ProgressDialog(mContext);
         progressDialog.setMessage("Please Wait ...");
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                /*AccountItem item = (AccountItem)adapterView.getItemAtPosition(i);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("selected_account",item);
-
-
-                Intent intent = new Intent(getActivity(),AccountsDetailsActivity.class );
-                intent.putExtras(bundle);
-                startActivity(intent);*/
-
-                //AccountItem item = (AccountItem) adapterView.getItemAtPosition(i);
-                //setUpPopupWindow(item);
-            }
-        });
-
 
     }
 
-    private void setUpPopupWindow(final AccountItem accountItem){
 
-
-        AlertDialog.Builder alertDialog=new AlertDialog.Builder(getActivity());
-        LayoutInflater inflater = getActivity().getLayoutInflater();
-
-        View customView=inflater.inflate(R.layout.custom_collect_popup,null);
-        final EditText amtEt = customView.findViewById(R.id.custom_collect_amt_et);
-
-        alertDialog.setTitle("Collect Amount")
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                    }
-                }).setPositiveButton("Collect", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                //Toast.makeText(mContext, "Amt collected!", Toast.LENGTH_SHORT).show();
-                float actualAmt = Float.parseFloat(accountItem.getDueAmt());
-                String eA = amtEt.getText().toString();
-                if(!eA.isEmpty()) {
-                    float enteredAmt = Float.parseFloat(eA);
-                    if (enteredAmt > actualAmt) {
-                        Toast.makeText(mContext, "Collected Amount is more than Due.", Toast.LENGTH_SHORT).show();
-                    } else {
-                        progressDialog.show();
-                        deductAmountFromAccount(accountItem, amtEt.getText().toString());
-                    }
-                }
-
-
-            }
-        });
-
-        alertDialog.setView(customView)
-                .create().show();
-
-    }
-
-    private void deductAmountFromAccount(final AccountItem accountItem, String amount){
-
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-
-        String newAmt = (Float.parseFloat(accountItem.getDueAmt()) - Float.parseFloat(amount))+"";
-        //accountItem.setDueAmt(newAmt);
-
-
-
-        //update the new info to db
-        DocumentReference accRef = db.collection("users").document(user.getEmail())
-                .collection("accounts").document(accountItem.getAccountNumber());
-
-        accRef.update("dueAmt",newAmt)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Toast.makeText(mContext, "Amount Updated!", Toast.LENGTH_SHORT).show();
-                        progressDialog.dismiss();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.d("TAG","error updating amt: "+e);
-            }
-        });
-
-        //close account id dueAmt = zero
-        if(Float.parseFloat(newAmt)  < 1.0){
-            Toast.makeText(mContext, "Account is Closed!", Toast.LENGTH_SHORT).show();
-            accountItem.setAccountStatus("closed");
-
-            accRef.update("accountStatus","closed")
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            //Toast.makeText(context, "Amount Updated!", Toast.LENGTH_SHORT).show();
-                            //progressDialog.dismiss();
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Log.d("TAG","error updating account status: "+e);
-                }
-            });
-        }
-
-
-
-    }
 
     //get realtime updates
     private void listenToChanges(){

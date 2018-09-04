@@ -37,6 +37,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import es.dmoral.toasty.Toasty;
+
 public class AddExpenseActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     Calendar myCalendar;
@@ -234,7 +236,7 @@ public class AddExpenseActivity extends AppCompatActivity implements AdapterView
 
             }
         });
-        Toast.makeText(AddExpenseActivity.this, "Expense Added!", Toast.LENGTH_SHORT).show();
+        Toasty.success(AddExpenseActivity.this, "Expense Added!").show();
         finish();
 
     }

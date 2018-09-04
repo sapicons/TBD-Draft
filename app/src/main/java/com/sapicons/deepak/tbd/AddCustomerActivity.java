@@ -38,6 +38,8 @@ import com.sapicons.deepak.tbd.Objects.CustomerItem;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
+import es.dmoral.toasty.Toasty;
+
 public class AddCustomerActivity extends AppCompatActivity {
 
     EditText firstNameEt,lastNameEt, phoneEt, addLine1Et, addLine2Et,townCityEt, pinCodeEt;
@@ -189,7 +191,6 @@ public class AddCustomerActivity extends AppCompatActivity {
                         bundle.putSerializable("selected_customer",customerItem);
                         Intent intent = new Intent(AddCustomerActivity.this, AddAccountActivity.class);
                         intent.putExtras(bundle);
-                        //Toast.makeText(mContext, item.getFirstName()+" selected", Toast.LENGTH_SHORT).show();
                         startActivity(intent);
                         finish();
 
@@ -262,7 +263,7 @@ public class AddCustomerActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Log.d(TAG, "Data successfully written.");
-                        Toast.makeText(AddCustomerActivity.this, "Customer successfully added!", Toast.LENGTH_SHORT).show();
+                        Toasty.success(AddCustomerActivity.this, "Customer successfully added!").show();
 
                         progressDialog.dismiss();
                         askForNewAccount();

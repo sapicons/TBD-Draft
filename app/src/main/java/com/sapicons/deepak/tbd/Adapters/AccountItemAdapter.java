@@ -40,6 +40,7 @@ import java.util.List;
 import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import es.dmoral.toasty.Toasty;
 import mehdi.sakout.fancybuttons.FancyButton;
 
 /**
@@ -254,13 +255,14 @@ public class AccountItemAdapter extends ArrayAdapter<AccountItem> {
                 }).setPositiveButton("Collect", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                //Toast.makeText(mContext, "Amt collected!", Toast.LENGTH_SHORT).show();
+
                 float actualAmt = Float.parseFloat(item.getDueAmt());
                 String eA = amtEt.getText().toString();
                 if(!eA.isEmpty()) {
                     float enteredAmt = Float.parseFloat(eA);
                     if (enteredAmt > actualAmt) {
-                        Toast.makeText(getContext(), "Amount collected is more than Due.", Toast.LENGTH_LONG).show();
+
+                        Toasty.error(getContext(),"Collected Amount is more than Due").show();
                     } else {
                         progressDialog.show();
 
@@ -297,7 +299,8 @@ public class AccountItemAdapter extends ArrayAdapter<AccountItem> {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Toast.makeText(getContext(), "Amount Updated!", Toast.LENGTH_SHORT).show();
+
+                        Toasty.success(getContext(),"Amount Updated").show();
                         progressDialog.dismiss();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -310,15 +313,14 @@ public class AccountItemAdapter extends ArrayAdapter<AccountItem> {
 
         //close account id dueAmt = zero
         if(Float.parseFloat(newAmt)  < 1.0){
-            Toast.makeText(getContext(), "Account is Closed!", Toast.LENGTH_SHORT).show();
+            Toasty.info(getContext(),"Account Closed").show();
             accountItem.setAccountStatus("closed");
 
             accRef.update("accountStatus","closed")
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            //Toast.makeText(context, "Amount Updated!", Toast.LENGTH_SHORT).show();
-                            //progressDialog.dismiss();
+
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                 @Override

@@ -48,6 +48,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Date;
 
+import es.dmoral.toasty.Toasty;
 import mehdi.sakout.fancybuttons.FancyButton;
 
 public class AddAccountActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -358,7 +359,7 @@ public class AddAccountActivity extends AppCompatActivity implements AdapterView
 
             }
         });
-        Toast.makeText(AddAccountActivity.this, "Account Added!", Toast.LENGTH_SHORT).show();
+        Toasty.success(AddAccountActivity.this, "Account Added!").show();
         finish();
 
     }

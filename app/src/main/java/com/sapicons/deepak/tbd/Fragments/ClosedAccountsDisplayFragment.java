@@ -42,6 +42,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import es.dmoral.toasty.Toasty;
+
 /**
  * Created by Deepak Prasad on 21-08-2018.
  */
@@ -319,7 +321,7 @@ public class ClosedAccountsDisplayFragment extends ListFragment implements Searc
                     startCalendar.set(Calendar.MONTH, monthOfYear);
                     startCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
-                    Toast.makeText(mContext, "Select End Date", Toast.LENGTH_SHORT).show();
+                    Toasty.info(mContext, "Select End Date").show();
                     new DatePickerDialog(getActivity(), endDate, endCalendar
                             .get(Calendar.YEAR), endCalendar.get(Calendar.MONTH),
                             endCalendar.get(Calendar.DAY_OF_MONTH)).show();
@@ -327,7 +329,7 @@ public class ClosedAccountsDisplayFragment extends ListFragment implements Searc
 
             };
 
-            Toast.makeText(mContext, "Select Start Date", Toast.LENGTH_SHORT).show();
+            Toasty.info(mContext, "Select Start Date").show();
 
             new DatePickerDialog(getActivity(), startDate, startCalendar
                     .get(Calendar.YEAR), startCalendar.get(Calendar.MONTH),

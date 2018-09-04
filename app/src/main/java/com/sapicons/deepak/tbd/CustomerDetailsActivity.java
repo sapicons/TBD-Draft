@@ -48,6 +48,7 @@ import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import es.dmoral.toasty.Toasty;
 
 public class CustomerDetailsActivity extends AppCompatActivity {
 
@@ -300,7 +301,7 @@ public class CustomerDetailsActivity extends AppCompatActivity {
             }
         });
 
-        Toast.makeText(this, "Customer successfully updated!", Toast.LENGTH_SHORT).show();
+        Toasty.success(this, "Customer successfully updated!").show();
 
         // clear the edit text fields and imageview
         //clearFields();
@@ -360,7 +361,7 @@ public class CustomerDetailsActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Toast.makeText(CustomerDetailsActivity.this, "Customer removed!", Toast.LENGTH_SHORT).show();
+                        Toasty.info(CustomerDetailsActivity.this, "Customer removed!").show();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override

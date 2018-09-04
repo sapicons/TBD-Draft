@@ -42,6 +42,8 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import java.util.Arrays;
 import java.util.List;
 
+import es.dmoral.toasty.Toasty;
+
 public class SignInActivity extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 123;
@@ -272,7 +274,7 @@ public class SignInActivity extends AppCompatActivity {
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful()) {
                                             Log.d("TAG", "Email sent.");
-                                            Toast.makeText(SignInActivity.this, "Email Sent!", Toast.LENGTH_SHORT).show();
+                                            Toasty.info(SignInActivity.this, "Email Sent!").show();
                                         }
                                     }
                                 });
@@ -304,7 +306,7 @@ public class SignInActivity extends AppCompatActivity {
 
         // user is signed in
         if(user!=null) {
-            Toast.makeText(this, " Welocme! " , Toast.LENGTH_SHORT).show();
+            Toasty.success(this, " Welocme! " ).show();
 
             //if remember me is checked, direct user to PIN activity
             if(checkForPINSignIN())

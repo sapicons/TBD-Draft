@@ -111,7 +111,6 @@ public class CustomerFragment extends ListFragment implements SearchView.OnQuery
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 CustomerItem item = (CustomerItem)adapterView.getItemAtPosition(i);
-                Toast.makeText(getActivity(), "Name: "+item.getLastName(), Toast.LENGTH_SHORT).show();
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("selected_customer",item);
                 Intent intent = new Intent(getActivity(), CustomerDetailsActivity.class);
