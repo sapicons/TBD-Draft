@@ -142,9 +142,12 @@ public class DashboardFragment extends Fragment {
         final CollectionReference collectionRef = db.collection("users").document(user.getEmail())
                 .collection("collections");
 
+
+
         collectionRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException e) {
+                float profit=0.0f;
 
                 if (e != null) {
                     Log.w("DF", "Listen failed.", e);
@@ -176,6 +179,8 @@ public class DashboardFragment extends Fragment {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException e) {
 
+                float revenue=0.0f;
+
                 if (e != null) {
                     Log.w("DF", "Listen failed.", e);
                     return;
@@ -206,6 +211,8 @@ public class DashboardFragment extends Fragment {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException e) {
 
+
+                float expenses =0.0f;
                 if (e != null) {
                     Log.w("DF", "Listen failed.", e);
                     return;

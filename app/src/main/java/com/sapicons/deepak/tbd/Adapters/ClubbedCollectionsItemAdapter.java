@@ -46,6 +46,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
+import es.dmoral.toasty.Toasty;
 import mehdi.sakout.fancybuttons.FancyButton;
 
 /**
@@ -225,7 +226,7 @@ public class ClubbedCollectionsItemAdapter extends ArrayAdapter<AccountItem> {
         AlertDialog.Builder alertDialog=new AlertDialog.Builder(getContext());
         LayoutInflater inflater =(LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View customView=inflater.inflate(R.layout.custom_collect_popup,null);
+        final View customView=inflater.inflate(R.layout.custom_collect_popup,null);
         final EditText amtEt = customView.findViewById(R.id.custom_collect_amt_et);
 
         alertDialog.setTitle("Edit Amount")
@@ -238,14 +239,23 @@ public class ClubbedCollectionsItemAdapter extends ArrayAdapter<AccountItem> {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
-                //float originalCollectionAmt = Float.parseFloat(collectItem.getAmountCollected());
+                float originalCollectionAmt = Float.parseFloat(collectItem.getAmountCollected());
                 String eA = amtEt.getText().toString();
                 if(!eA.isEmpty()) {
+
                     float enteredAmt = Float.parseFloat(eA);
+                    float difference = enteredAmt - originalCollectionAmt;
+                    float originalDueAmt  = Float.parseFloat(accountItem.getDueAmt());
+                    float newDueAmt = originalDueAmt-difference;
 
-                    progressDialog.show();
+                    if(newDueAmt<0)
+                        Toasty.error(context,"Entered Amount is more than Due Amount").show();
 
-                    editCollectionAmount(collectItem, amtEt.getText().toString(),collectionAmtTv);
+                    else {
+
+                        progressDialog.show();
+                        editCollectionAmount(collectItem, amtEt.getText().toString(), collectionAmtTv);
+                    }
 
                 }
 
@@ -257,33 +267,43 @@ public class ClubbedCollectionsItemAdapter extends ArrayAdapter<AccountItem> {
     }
 
 
-    public void editCollectionAmount(CollectItem collectItem,String updatedAmount, TextView collectionAmtTv){
+    public void editCollectionAmount(CollectItem collectItem,final String updatedAmount, TextView collectionAmtTv){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         //update local info
-        String originalCollectedAmt= collectItem.getAmountCollected();
+        final String originalCollectedAmt= collectItem.getAmountCollected();
         collectItem.setAmountCollected(updatedAmount);
         //collectionAmtTv.setText(updatedAmount);
         float dA=Float.parseFloat(updatedAmount);
+
+
+
+
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
             NumberFormat numberFormat = NumberFormat.getCurrencyInstance(new Locale("en","in"));
-            collectionAmtTv.setText("₹ "+numberFormat.format(dA));
+            collectionAmtTv.setText(numberFormat.format(dA));
         }else {
 
             java.text.NumberFormat numberFormat = java.text.NumberFormat.getNumberInstance(Locale.US);
-            collectionAmtTv.setText("₹ "+numberFormat.format(dA));
+            collectionAmtTv.setText(numberFormat.format(dA));
         }
+
+
+
 
         //update the new info to db
         DocumentReference collectRef = db.collection("users").document(user.getEmail())
                 .collection("collections").document(collectItem.getTimestamp());
+
         collectRef.update("amountCollected",updatedAmount)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Toast.makeText(context, "Amount Updated!", Toast.LENGTH_SHORT).show();
+
+                        Toasty.success(context,"Collection Updated").show();
                         progressDialog.dismiss();
+                        updateAccountInfo(originalCollectedAmt,updatedAmount);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -292,15 +312,17 @@ public class ClubbedCollectionsItemAdapter extends ArrayAdapter<AccountItem> {
             }
         });
 
-        updateAccountInfo(originalCollectedAmt,updatedAmount);
+
     }
     public void updateAccountInfo(String originalCollectedAmt, String updatedAmount){
+
+        Log.d("CCIA","updateAccountInfo");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         float difference = Float.parseFloat(updatedAmount)-Float.parseFloat(originalCollectedAmt);
 
-        String newDueAmt = (Float.parseFloat(originalCollectedAmt)+difference)+"";
+        String newDueAmt = (Float.parseFloat(accountItem.getDueAmt())-difference)+"";
         String newTotalCollectedAmt = (Float.parseFloat(accountItem.getTotalCollectedAmt())+difference)+"";
 
         accountItem.setDueAmt(newDueAmt);
@@ -318,5 +340,48 @@ public class ClubbedCollectionsItemAdapter extends ArrayAdapter<AccountItem> {
                         Log.d("TAG","Failed to write collection amount. "+e);
                     }
                 });
+
+
+
+
+        //close account id dueAmt = zero
+        if(Float.parseFloat(newDueAmt)  < 1.0){
+            Toasty.info(context,"Account Closed").show();
+            accountItem.setAccountStatus("closed");
+
+            accRef.update("accountStatus","closed")
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+
+                            //progressDialog.dismiss();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.d("TAG","error updating account status: "+e);
+                }
+            });
+        }
+
+        //open account id newDueAmt > zero and account is closed
+        if(Float.parseFloat(newDueAmt)  >=1.0 && accountItem.getAccountStatus().contains("closed")){
+            Toasty.info(context,"Account Opened").show();
+            accountItem.setAccountStatus("open");
+
+            accRef.update("accountStatus","open")
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+
+                            //progressDialog.dismiss();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.d("TAG","error updating account status: "+e);
+                }
+            });
+        }
     }
 }
