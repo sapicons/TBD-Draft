@@ -212,6 +212,42 @@ public class AccountsDisplayFragment extends ListFragment implements SearchView.
         //listenToChanges();
     }
 
+
+    public float getAmountToBeCollected(AccountItem accountItem){
+        Calendar calendar = Calendar.getInstance();
+        long currTime = calendar.getTimeInMillis();
+        long day = 1000 * 60 * 60 * 24;
+
+        float amountToBeCollected=0.0f;
+        float loanAmt= Float.parseFloat(accountItem.getLoanAmt());
+        float totalCollectedAmt = 0.0f;
+        if (accountItem.getTotalCollectedAmt() != null)
+            totalCollectedAmt = Float.parseFloat(accountItem.getTotalCollectedAmt()); //get total collected amount till now
+
+        long lastCollectionDay = Long.parseLong(accountItem.getLatestCollectionTimestamp());
+        if (lastCollectionDay ==0)
+            lastCollectionDay= Long.parseLong(accountItem.getStartDate());
+
+        if(accountItem.getAccoutType().contains("D")) {
+
+            int daysUnpaid =(int) ((currTime-lastCollectionDay)/day );
+            amountToBeCollected =(float) (daysUnpaid*0.01*loanAmt - totalCollectedAmt);
+
+        }
+        else if(accountItem.getAccoutType().contains("M")){
+
+            long month = day*30;
+            long startDate = Long.parseLong(accountItem.getStartDate());
+            int monthsFromStart = (int)((currTime-startDate)/month);
+
+            float interestPct = Float.parseFloat(accountItem.getInterestPct());
+            amountToBeCollected = (loanAmt*(interestPct/100)*monthsFromStart - totalCollectedAmt);
+        }
+
+        if(amountToBeCollected<0)
+            amountToBeCollected=0.0f;
+        return amountToBeCollected;
+    }
     boolean filterAccounts(AccountItem item){
 
         Calendar calendar = Calendar.getInstance();
@@ -233,8 +269,13 @@ public class AccountsDisplayFragment extends ListFragment implements SearchView.
             Log.d("ADF","NO of days: "+noOfDays);
             Log.d("ADF","last collection date: "+lastCollectionDate);
             // if started on the same day of the previous months and account is open return true
-            if(noOfDays >=30 &&
-                    item.getAccountStatus().equalsIgnoreCase("open")) {
+
+            Log.d("ADF","amt to be collected: "+getAmountToBeCollected(item));
+
+            if(getAmountToBeCollected(item)>0)
+                return true;
+            if((noOfDays >=30 &&
+                    item.getAccountStatus().equalsIgnoreCase("open")) ) {
                 return true;
             }
 
@@ -259,10 +300,10 @@ public class AccountsDisplayFragment extends ListFragment implements SearchView.
 
 
             long day=1000*60*60*24;
-            if((todaysDate - lastCollectionDate) >= day  &&
+            if(((todaysDate - lastCollectionDate) >= day  &&
                     todaysDate<endDate &&
                     Float.parseFloat(item.getDueAmt())>0 &&
-                    item.getAccountStatus().equalsIgnoreCase("open"))
+                    item.getAccountStatus().equalsIgnoreCase("open")) )
                 return true;
 
 

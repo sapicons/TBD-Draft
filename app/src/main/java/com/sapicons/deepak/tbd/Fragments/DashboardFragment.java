@@ -2,8 +2,10 @@ package com.sapicons.deepak.tbd.Fragments;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.icu.text.NumberFormat;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.app.Fragment;
@@ -12,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,9 +51,7 @@ public class DashboardFragment extends Fragment {
 
     ProgressDialog progressDialog;
     TextView profitTv, revenueTv, expensesTv;
-    float profit = 0.0f;
-    float revenue = 0.0f;
-    float expenses = 0.0f;
+    LinearLayout profitLL,revenueLL,expensesLL;
 
     FirebaseUser user;
     FirebaseFirestore db;
@@ -88,6 +89,10 @@ public class DashboardFragment extends Fragment {
        profitTv = view.findViewById(R.id.fd_total_profit_tv);
        revenueTv = view.findViewById(R.id.fd_total_revenue_tv);
        expensesTv = view.findViewById(R.id.fd_total_expenses_tv);
+       profitLL = view.findViewById(R.id.fd_profit_ll);
+       revenueLL= view.findViewById(R.id.fd_revenue_ll);
+       expensesLL = view.findViewById(R.id.fd_expenses_ll);
+
 
        addCustomerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,6 +142,28 @@ public class DashboardFragment extends Fragment {
         updateExpenses();
 
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        displayOrHidePER();
+    }
+
+    private  void displayOrHidePER(){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        boolean showProfit = sharedPreferences.getBoolean(getResources().getString(R.string.key_show_total_profit),true);
+        boolean showRevenue = sharedPreferences.getBoolean(getResources().getString(R.string.key_show_total_revenue),true);
+        boolean showExpenses = sharedPreferences.getBoolean(getResources().getString(R.string.key_show_total_expenses),true);
+
+        if(!showProfit)  profitLL.setVisibility(View.GONE);
+        else profitLL.setVisibility(View.VISIBLE);
+
+        if(!showExpenses) expensesLL.setVisibility(View.GONE);
+        else  expensesLL.setVisibility(View.VISIBLE);
+
+        if(!showRevenue) revenueLL.setVisibility(View.GONE);
+        else revenueLL.setVisibility(View.VISIBLE);
     }
     private void updateProfit(){
         final CollectionReference collectionRef = db.collection("users").document(user.getEmail())
@@ -188,7 +215,7 @@ public class DashboardFragment extends Fragment {
 
                 for (QueryDocumentSnapshot doc : value) {
                     AccountItem accountItem = doc.toObject(AccountItem.class);
-                    revenue+=Float.parseFloat(accountItem.getActualAmt());
+                    revenue+=Float.parseFloat(accountItem.getActualLoanAmt());
 
                 }
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {

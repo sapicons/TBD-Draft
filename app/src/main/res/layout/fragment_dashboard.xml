@@ -68,7 +68,7 @@
                 android:layout_gravity="end"
                 android:id="@+id/fd_total_profit_tv"
                 android:textSize="18sp"
-                android:text="24,000.00"
+                android:text="0.00"
                 android:textColor="#2e7d32"/>
         </LinearLayout>
 
@@ -91,7 +91,7 @@
                 android:layout_gravity="end"
                 android:id="@+id/fd_total_expenses_tv"
                 android:textSize="18sp"
-                android:text="24,000.00"
+                android:text="0.00"
                 android:textColor="#d50000"/>
         </LinearLayout>
 
@@ -115,7 +115,7 @@
                 android:layout_gravity="end"
                 android:id="@+id/fd_total_revenue_tv"
                 android:textSize="18sp"
-                android:text="24,000.00"
+                android:text="0.00"
                 android:textColor="#2962ff"/>
         </LinearLayout>
     </LinearLayout>

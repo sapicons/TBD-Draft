@@ -306,7 +306,7 @@ public class SignInActivity extends AppCompatActivity {
 
         // user is signed in
         if(user!=null) {
-            Toasty.success(this, " Welocme! " ).show();
+            Toasty.info(this, " Welcome! " ).show();
 
             //if remember me is checked, direct user to PIN activity
             if(checkForPINSignIN())

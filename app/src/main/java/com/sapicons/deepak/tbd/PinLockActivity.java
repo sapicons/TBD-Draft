@@ -55,7 +55,7 @@ public class PinLockActivity extends AppCompatActivity {
 
                     //pin match. direct user to main activity
                     Log.d("TAG","Success PIN match");
-                    Toasty.success(PinLockActivity.this, "Welcome").show();
+                    Toasty.info(PinLockActivity.this, "Welcome").show();
                     directUser();
                 }
                 else{

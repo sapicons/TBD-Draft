@@ -1,7 +1,9 @@
 package com.sapicons.deepak.tbd;
 
+import android.app.AlertDialog;
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -139,13 +141,31 @@ public class Main2Activity extends AppCompatActivity
 
         if (id == R.id.nav_settings) {
 
+            startActivity(new Intent(Main2Activity.this,SettingsActivity.class));
+
+
         } else if (id == R.id.nav_sign_out){
-            signOut();
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Log Out?").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    signOut();
+                }
+            }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                }
+            });
+            builder.create().show();
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+
         return true;
+
     }
 
 

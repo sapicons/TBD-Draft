@@ -16,6 +16,7 @@ import com.sapicons.deepak.tbd.ClosedAccountsActivity;
 import com.sapicons.deepak.tbd.CollectionsReportsActivity;
 import com.sapicons.deepak.tbd.DisplayAccountsListActivity;
 import com.sapicons.deepak.tbd.DisplayCustomerListActivity;
+import com.sapicons.deepak.tbd.ProfitStatementActivity;
 import com.sapicons.deepak.tbd.R;
 
 import mehdi.sakout.fancybuttons.FancyButton;
@@ -73,6 +74,7 @@ public class ReportsFragment extends Fragment {
         profitStatementBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                startActivity(new Intent(getActivity(),ProfitStatementActivity.class));
             }
         });
 

@@ -47,7 +47,10 @@
         <activity android:name=".AddExpenseActivity" />
         <activity android:name=".TodaysDueActivity" />
         <activity android:name=".ClosedAccountsActivity" />
-        <activity android:name=".CollectionsReportsActivity"></activity>
+        <activity android:name=".CollectionsReportsActivity" />
+        <activity android:name=".ProfitStatementActivity"></activity>
+        <activity android:name=".SettingsActivity"
+            android:parentActivityName=".Main2Activity"/>
     </application>
 
 </manifest>
