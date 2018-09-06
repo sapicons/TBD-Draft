@@ -24,7 +24,7 @@ import java.util.Locale;
 
 public class ProfitStatementActivity extends AppCompatActivity {
 
-    TextView profitTv, revenueTv, expensesTv;
+    TextView profitTv, revenueTv, expensesTv,dueTv;
 
     ProgressDialog progressDialog;
 
@@ -48,6 +48,7 @@ public class ProfitStatementActivity extends AppCompatActivity {
         profitTv = findViewById(R.id.aps_total_profit_tv);
         revenueTv = findViewById(R.id.aps_total_revenue_tv);
         expensesTv = findViewById(R.id.aps_total_expenses_tv);
+        dueTv = findViewById(R.id.aps_total_due_tv);
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please Wait ...");
@@ -62,6 +63,7 @@ public class ProfitStatementActivity extends AppCompatActivity {
         updateProfit();
         updateRevenue();
         updateExpenses();
+        updateTotalDue();
 
 
     }
@@ -162,6 +164,38 @@ public class ProfitStatementActivity extends AppCompatActivity {
 
                     java.text.NumberFormat numberFormat = java.text.NumberFormat.getNumberInstance(Locale.US);
                     expensesTv.setText(numberFormat.format(expenses));
+                }
+
+            }
+        });
+    }
+    private void updateTotalDue(){
+        final CollectionReference collectionRef = db.collection("users").document(user.getEmail())
+                .collection("accounts");
+
+        collectionRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException e) {
+
+
+                float due =0.0f;
+                if (e != null) {
+                    Log.w("DF", "Listen failed.", e);
+                    return;
+                }
+
+                for (QueryDocumentSnapshot doc : value) {
+                    AccountItem accountItem = doc.toObject(AccountItem.class);
+                    due+=Float.parseFloat(accountItem.getDueAmt());
+
+                }
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                    NumberFormat numberFormat = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
+                    dueTv.setText(numberFormat.format(due));
+                } else {
+
+                    java.text.NumberFormat numberFormat = java.text.NumberFormat.getNumberInstance(Locale.US);
+                    dueTv.setText(numberFormat.format(due));
                 }
 
             }

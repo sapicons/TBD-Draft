@@ -53,6 +53,8 @@ public class AddCustomerActivity extends AppCompatActivity {
     String TAG = "AddCustomerActivity";
 
     CustomerItem customerItem;
+    Intent intent;
+    Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +63,10 @@ public class AddCustomerActivity extends AppCompatActivity {
         setTitle("Add Customer");
 
         Log.d("ACTIVITY","AddCustomerActivity");
+
+        intent = this.getIntent();
+        bundle = intent.getExtras();
+
 
         initialiseUI();
     }
@@ -84,6 +90,19 @@ public class AddCustomerActivity extends AppCompatActivity {
         addLine2Et.addTextChangedListener(watcher);
         addLine1Et.addTextChangedListener(watcher);
         townCityEt.addTextChangedListener(watcher);
+
+        //set fields if bundle is not null (if this activity is opened after contacts import
+        if(bundle!=null){
+            String name = bundle.getString("full_name");
+            String number = bundle.getString("number");
+            String firstName= name.substring(0,name.indexOf(" "));
+            String lastName = name.substring(name.lastIndexOf(" "),name.length());
+
+
+            firstNameEt.setText(firstName);
+            lastNameEt.setText(lastName);
+            phoneEt.setText(number);
+        }
 
         doneBtn.setOnClickListener(new View.OnClickListener() {
             @Override

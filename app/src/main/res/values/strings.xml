@@ -127,10 +127,13 @@
     <string name="show_total_profit">Show Total Profit</string>
     <string name="show_total_revenue">Show Total Revenue</string>
     <string name="show_total_expenses">Show Total Expenses</string>
+    <string name="show_total_due">Show Total Due</string>
 
     <string name="key_show_total_profit">key_show_total_profit</string>
     <string name="key_show_total_revenue">key_show_total_revenue</string>
     <string name="key_show_total_expenses">key_show_total_expenses</string>
+
+    <string name="key_show_total_due">key_show_total_due</string>
 
 
 </resources>

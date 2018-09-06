@@ -14,6 +14,10 @@
             android:defaultValue="true"
             android:key="@string/key_show_total_expenses"
             android:title="@string/show_total_expenses" />
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="@string/key_show_total_due"
+            android:title="@string/show_total_due" />
 
     </PreferenceCategory>
 

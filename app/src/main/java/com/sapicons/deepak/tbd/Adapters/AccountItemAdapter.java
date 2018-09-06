@@ -349,6 +349,7 @@ public class AccountItemAdapter extends ArrayAdapter<AccountItem> {
         if(item.getAccoutType().contains("M")){
 
             profit= (Float.parseFloat(item.getLoanAmt().trim())*Float.parseFloat(item.getInterestPct().trim())/100)+"";
+            profit = collectedAmount;
         }
 
         CollectItem collectItem = new CollectItem(item.getAccountNumber(),timestamp,collectedAmount,profit,item.getAccoutType());

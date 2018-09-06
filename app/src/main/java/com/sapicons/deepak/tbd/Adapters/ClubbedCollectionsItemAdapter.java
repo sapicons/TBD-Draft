@@ -154,7 +154,11 @@ public class ClubbedCollectionsItemAdapter extends ArrayAdapter<AccountItem> {
                                 CollectItem item = document.toObject(CollectItem.class);
                                 Log.d("CCIA",item.getAccountNumber());
 
-                                list.add(item);
+                                //remove first collection for D accounts
+                                float profitAmt = Float.parseFloat(item.getProfitAmount());
+                                float collectedAmt = Float.parseFloat(item.getAmountCollected());
+                                if(profitAmt >= 0.0 && collectedAmt > 0.0)
+                                    list.add(item);
 
                             }
 
@@ -296,7 +300,7 @@ public class ClubbedCollectionsItemAdapter extends ArrayAdapter<AccountItem> {
         DocumentReference collectRef = db.collection("users").document(user.getEmail())
                 .collection("collections").document(collectItem.getTimestamp());
 
-        collectRef.update("amountCollected",updatedAmount)
+        collectRef.update("amountCollected",updatedAmount,"profitAmount",updatedAmount)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -325,14 +329,16 @@ public class ClubbedCollectionsItemAdapter extends ArrayAdapter<AccountItem> {
         String newDueAmt = (Float.parseFloat(accountItem.getDueAmt())-difference)+"";
         String newTotalCollectedAmt = (Float.parseFloat(accountItem.getTotalCollectedAmt())+difference)+"";
 
-        accountItem.setDueAmt(newDueAmt);
+        if(accountItem.getAccoutType().contains("D"))
+            accountItem.setDueAmt(newDueAmt);
         accountItem.setTotalCollectedAmt(newTotalCollectedAmt);
 
 
         DocumentReference accRef = db.collection("users").document(user.getEmail())
                 .collection("accounts").document(accountItem.getAccountNumber());
 
-        accRef.update("dueAmt",newDueAmt,
+        if(accountItem.getAccoutType().contains("D"))
+            accRef.update("dueAmt",newDueAmt,
                         "totalCollectedAmt",newTotalCollectedAmt)
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -341,6 +347,14 @@ public class ClubbedCollectionsItemAdapter extends ArrayAdapter<AccountItem> {
                     }
                 });
 
+        else
+            accRef.update("totalCollectedAmt",newTotalCollectedAmt)
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.d("TAG","Failed to write collection amount. "+e);
+                        }
+                    });
 
 
 
