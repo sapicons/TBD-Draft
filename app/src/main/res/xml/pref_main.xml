@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="General">
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="@string/key_show_total_profit"
+            android:title="@string/show_total_profit" />
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="@string/key_show_total_revenue"
+            android:title="@string/show_total_revenue" />
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="@string/key_show_total_expenses"
+            android:title="@string/show_total_expenses" />
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="@string/key_show_total_due"
+            android:title="@string/show_total_due" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_header_about">
+
+        <Preference android:selectable="false"
+            android:summary="@string/summary_about"/>
+
+        <Preference android:summary="@string/app_version"
+            android:title="@string/title_version"/>
+
+        <Preference
+            android:key="@string/key_send_feedback"
+            android:summary="@string/summary_support"
+            android:title="@string/title_send_feedback"/>
+
+        <Preference android:title="@string/privacy_policy">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/url_privacy"/>
+
+        </Preference>
+        <Preference android:title="@string/title_terms">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/url_terms"/>
+
+        </Preference>
+
+
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

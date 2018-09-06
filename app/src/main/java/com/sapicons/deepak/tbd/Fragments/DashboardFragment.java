@@ -1,17 +1,30 @@
 package com.sapicons.deepak.tbd.Fragments;
 
+import android.Manifest;
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.icu.text.NumberFormat;
+import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.app.Fragment;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,13 +60,13 @@ import mehdi.sakout.fancybuttons.FancyButton;
 public class DashboardFragment extends Fragment {
 
     ProgressDialog progressDialog;
-    TextView profitTv, revenueTv, expensesTv;
-    float profit = 0.0f;
-    float revenue = 0.0f;
-    float expenses = 0.0f;
+    TextView profitTv, revenueTv, expensesTv,dueTv;
+    LinearLayout profitLL,revenueLL,expensesLL,dueLL;
 
     FirebaseUser user;
     FirebaseFirestore db;
+
+    static final int PICK_CONTACT=1;
 
     @Nullable
     @Override
@@ -88,11 +101,33 @@ public class DashboardFragment extends Fragment {
        profitTv = view.findViewById(R.id.fd_total_profit_tv);
        revenueTv = view.findViewById(R.id.fd_total_revenue_tv);
        expensesTv = view.findViewById(R.id.fd_total_expenses_tv);
+       profitLL = view.findViewById(R.id.fd_profit_ll);
+       revenueLL= view.findViewById(R.id.fd_revenue_ll);
+       expensesLL = view.findViewById(R.id.fd_expenses_ll);
+       dueLL = view.findViewById(R.id.fd_due_ll);
+       dueTv = view.findViewById(R.id.fd_total_due_tv);
+
 
        addCustomerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), AddCustomerActivity.class));
+                //startActivity(new Intent(getActivity(), AddCustomerActivity.class));
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("Open Contacts?");
+                builder.setNeutralButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        // open Add contacts
+                        startActivity(new Intent(getActivity(), AddCustomerActivity.class));
+                    }
+                }).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        openOrAddContacts();
+                    }
+                });
+                builder.create().show();
            }
         });
 
@@ -135,8 +170,35 @@ public class DashboardFragment extends Fragment {
         updateProfit();
         updateRevenue();
         updateExpenses();
+        updateTotalDue();
 
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        displayOrHidePER();
+    }
+
+    private  void displayOrHidePER(){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        boolean showProfit = sharedPreferences.getBoolean(getResources().getString(R.string.key_show_total_profit),true);
+        boolean showRevenue = sharedPreferences.getBoolean(getResources().getString(R.string.key_show_total_revenue),true);
+        boolean showExpenses = sharedPreferences.getBoolean(getResources().getString(R.string.key_show_total_expenses),true);
+        boolean showDue = sharedPreferences.getBoolean(getResources().getString(R.string.key_show_total_due),true);
+
+        if(!showProfit)  profitLL.setVisibility(View.GONE);
+        else profitLL.setVisibility(View.VISIBLE);
+
+        if(!showExpenses) expensesLL.setVisibility(View.GONE);
+        else  expensesLL.setVisibility(View.VISIBLE);
+
+        if(!showRevenue) revenueLL.setVisibility(View.GONE);
+        else revenueLL.setVisibility(View.VISIBLE);
+
+        if(!showDue) dueLL.setVisibility(View.GONE);
+        else dueLL.setVisibility(View.VISIBLE);
     }
     private void updateProfit(){
         final CollectionReference collectionRef = db.collection("users").document(user.getEmail())
@@ -188,7 +250,7 @@ public class DashboardFragment extends Fragment {
 
                 for (QueryDocumentSnapshot doc : value) {
                     AccountItem accountItem = doc.toObject(AccountItem.class);
-                    revenue+=Float.parseFloat(accountItem.getActualAmt());
+                    revenue+=Float.parseFloat(accountItem.getActualLoanAmt());
 
                 }
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
@@ -234,6 +296,118 @@ public class DashboardFragment extends Fragment {
 
             }
         });
+    }
+
+    private void updateTotalDue(){
+        final CollectionReference collectionRef = db.collection("users").document(user.getEmail())
+                .collection("accounts");
+
+        collectionRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException e) {
+
+
+                float due =0.0f;
+                if (e != null) {
+                    Log.w("DF", "Listen failed.", e);
+                    return;
+                }
+
+                for (QueryDocumentSnapshot doc : value) {
+                    AccountItem accountItem = doc.toObject(AccountItem.class);
+                    due+=Float.parseFloat(accountItem.getDueAmt());
+
+                }
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                    NumberFormat numberFormat = NumberFormat.getCurrencyInstance(new Locale("en", "in"));
+                    dueTv.setText(numberFormat.format(due));
+                } else {
+
+                    java.text.NumberFormat numberFormat = java.text.NumberFormat.getNumberInstance(Locale.US);
+                    dueTv.setText(numberFormat.format(due));
+                }
+
+            }
+        });
+    }
+
+    public void openOrAddContacts(){
+
+        if (ContextCompat.checkSelfPermission(getActivity(),
+                Manifest.permission.READ_CONTACTS)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{Manifest.permission.READ_CONTACTS},
+                    1);
+        }
+
+        else{
+
+
+            Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
+            startActivityForResult(intent, PICK_CONTACT);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case (PICK_CONTACT):
+
+                if (resultCode == Activity.RESULT_OK) {
+
+                    String name="",number="";
+
+                    Uri contactData = data.getData();
+                    Cursor c = getActivity().managedQuery(contactData, null, null, null, null);
+                    if (c.moveToFirst()) {
+
+
+                        String id = c.getString(c.getColumnIndexOrThrow(ContactsContract.Contacts._ID));
+
+                        String hasPhone = c.getString(c.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER));
+
+                        if (hasPhone.equalsIgnoreCase("1")) {
+                            Cursor phones = getActivity().getContentResolver().query(
+                                    ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
+                                    ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + id,
+                                    null, null);
+                            phones.moveToFirst();
+                            number = phones.getString(phones.getColumnIndex("data1"));
+                            //
+                        }
+                        name = c.getString(c.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+                        Log.d("DashboardFragment","Name is:" + name);
+
+                    }
+
+                    number = formatPhoneNumber(number);
+                    Log.d("DashboardFragment","number is:" + number);
+
+                    // open Add contacts
+                    addCustomerWithContactsDetails(name,number);
+                }
+                break;
+        }
+    }
+
+    public String formatPhoneNumber(String number){
+        number=number.replace(" ","");
+        number=number.replace("-","");
+
+        return number;
+    }
+
+    public void addCustomerWithContactsDetails(String name, String number){
+        Intent intent = new Intent(getActivity(), AddCustomerActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("full_name",name);
+        bundle.putString("number",number);
+
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
 }

@@ -1,16 +1,26 @@
 package com.sapicons.deepak.tbd.Fragments;
 
+import android.Manifest;
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ListFragment;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.app.Fragment;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -59,6 +69,7 @@ public class CustomerFragment extends ListFragment implements SearchView.OnQuery
 
     ProgressDialog progressDialog;
     String TAG = "TAG";
+    static final int PICK_CONTACT=1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -126,7 +137,26 @@ public class CustomerFragment extends ListFragment implements SearchView.OnQuery
             @Override
             public void onClick(View view) {
 
-                startActivity(new Intent(getActivity(), AddCustomerActivity.class));
+                //startActivity(new Intent(getActivity(), AddCustomerActivity.class));
+
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("Open Contacts?");
+                builder.setNeutralButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        // open Add contacts
+                        startActivity(new Intent(getActivity(), AddCustomerActivity.class));
+                    }
+                }).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        openOrAddContacts();
+                    }
+                });
+                builder.create().show();
+
             }
         });
     }
@@ -250,5 +280,82 @@ public class CustomerFragment extends ListFragment implements SearchView.OnQuery
         //listenToChanges();
     }
 
+    public void openOrAddContacts(){
 
+        if (ContextCompat.checkSelfPermission(getActivity(),
+                Manifest.permission.READ_CONTACTS)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{Manifest.permission.READ_CONTACTS},
+                    1);
+        }
+
+            else{
+
+
+            Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
+            startActivityForResult(intent, PICK_CONTACT);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case (PICK_CONTACT):
+
+                if (resultCode == Activity.RESULT_OK) {
+
+                    String name="",number="";
+
+                    Uri contactData = data.getData();
+                    Cursor c = getActivity().managedQuery(contactData, null, null, null, null);
+                    if (c.moveToFirst()) {
+
+
+                        String id = c.getString(c.getColumnIndexOrThrow(ContactsContract.Contacts._ID));
+
+                        String hasPhone = c.getString(c.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER));
+
+                        if (hasPhone.equalsIgnoreCase("1")) {
+                            Cursor phones = getActivity().getContentResolver().query(
+                                    ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
+                                    ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + id,
+                                    null, null);
+                            phones.moveToFirst();
+                            number = phones.getString(phones.getColumnIndex("data1"));
+                            //
+                        }
+                        name = c.getString(c.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+                        Log.d(TAG,"Name is:" + name);
+
+                    }
+
+                    number = formatPhoneNumber(number);
+                    Log.d(TAG,"number is:" + number);
+
+                    // open Add contacts
+                    addCustomerWithContactsDetails(name,number);
+                }
+                break;
+        }
+    }
+
+    public String formatPhoneNumber(String number){
+        number=number.replace(" ","");
+        number=number.replace("-","");
+
+        return number;
+    }
+
+    public void addCustomerWithContactsDetails(String name, String number){
+        Intent intent = new Intent(getActivity(), AddCustomerActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("full_name",name);
+        bundle.putString("number",number);
+
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
 }

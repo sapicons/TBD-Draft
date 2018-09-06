@@ -291,7 +291,7 @@ public class AddAccountActivity extends AppCompatActivity implements AdapterView
             endCalender.setTimeInMillis(4102338600000l);
             endDateEt.setText(dateFormatter.format(endDate));
 
-            interestPctEt.getText().clear();
+            //interestPctEt.getText().clear();
         }
         else if(selectedAccType.contains("C")){
             interestPctEt.getText().clear();

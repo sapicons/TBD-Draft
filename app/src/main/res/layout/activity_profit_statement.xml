@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.sapicons.deepak.tbd.ProfitStatementActivity">
+
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="48dp"
+        android:layout_marginRight="48dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="24dp"
+        android:id="@+id/profit_rev_ll"
+        android:layout_above="@id/fd_ll">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/aps_profit_ll">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="Profit:    "/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:textAlignment="textEnd"
+                android:layout_gravity="end"
+                android:id="@+id/aps_total_profit_tv"
+                android:textSize="18sp"
+                android:text="0.00"
+                android:textColor="#2e7d32"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/aps_expenses_ll">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="Expenses:    "/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:textAlignment="textEnd"
+                android:layout_gravity="end"
+                android:id="@+id/aps_total_expenses_tv"
+                android:textSize="18sp"
+                android:text="0.00"
+                android:textColor="#d50000"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/aps_revenue_ll">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="Revenue:"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:layout_marginLeft="5dp"
+                android:textAlignment="textEnd"
+                android:layout_gravity="end"
+                android:id="@+id/aps_total_revenue_tv"
+                android:textSize="18sp"
+                android:text="0.00"
+                android:textColor="#2962ff"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/aps_total_due_ll">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="Total Due:    "/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:textAlignment="textEnd"
+                android:layout_gravity="end"
+                android:id="@+id/aps_total_due_tv"
+                android:textSize="18sp"
+                android:text="0.00"
+                android:textColor="#2e7d32"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

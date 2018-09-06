@@ -197,36 +197,32 @@ public class AccountItemAdapter extends ArrayAdapter<AccountItem> {
     public String getAmountToBeCollected(AccountItem accountItem){
         Calendar calendar = Calendar.getInstance();
         long currTime = calendar.getTimeInMillis();
-        long day = 1000 * 60 * 60 * 24;   // a day
+        long day = 1000 * 60 * 60 * 24;
 
         String amountToBeCollected="";
+        float loanAmt= Float.parseFloat(accountItem.getLoanAmt());
+        float totalCollectedAmt = 0.0f;
+        if (accountItem.getTotalCollectedAmt() != null)
+            totalCollectedAmt = Float.parseFloat(accountItem.getTotalCollectedAmt()); //get total collected amount till now
+
+        long lastCollectionDay = Long.parseLong(accountItem.getLatestCollectionTimestamp());
+        if (lastCollectionDay ==0)
+            lastCollectionDay= Long.parseLong(accountItem.getStartDate());
 
         if(accountItem.getAccoutType().contains("D")) {
 
-
-            long startTime = Long.parseLong(accountItem.getStartDate());  //get the start date of the account
-            float loanAmt = Float.parseFloat(accountItem.getLoanAmt());   //get the loan amount
-            float totalCollectedAmt = 0.0f;
-            if (accountItem.getTotalCollectedAmt() != null)
-                totalCollectedAmt = Float.parseFloat(accountItem.getTotalCollectedAmt()); //get total collected amount till now
-
-            float numberOfDays = (currTime - startTime) / (day);             // no of days (yesterday - start day)
-            if (totalCollectedAmt >= (numberOfDays - 1) * (0.01 * loanAmt)) {         // total amount that must be collected for green button
-                amountToBeCollected ="";
-
-            }
-            else if (totalCollectedAmt < (numberOfDays - 4) * (0.01 * loanAmt)) {
-                amountToBeCollected = (((numberOfDays - 4) * (0.01 * loanAmt))-totalCollectedAmt)+"";
-            }
-            else {
-                amountToBeCollected = (((numberOfDays - 1) * (0.01 * loanAmt))-totalCollectedAmt)+"";
-            }
-
+            int daysUnpaid =(int) ((currTime-lastCollectionDay)/day );
+            amountToBeCollected = (daysUnpaid*0.01*loanAmt - totalCollectedAmt)+"";
 
         }
         else if(accountItem.getAccoutType().contains("M")){
 
-            amountToBeCollected = "";
+            long month = day*30;
+            long startDate = Long.parseLong(accountItem.getStartDate());
+            int monthsFromStart = (int)((currTime-startDate)/month);
+
+            float interestPct = Float.parseFloat(accountItem.getInterestPct());
+            amountToBeCollected = (loanAmt*(interestPct/100)*monthsFromStart - totalCollectedAmt)+"";
         }
 
         if(amountToBeCollected.contains("-"))
@@ -353,6 +349,7 @@ public class AccountItemAdapter extends ArrayAdapter<AccountItem> {
         if(item.getAccoutType().contains("M")){
 
             profit= (Float.parseFloat(item.getLoanAmt().trim())*Float.parseFloat(item.getInterestPct().trim())/100)+"";
+            profit = collectedAmount;
         }
 
         CollectItem collectItem = new CollectItem(item.getAccountNumber(),timestamp,collectedAmount,profit,item.getAccoutType());
