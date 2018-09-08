@@ -13,10 +13,12 @@ public class AccountItem implements Serializable{
     String accountNumber, startDate,accoutType,firstName, lastName, phoneNumber, amount,interestPct;
     String actualAmt,dueAmt,accountStatus,endDate,customerPicUrl;
     String loanAmt,actualLoanAmt,totalCollectedAmt,latestCollectionTimestamp;
+    String customerId;
     public AccountItem(){}
     public AccountItem(String accountNumber, String startDate,String endDate, String accoutType, String firstName, String lastName,
                        String phoneNumber, String amount,String actualAmt,String dueAmt, String interestPct,String accountStatus,
-                       String customerPicUrl,String loanAmt, String actualLoanAmt,String totalCollectedAmt,String latestCollectionTimestamp){
+                       String customerPicUrl,String loanAmt, String actualLoanAmt,String totalCollectedAmt,String latestCollectionTimestamp
+                       ,String customerId){
         this.accountNumber = accountNumber;
         this.startDate = startDate;
         this.accoutType = accoutType;
@@ -34,6 +36,15 @@ public class AccountItem implements Serializable{
         this.actualLoanAmt = actualLoanAmt;
         this.totalCollectedAmt=totalCollectedAmt;
         this.latestCollectionTimestamp=latestCollectionTimestamp;
+        this.customerId=customerId;
+    }
+
+    public String getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
     }
 
     public String getLoanAmt() {

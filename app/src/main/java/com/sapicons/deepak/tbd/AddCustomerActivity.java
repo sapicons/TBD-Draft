@@ -28,9 +28,13 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -264,9 +268,12 @@ public class AddCustomerActivity extends AppCompatActivity {
         String pincode = pinCodeEt.getText().toString();
 
         //create an auto-generated id
+        //final DocumentReference newCustomerRef = db.collection("users").document(user.getEmail())
+         //       .collection("customers").document(phone);
         final DocumentReference newCustomerRef = db.collection("users").document(user.getEmail())
-                .collection("customers").document(phone);
-        customerItem = new CustomerItem(newCustomerRef.getId(), firstName, lastName, phone, addLine1, addLine2, townCity, pincode, picUrl);
+                .collection("customers").document();
+        customerItem = new CustomerItem(newCustomerRef.getId(), firstName, lastName, phone,
+                addLine1, addLine2, townCity, pincode, picUrl);
 
 
         //check if document already exists
@@ -298,7 +305,7 @@ public class AddCustomerActivity extends AppCompatActivity {
 
     public void documentExists(final  DocumentReference ref,final CustomerItem item){
 
-        ref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+        /*ref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if(documentSnapshot.exists()){
@@ -309,6 +316,45 @@ public class AddCustomerActivity extends AppCompatActivity {
 
                 else {
                     uploadData(ref,item);
+                }
+            }
+        });*/
+
+
+        /// 8/09/2018
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        // create firestore instance
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        final CollectionReference customerRef = db.collection("users").document(user.getEmail())
+                .collection("customers");
+
+        Query checkExistingUser = customerRef.whereEqualTo("firstName",item.getFirstName())
+                .whereEqualTo("lastName",item.getLastName())
+                .whereEqualTo("phone",item.getPhone());
+
+        checkExistingUser.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                if(task.isSuccessful()) {
+                    int i = 0;
+                    for (QueryDocumentSnapshot doc : task.getResult()) {
+                        i++;
+                    }
+
+                    if (i > 0) {
+                    Snackbar snackbar = Snackbar.make(findViewById(R.id.aac_ll), "User with this phone number already exists.", Snackbar.LENGTH_LONG);
+                    snackbar.show();
+                    progressDialog.dismiss();
+                    }
+                    else
+                        uploadData(ref, item);
+
+                }
+                else{
+                    Log.d("TAG", "Error getting documents: ", task.getException());
                 }
             }
         });

@@ -203,7 +203,7 @@ public class AccountItemAdapter extends ArrayAdapter<AccountItem> {
         float loanAmt= Float.parseFloat(accountItem.getLoanAmt());
         float totalCollectedAmt = 0.0f;
         if (accountItem.getTotalCollectedAmt() != null)
-            totalCollectedAmt = Float.parseFloat(accountItem.getTotalCollectedAmt()); //get total collected amount till now
+            totalCollectedAmt = Math.round(Float.parseFloat(accountItem.getTotalCollectedAmt())); //get total collected amount till now
 
         long lastCollectionDay = Long.parseLong(accountItem.getLatestCollectionTimestamp());
         if (lastCollectionDay ==0)
@@ -212,7 +212,7 @@ public class AccountItemAdapter extends ArrayAdapter<AccountItem> {
         if(accountItem.getAccoutType().contains("D")) {
 
             int daysUnpaid =(int) ((currTime-lastCollectionDay)/day );
-            amountToBeCollected = (daysUnpaid*0.01*loanAmt - totalCollectedAmt)+"";
+            amountToBeCollected = Math.round(daysUnpaid*0.01*loanAmt - totalCollectedAmt)+"";
 
         }
         else if(accountItem.getAccoutType().contains("M")){
@@ -222,7 +222,7 @@ public class AccountItemAdapter extends ArrayAdapter<AccountItem> {
             int monthsFromStart = (int)((currTime-startDate)/month);
 
             float interestPct = Float.parseFloat(accountItem.getInterestPct());
-            amountToBeCollected = (loanAmt*(interestPct/100)*monthsFromStart - totalCollectedAmt)+"";
+            amountToBeCollected = Math.round(loanAmt*(interestPct/100)*monthsFromStart - totalCollectedAmt)+"";
         }
 
         if(amountToBeCollected.contains("-"))

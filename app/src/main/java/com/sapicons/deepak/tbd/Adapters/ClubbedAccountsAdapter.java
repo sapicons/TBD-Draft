@@ -141,9 +141,7 @@ public class ClubbedAccountsAdapter  extends ArrayAdapter<CustomerItem> {
                 .collection("accounts");
 
         //create a query to search for user's accounts
-        Query getNoOfAcc = ref.whereEqualTo("firstName",item.getFirstName())
-                .whereEqualTo("lastName",item.getLastName())
-                .whereEqualTo("phoneNumber",item.getPhone())
+        Query getNoOfAcc = ref.whereEqualTo("customerId",item.getCustomerId())
                 .whereEqualTo("accountStatus","open");
 
         getNoOfAcc.get()
@@ -240,11 +238,11 @@ public class ClubbedAccountsAdapter  extends ArrayAdapter<CustomerItem> {
                 public void onClick(View v) {
                     Log.d("TAG","Amt: "+item.getDueAmt());
 
-                    if(isCollect ==0) {
+                    if(isCollect ==0) { // if close button is clicked
                         //view.setVisibility(View.GONE);
                         displayPopupToCloseAccount(item,dueAmtTv,singleAccView,collectBtn);
                     }
-                    else
+                    else  // if collect button is clicked
                         setUpPopupWindow(item,dueAmtTv,singleAccView,collectBtn);
                 }
             });
@@ -309,16 +307,18 @@ public class ClubbedAccountsAdapter  extends ArrayAdapter<CustomerItem> {
 
 
         String newAmt = (Float.parseFloat(accountItem.getDueAmt()) - Float.parseFloat(amount))+"";
-        float amtZero = Float.parseFloat(newAmt);
+        float amtZero = Float.parseFloat(newAmt);  //new due amt is zero
 
 
-        if(accountItem.getAccoutType().contains("M"))
-            newAmt = accountItem.getDueAmt();
+        //if(accountItem.getAccoutType().contains("M"))
+          //  newAmt = accountItem.getDueAmt();
 
 
-        if(amtZero <1){
+        if(amtZero <1){ //check if new due amt is zero
             collectBtn.setEnabled(false);
             dueAmtTv.setText("Closed");
+            accountItem.setDueAmt("0"); // if account is being closed , set new due amt to zero
+            newAmt ="0";
 
         }else {
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
@@ -328,10 +328,11 @@ public class ClubbedAccountsAdapter  extends ArrayAdapter<CustomerItem> {
 
                 java.text.NumberFormat numberFormat = java.text.NumberFormat.getNumberInstance(Locale.US);
                 dueAmtTv.setText(numberFormat.format(Float.parseFloat(newAmt)));
+                accountItem.setDueAmt(newAmt);  // if new due amount isn't zero, set the new due amt
             }
         }
         //dueAmtTv.setText(newAmt);
-        accountItem.setDueAmt(newAmt);
+
 
 
         //update the new info to db
@@ -394,7 +395,11 @@ public class ClubbedAccountsAdapter  extends ArrayAdapter<CustomerItem> {
         // profit for M account is (loanAmt * interestPct/100)
         if(item.getAccoutType().contains("M")){
 
-            profit= (Float.parseFloat(item.getLoanAmt().trim())*Float.parseFloat(item.getInterestPct().trim())/100)+"";
+            if(Float.parseFloat(collectedAmount)>Float.parseFloat(item.getDueAmt()))
+                profit = Float.parseFloat(collectedAmount)-Float.parseFloat(item.getDueAmt())+"";
+            else
+                profit = collectedAmount;
+            //profit= (Float.parseFloat(item.getLoanAmt().trim())*Float.parseFloat(item.getInterestPct().trim())/100)+"";
         }
 
         CollectItem collectItem = new CollectItem(item.getAccountNumber(),timestamp,collectedAmount,profit,item.getAccoutType());
@@ -460,9 +465,10 @@ public class ClubbedAccountsAdapter  extends ArrayAdapter<CustomerItem> {
                                             final View singleAccView, final FancyButton collectBtn){
 
         float dueAmt = Float.parseFloat(accountItem.getDueAmt());
-
         progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("Please Wait ...");
+
+
 
         AlertDialog.Builder alertDialog=new AlertDialog.Builder(getContext());
         LayoutInflater inflater =(LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -470,6 +476,23 @@ public class ClubbedAccountsAdapter  extends ArrayAdapter<CustomerItem> {
         View customView=inflater.inflate(R.layout.custom_close_account_popup,null);
         //final Te amtEt = customView.findViewById(R.id.custom_collect_amt_et);
         final TextView amtTv = customView.findViewById(R.id.custom_close_account_amt_tv);
+
+
+
+        if(accountItem.getAccoutType().contains("M")){
+            Calendar calendar = Calendar.getInstance();
+            long currTime = calendar.getTimeInMillis();
+            long day = 1000 * 60 * 60 * 24;
+            long lastCollectionDay = Long.parseLong(accountItem.getLatestCollectionTimestamp());
+            if (lastCollectionDay==0)
+                lastCollectionDay = Long.parseLong(accountItem.getStartDate());
+            float months = (float)(currTime-lastCollectionDay)/(day*30);
+            float loanAmt= Float.parseFloat(accountItem.getLoanAmt());
+            float interestPct = Float.parseFloat(accountItem.getInterestPct());
+
+            dueAmt += loanAmt*(interestPct/100)*months;
+        }
+
         //set dueAmtTv
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
             NumberFormat numberFormat = NumberFormat.getCurrencyInstance(new Locale("en","in"));
@@ -479,6 +502,9 @@ public class ClubbedAccountsAdapter  extends ArrayAdapter<CustomerItem> {
             java.text.NumberFormat numberFormat = java.text.NumberFormat.getNumberInstance(Locale.US);
             amtTv.setText(numberFormat.format(dueAmt));
         }
+
+        // new  amt to be update to close the account
+        final float amtToCloseAccount = dueAmt;
 
         alertDialog.setTitle("Collect Amount")
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -491,7 +517,7 @@ public class ClubbedAccountsAdapter  extends ArrayAdapter<CustomerItem> {
             public void onClick(DialogInterface dialogInterface, int i) {
 
                         progressDialog.show();
-                        deductAmountFromAccount(accountItem, accountItem.getDueAmt(),dueAmtTv,singleAccView,collectBtn);
+                        deductAmountFromAccount(accountItem, amtToCloseAccount+"",dueAmtTv,singleAccView,collectBtn);
 
             }
         });
