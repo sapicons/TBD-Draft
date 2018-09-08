@@ -274,16 +274,19 @@ public class CustomerDetailsActivity extends AppCompatActivity {
         String addLine2 = addLine2Et.getText().toString();
         String townCity = townEt.getText().toString();
         String pincode = pincodeEt.getText().toString();
+        if(picUrl.length() == 0)
+            picUrl = selectedCustomer.getPhotoUrl();
 
         //check if the new phone number is different from old phone number
-        if(!phone.equals(selectedCustomer.getPhone()))
-            deleteCustomer(true);
+        //if(!phone.equals(selectedCustomer.getPhone()))
+          //  deleteCustomer(true);
 
         //create an auto-generated id
         final DocumentReference newCustomerRef = db.collection("users").document(user.getEmail())
-                .collection("customers").document(phone);
+                .collection("customers").document(selectedCustomer.getCustomerId());
         //create a customer item
-        CustomerItem item =  new CustomerItem(newCustomerRef.getId(),firstName,lastName,phone,addLine1,addLine2,townCity,pincode,picUrl);
+        CustomerItem item =  new CustomerItem(selectedCustomer.getCustomerId(),firstName,lastName,phone,
+                addLine1,addLine2,townCity,pincode,picUrl);
 
         //set the new customer item to firestore db
         newCustomerRef.set(item)
@@ -303,8 +306,16 @@ public class CustomerDetailsActivity extends AppCompatActivity {
 
         Toasty.success(this, "Customer successfully updated!").show();
 
-        // clear the edit text fields and imageview
-        //clearFields();
+        //update the name of the customer in their accounts
+        //updateCustomersNameInAccounts(firstName,lastName,phone);
+
+        if (!firstName.equals(selectedCustomer.getFirstName()) ||
+                !lastName.equals(selectedCustomer.getLastName()) ||
+                !phone.equals(selectedCustomer.getPhone())){
+            updateCustomersExistingAccounts(firstName,lastName,phone);
+        }
+
+
         progressDialog.dismiss();
         finish();
 
@@ -397,10 +408,14 @@ public class CustomerDetailsActivity extends AppCompatActivity {
         CollectionReference ref = db.collection("users").document(user.getEmail())
                 .collection("accounts");
 
+
+        // 8-09-2018
         //create a query to search for user's accounts
-        Query getNoOfAcc = ref.whereEqualTo("firstName",selectedCustomer.getFirstName())
+        /*Query getNoOfAcc = ref.whereEqualTo("firstName",selectedCustomer.getFirstName())
                 .whereEqualTo("lastName",selectedCustomer.getLastName())
-                .whereEqualTo("phoneNumber",selectedCustomer.getPhone());
+                .whereEqualTo("phoneNumber",selectedCustomer.getPhone());*/
+
+        Query getNoOfAcc = ref.whereEqualTo("customerId",selectedCustomer.getCustomerId());
 
         getNoOfAcc.get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -486,4 +501,63 @@ public class CustomerDetailsActivity extends AppCompatActivity {
             }
         }
     }
+
+    public void updateCustomersExistingAccounts(final String fName, final String lName, final String phone){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        // create firestore instance
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        final CollectionReference accRef = db.collection("users").document(user.getEmail())
+                .collection("accounts");
+
+        Query getAcc = accRef.whereEqualTo("customerId",selectedCustomer.getCustomerId());
+
+        getAcc.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                if(task.isSuccessful()){
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Log.d("TAG", document.getId() + " => " + document.getData());
+                        AccountItem item = document.toObject(AccountItem.class);
+
+                        item.setFirstName(fName);
+                        item.setLastName(lName);
+                        item.setPhoneNumber(phone);
+
+                        updateAccounts(item);
+
+                    }
+                    Toasty.success(CustomerDetailsActivity.this,"Customer Updated!").show();
+                }else {
+                    Log.d("TAG", "Error getting documents: ", task.getException());
+                }
+            }
+        });
+    }
+
+    private void updateAccounts(AccountItem accountItem){
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        final  DocumentReference accRef = db.collection("users").document(firebaseUser.getEmail())
+                .collection("accounts").document(accountItem.getAccountNumber());
+
+        accRef.update("firstName",accountItem.getFirstName(),
+                "lastName",accountItem.getLastName(),
+                "phoneNumber",accountItem.getPhoneNumber())
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        //Toasty.success(CustomerDetailsActivity.this,"Customer Updated!").show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("TAG","Error updating documents: "+e);
+            }
+        });
+
+
+    }
+
 }

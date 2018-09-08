@@ -240,8 +240,12 @@ public class AddAccountActivity extends AppCompatActivity implements AdapterView
 
 
             }
-            else
-                saveBtn.setVisibility(View.VISIBLE);
+            else {
+                if (Float.parseFloat(amtET.getText().toString()) > 0)
+                    saveBtn.setVisibility(View.VISIBLE);
+                else
+                    saveBtn.setVisibility(View.GONE);
+            }
 
         }
     };
@@ -341,7 +345,8 @@ public class AddAccountActivity extends AppCompatActivity implements AdapterView
                 .collection("accounts").document(accNumber);
 
         final AccountItem accountItem = new AccountItem(accNumber,startDate,endDate,accountType,firstName,
-                lastName,phoneNumber,amount,actualAmt,dueAmt,interestPct,accoutStatus,customerPicUrl,loanAmt,actualLoanAmt,"0","0");
+                lastName,phoneNumber,amount,actualAmt,dueAmt,interestPct, accoutStatus,
+                customerPicUrl,loanAmt,actualLoanAmt,"0","0",selectedCustomer.getCustomerId());
 
         newAccRef.set(accountItem)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {

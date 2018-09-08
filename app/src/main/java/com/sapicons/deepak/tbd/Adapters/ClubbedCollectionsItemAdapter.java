@@ -63,7 +63,7 @@ public class ClubbedCollectionsItemAdapter extends ArrayAdapter<AccountItem> {
 
     ProgressDialog progressDialog;
     ViewHolder holder;
-    AccountItem accountItem;
+    //AccountItem accountItem;
 
 
     public ClubbedCollectionsItemAdapter(@NonNull Context context, int resource, @NonNull List<AccountItem> objects) {
@@ -79,6 +79,7 @@ public class ClubbedCollectionsItemAdapter extends ArrayAdapter<AccountItem> {
         TextView accNo;
         TextView accType;
         LinearLayout accLL;
+        AccountItem account;
     }
 
     @NonNull
@@ -87,9 +88,12 @@ public class ClubbedCollectionsItemAdapter extends ArrayAdapter<AccountItem> {
 
         Log.d("ADAPTER","ClubbedCollectionsItemAdapter");
 
-        accountItem = getItem(position);
+
+
+        //accountItem = getItem(position);
         if(convertView == null) {
             convertView = ((Activity) getContext()).getLayoutInflater().inflate(R.layout.item_clubbed_collections, parent, false);
+
 
             holder = new ViewHolder();
             holder.custImage = convertView.findViewById(R.id.item_clubbed_collections_customer_pic_iv);
@@ -97,23 +101,25 @@ public class ClubbedCollectionsItemAdapter extends ArrayAdapter<AccountItem> {
             holder.accLL = convertView.findViewById(R.id.item_clubbed_collections_ll);
             holder.accNo = convertView.findViewById(R.id.item_clubbed_collections_acc_no);
             holder.accType = convertView.findViewById(R.id.item_clubbed_collections_acc_type);
+            holder.account = getItem(position);
 
             convertView.setTag(holder);
-            findCollectionsForAccount(accountItem,holder);
+            findCollectionsForAccount(holder.account,holder);
 
 
         }else{
             holder=(ViewHolder)convertView.getTag();
-
+            //accountItem = getItem(position);
+            //Log.d("CCIA","AccNumber TOp: "+accountItem.getAccountNumber());
         }
 
 
-        holder.custName.setText(accountItem.getFirstName().toString() + " " + accountItem.getLastName().toString());
-        if (accountItem.getCustomerPicUrl().length() > 0)
-            Glide.with(getContext()).load(accountItem.getCustomerPicUrl()).into(holder.custImage);
+        holder.custName.setText(holder.account.getFirstName().toString() + " " + holder.account.getLastName().toString());
+        if (holder.account.getCustomerPicUrl().length() > 0)
+            Glide.with(getContext()).load(holder.account.getCustomerPicUrl()).into(holder.custImage);
 
-        holder.accType.setText((accountItem.getAccoutType().contains("D"))?"D":"M");
-        holder.accNo.setText("Acc No: "+accountItem.getAccountNumber());
+        holder.accType.setText((holder.account.getAccoutType().contains("D"))?"D":"M");
+        holder.accNo.setText("Acc No: "+holder.account.getAccountNumber());
 
 
 
@@ -152,7 +158,6 @@ public class ClubbedCollectionsItemAdapter extends ArrayAdapter<AccountItem> {
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
                                 CollectItem item = document.toObject(CollectItem.class);
-                                Log.d("CCIA",item.getAccountNumber());
 
                                 //remove first collection for D accounts
                                 float profitAmt = Float.parseFloat(item.getProfitAmount());
@@ -161,6 +166,8 @@ public class ClubbedCollectionsItemAdapter extends ArrayAdapter<AccountItem> {
                                     list.add(item);
 
                             }
+                            Collections.sort(list,CollectItem.CollectDateComparator);
+                            clubCollections(list,holder);
 
                         }else {
                             Log.d("TAG", "Error getting documents: ", task.getException());
@@ -168,15 +175,14 @@ public class ClubbedCollectionsItemAdapter extends ArrayAdapter<AccountItem> {
 
                         //  club the accounts
 
-                        Collections.sort(list,CollectItem.CollectDateComparator);
-                        clubCollections(list,holder);
+
                     }
                 });
 
 
     }
 
-    public void clubCollections(List<CollectItem> list,ViewHolder holder){
+    public void clubCollections(List<CollectItem> list, final ViewHolder holder){
 
         Log.d("CAA","No. of collections: "+list.size());
 
@@ -212,7 +218,11 @@ public class ClubbedCollectionsItemAdapter extends ArrayAdapter<AccountItem> {
             editBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    setupPopupWindow(item,collectionAmtTv);
+
+
+                    Log.d("CCIA","CollecItem: "+item.getTimestamp());
+                    Log.d("CCIA","AccItemHolder: "+holder.account.getAccountNumber());
+                    setupPopupWindow(item,collectionAmtTv,holder);
                 }
             });
             holder.accLL.addView(view);
@@ -223,7 +233,7 @@ public class ClubbedCollectionsItemAdapter extends ArrayAdapter<AccountItem> {
     }
 
 
-    public void setupPopupWindow(final CollectItem collectItem, final TextView collectionAmtTv){
+    public void setupPopupWindow(final CollectItem collectItem, final TextView collectionAmtTv,final ViewHolder holder){
         progressDialog  = new ProgressDialog(context);
         progressDialog.setMessage("Please Wait ...");
 
@@ -249,7 +259,7 @@ public class ClubbedCollectionsItemAdapter extends ArrayAdapter<AccountItem> {
 
                     float enteredAmt = Float.parseFloat(eA);
                     float difference = enteredAmt - originalCollectionAmt;
-                    float originalDueAmt  = Float.parseFloat(accountItem.getDueAmt());
+                    float originalDueAmt  = Float.parseFloat(holder.account.getDueAmt());
                     float newDueAmt = originalDueAmt-difference;
 
                     if(newDueAmt<0)
@@ -258,7 +268,7 @@ public class ClubbedCollectionsItemAdapter extends ArrayAdapter<AccountItem> {
                     else {
 
                         progressDialog.show();
-                        editCollectionAmount(collectItem, amtEt.getText().toString(), collectionAmtTv);
+                        editCollectionAmount(collectItem, amtEt.getText().toString(), collectionAmtTv,holder);
                     }
 
                 }
@@ -271,7 +281,7 @@ public class ClubbedCollectionsItemAdapter extends ArrayAdapter<AccountItem> {
     }
 
 
-    public void editCollectionAmount(CollectItem collectItem,final String updatedAmount, TextView collectionAmtTv){
+    public void editCollectionAmount(CollectItem collectItem,final String updatedAmount, TextView collectionAmtTv,final ViewHolder holder){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -294,6 +304,7 @@ public class ClubbedCollectionsItemAdapter extends ArrayAdapter<AccountItem> {
         }
 
 
+        Log.d("CCIA","CollectionID: "+collectItem.getTimestamp());
 
 
         //update the new info to db
@@ -307,7 +318,7 @@ public class ClubbedCollectionsItemAdapter extends ArrayAdapter<AccountItem> {
 
                         Toasty.success(context,"Collection Updated").show();
                         progressDialog.dismiss();
-                        updateAccountInfo(originalCollectedAmt,updatedAmount);
+                        updateAccountInfo(originalCollectedAmt,updatedAmount,holder);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -318,26 +329,32 @@ public class ClubbedCollectionsItemAdapter extends ArrayAdapter<AccountItem> {
 
 
     }
-    public void updateAccountInfo(String originalCollectedAmt, String updatedAmount){
+    public void updateAccountInfo(String originalCollectedAmt, String updatedAmount,final ViewHolder holder){
 
-        Log.d("CCIA","updateAccountInfo");
+        //Log.d("CCIA","updateAccountInfo");
+        Log.d("CCIA","HolderAccId: "+holder.account.getAccountNumber());
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         float difference = Float.parseFloat(updatedAmount)-Float.parseFloat(originalCollectedAmt);
 
-        String newDueAmt = (Float.parseFloat(accountItem.getDueAmt())-difference)+"";
-        String newTotalCollectedAmt = (Float.parseFloat(accountItem.getTotalCollectedAmt())+difference)+"";
+        String newDueAmt = (Float.parseFloat(holder.account.getDueAmt())-difference)+"";
 
-        if(accountItem.getAccoutType().contains("D"))
-            accountItem.setDueAmt(newDueAmt);
-        accountItem.setTotalCollectedAmt(newTotalCollectedAmt);
+        String newTotalCollectedAmt = (Float.parseFloat(holder.account.getTotalCollectedAmt())+difference)+"";
+
+        if(holder.account.getAccoutType().contains("D"))
+            holder.account.setDueAmt(newDueAmt);
+        else if(holder.account.getAccoutType().contains("M")) {
+            holder.account.setDueAmt(holder.account.getLoanAmt());
+            newDueAmt = holder.account.getLoanAmt();
+        }
+        holder.account.setTotalCollectedAmt(newTotalCollectedAmt);
 
 
         DocumentReference accRef = db.collection("users").document(user.getEmail())
-                .collection("accounts").document(accountItem.getAccountNumber());
+                .collection("accounts").document(holder.account.getAccountNumber());
 
-        if(accountItem.getAccoutType().contains("D"))
+        if(holder.account.getAccoutType().contains("D"))
             accRef.update("dueAmt",newDueAmt,
                         "totalCollectedAmt",newTotalCollectedAmt)
                 .addOnFailureListener(new OnFailureListener() {
@@ -347,8 +364,8 @@ public class ClubbedCollectionsItemAdapter extends ArrayAdapter<AccountItem> {
                     }
                 });
 
-        else
-            accRef.update("totalCollectedAmt",newTotalCollectedAmt)
+        else if(holder.account.getAccoutType().contains("M"))
+            accRef.update("dueAmt",newDueAmt,"totalCollectedAmt",newTotalCollectedAmt)
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
@@ -361,7 +378,7 @@ public class ClubbedCollectionsItemAdapter extends ArrayAdapter<AccountItem> {
         //close account id dueAmt = zero
         if(Float.parseFloat(newDueAmt)  < 1.0){
             Toasty.info(context,"Account Closed").show();
-            accountItem.setAccountStatus("closed");
+            holder.account.setAccountStatus("closed");
 
             accRef.update("accountStatus","closed")
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -379,9 +396,9 @@ public class ClubbedCollectionsItemAdapter extends ArrayAdapter<AccountItem> {
         }
 
         //open account id newDueAmt > zero and account is closed
-        if(Float.parseFloat(newDueAmt)  >=1.0 && accountItem.getAccountStatus().contains("closed")){
+        if(Float.parseFloat(newDueAmt)  >=1.0 && holder.account.getAccountStatus().contains("closed")){
             Toasty.info(context,"Account Opened").show();
-            accountItem.setAccountStatus("open");
+            holder.account.setAccountStatus("open");
 
             accRef.update("accountStatus","open")
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
