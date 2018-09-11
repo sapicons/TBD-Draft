@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
         android:allowBackup="true"
@@ -49,9 +49,12 @@
         <activity android:name=".TodaysDueActivity" />
         <activity android:name=".ClosedAccountsActivity" />
         <activity android:name=".CollectionsReportsActivity" />
-        <activity android:name=".ProfitStatementActivity"></activity>
-        <activity android:name=".SettingsActivity"
-            android:parentActivityName=".Main2Activity"/>
+        <activity android:name=".ProfitStatementActivity" />
+        <activity
+            android:name=".SettingsActivity"
+            android:parentActivityName=".Main2Activity" />
+        <activity android:name=".CManagerActivity" />
+        <activity android:name=".AddCGroupActivity"></activity>
     </application>
 
 </manifest>

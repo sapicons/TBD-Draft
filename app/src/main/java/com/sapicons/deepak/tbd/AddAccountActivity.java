@@ -2,6 +2,7 @@ package com.sapicons.deepak.tbd;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -9,6 +10,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,6 +23,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.Spinner;
@@ -32,8 +35,14 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.sapicons.deepak.tbd.Adapters.CustomerItemAdapter;
 import com.sapicons.deepak.tbd.Objects.AccountItem;
+import com.sapicons.deepak.tbd.Objects.CGroupItem;
 import com.sapicons.deepak.tbd.Objects.CollectItem;
 import com.sapicons.deepak.tbd.Objects.CustomerItem;
 
@@ -51,20 +60,25 @@ import java.util.Date;
 import es.dmoral.toasty.Toasty;
 import mehdi.sakout.fancybuttons.FancyButton;
 
-public class AddAccountActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class AddAccountActivity extends AppCompatActivity  {
     CustomerItem selectedCustomer;
     Calendar myCalendar,endCalender;
     EditText amtET,interestPctEt,startDateEt,endDateEt;
     DatePickerDialog.OnDateSetListener date,endDate;
-    //FancyButton saveBtn;
+    LinearLayout interestLL, cGroupLL;
     FloatingActionButton saveBtn;
 
     TextView customerNameTV;
-    Spinner selectAccTypeSpinner;
+    Spinner selectAccTypeSpinner,selectCGroupSpinner;
 
     String selectedAccType;
 
     PopupWindow popupWindow;
+
+
+
+    List<CGroupItem> groupItems;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +111,11 @@ public class AddAccountActivity extends AppCompatActivity implements AdapterView
         interestPctEt = findViewById(R.id.add_acc_interest_pct_et);
         endDateEt = findViewById(R.id.add_acc_end_date_et);
 
+        interestLL = findViewById(R.id.add_acc_interest_ll);
+        cGroupLL = findViewById(R.id.add_acc_cgroup_ll);
+        selectCGroupSpinner = findViewById(R.id.add_acc_choose_cgroup_spinner);
+
+
 
         //add text watcher
         interestPctEt.addTextChangedListener(watcher);
@@ -116,7 +135,40 @@ public class AddAccountActivity extends AppCompatActivity implements AdapterView
         selectAccTypeSpinner.setAdapter(dataAdapter);
 
         // Spinner click listener
-        selectAccTypeSpinner.setOnItemSelectedListener(this);
+        selectAccTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
+                // On selecting a spinner item
+                selectedAccType = parent.getItemAtPosition(position).toString();
+                Log.d("TAG","ACC TYPE :"+selectedAccType);
+
+                if(selectedAccType.contains("D") || selectedAccType.contains("M")) {
+                    Log.d("TAG","D or M");
+                    interestPctEt.setText("");
+                    cGroupLL.setVisibility(View.GONE);
+                    interestLL.setVisibility(View.VISIBLE);
+                    setEndDate(0); //automatically set end date and interest rates
+
+                }
+                else if(selectedAccType.equals("C Account")) {
+                    //add a C account
+                    Toasty.info(AddAccountActivity.this, "Inflate C groups").show();
+                    cGroupLL.setVisibility(View.VISIBLE);
+                    interestLL.setVisibility(View.GONE);
+                    interestPctEt.setText("0");
+
+
+                    getCGroupsFromFirestore();
+
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         customerNameTV.setText(selectedCustomer.getFirstName()+" "+selectedCustomer.getLastName());
 
@@ -210,16 +262,7 @@ public class AddAccountActivity extends AppCompatActivity implements AdapterView
         });
     }
 
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        // On selecting a spinner item
-        selectedAccType = parent.getItemAtPosition(position).toString();
 
-        setEndDate(0); //automatically set end date and interest rates
-    }
-    public void onNothingSelected(AdapterView<?> arg0) {
-
-
-    }
     private final TextWatcher watcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -352,7 +395,7 @@ public class AddAccountActivity extends AppCompatActivity implements AdapterView
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Log.d("TAG","Customer added. AccNo: "+ accNumber);
+                        Log.d("TAG","Account added. AccNo: "+ accNumber);
                         addProfitCollectionForDAcc(accountItem);
 
 
@@ -442,4 +485,85 @@ public class AddAccountActivity extends AppCompatActivity implements AdapterView
         }
 
     }
+
+    private void getCGroupsFromFirestore(){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        //final CollectionReference docRef = db.collection("users").document(user.getEmail()).collection("");
+
+        groupItems = new ArrayList<CGroupItem>();
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Getting C Groups. Please Wait ...");
+        progressDialog.show();
+
+        db.collection("users").document(user.getEmail()).collection("groups")
+
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value,
+                                        @Nullable FirebaseFirestoreException e) {
+                        if (e != null) {
+                            Log.w("TAG", "Listen failed.", e);
+                            return;
+                        }
+
+
+                        for (QueryDocumentSnapshot doc : value) {
+                            CGroupItem newItem = doc.toObject(CGroupItem.class);
+                            Log.d("TAG","GId: "+newItem.getGroupID());
+                            Log.d("TAG","GName: "+newItem.getGroupName());
+                            groupItems.add(newItem);
+
+                        }
+
+                        progressDialog.dismiss();
+                        setCGroupDropDown(groupItems);
+
+                    }
+                });
+    }
+
+
+    private void setCGroupDropDown(final List<CGroupItem> groupItems){
+
+        List<String> gName = new ArrayList<String>();
+        for(CGroupItem item : groupItems)
+            gName.add(item.getGroupName());
+
+        // Creating adapter for spinner
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, gName);
+
+        // Drop down layout style - list view with radio button
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        selectCGroupSpinner.setAdapter(adapter);
+
+        // Spinner click listener
+        selectCGroupSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                setStartAndEndDateForCAccount(groupItems.get(i));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+    }
+
+    private void setStartAndEndDateForCAccount(CGroupItem item){
+        long startDate = Long.parseLong(item.getStartDate());
+        long endDate = Long.parseLong(item.getEndDate());
+
+        myCalendar.setTimeInMillis(startDate);
+        endCalender.setTimeInMillis(endDate);
+
+        Log.d("TAG","START DATE: "+myCalendar);
+        Log.d("TAG","END DATE: "+endCalender);
+        updateStartDate();
+        setEndDate(1);
+    }
+
 }

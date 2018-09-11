@@ -19,18 +19,19 @@ public class DisplayCustomerListActivity extends AppCompatActivity {
 
         Log.d("ACTIVITY","DisplayCustomerListActivity");
 
-        Intent intent = this.getIntent();
-        Bundle bundle = intent.getExtras();
 
-        startDashboardFragment();
+        startCustomerDisplayFragment();
+
     }
 
 
-    private  void startDashboardFragment(){
+    private  void startCustomerDisplayFragment(){
         Fragment fragment =new CustomerDisplayFragment();
+
         if(fragment!=null) {
             fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.activity_display_customer_content_frame, fragment, "").commit();
         }
     }
+
 }

@@ -15,7 +15,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.app.Fragment;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -23,15 +22,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -39,18 +35,17 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.sapicons.deepak.tbd.AddCustomerActivity;
 import com.sapicons.deepak.tbd.AddExpenseActivity;
+import com.sapicons.deepak.tbd.CManagerActivity;
 import com.sapicons.deepak.tbd.CollectActivity;
 import com.sapicons.deepak.tbd.DisplayCustomerListActivity;
 import com.sapicons.deepak.tbd.Objects.AccountItem;
 import com.sapicons.deepak.tbd.Objects.CollectItem;
-import com.sapicons.deepak.tbd.Objects.CustomerItem;
 import com.sapicons.deepak.tbd.Objects.ExpenseItem;
 import com.sapicons.deepak.tbd.R;
 import com.sapicons.deepak.tbd.TodaysDueActivity;
 
 import java.util.Locale;
 
-import at.markushi.ui.CircleButton;
 import mehdi.sakout.fancybuttons.FancyButton;
 
 /**
@@ -97,7 +92,9 @@ public class DashboardFragment extends Fragment {
                addAccountBtn = view.findViewById(R.id.frag_dash_add_account_btn),
                collectBtn = view.findViewById(R.id.frag_dash_collect_btn),
                addExpenseBtn = view.findViewById(R.id.frag_dash_add_expense_btn),
-                dueTodayBtn = view.findViewById(R.id.frag_dash_due_today_btn);
+                dueTodayBtn = view.findViewById(R.id.frag_dash_due_today_btn),
+                cManagerBtn = view.findViewById(R.id.frag_dash_c_manager_btn);
+
        profitTv = view.findViewById(R.id.fd_total_profit_tv);
        revenueTv = view.findViewById(R.id.fd_total_revenue_tv);
        expensesTv = view.findViewById(R.id.fd_total_expenses_tv);
@@ -157,11 +154,16 @@ public class DashboardFragment extends Fragment {
        dueTodayBtn.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
-
                startActivity(new Intent(getActivity(),TodaysDueActivity.class));
            }
        });
 
+       cManagerBtn.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               startActivity(new Intent(getActivity(),CManagerActivity.class));
+           }
+       });
 
     }
 
