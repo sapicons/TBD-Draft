@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -168,17 +168,37 @@
                         android:inputType="textPersonName"
                         android:id="@+id/display_customer_last_name"/>
                 </android.support.design.widget.TextInputLayout>
-                <android.support.design.widget.TextInputLayout
+                
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                    <EditText
+                    <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                        android:hint="Phone Number*"
-                        android:inputType="phone"
-                        android:id="@+id/display_customer_phone"/>
-                </android.support.design.widget.TextInputLayout>
+                        android:id="@+id/acd_phone_til"
+                        android:layout_alignParentBottom="true"
+                        android:layout_toLeftOf="@id/acd_contact_customer_btn">
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                            android:hint="Phone Number*"
+                            android:inputType="phone"
+                            android:id="@+id/display_customer_phone"/>
+                    </android.support.design.widget.TextInputLayout>
+                    
+                    <mehdi.sakout.fancybuttons.FancyButton
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_margin="8dp"
+                        android:layout_alignParentRight="true"
+                        android:id="@+id/acd_contact_customer_btn"
+                        fancy:fb_radius="64dp"
+                        fancy:fb_iconResource="@mipmap/ic_icon_contact_white">
+
+                    </mehdi.sakout.fancybuttons.FancyButton>
+                </RelativeLayout>
+                
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"

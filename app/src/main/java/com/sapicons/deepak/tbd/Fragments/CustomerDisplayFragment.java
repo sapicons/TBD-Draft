@@ -1,6 +1,5 @@
 package com.sapicons.deepak.tbd.Fragments;
 
-import android.app.Activity;
 import android.app.ListFragment;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -18,7 +17,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -31,7 +29,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.sapicons.deepak.tbd.Adapters.CustomerItemAdapter;
 import com.sapicons.deepak.tbd.AddAccountActivity;
-import com.sapicons.deepak.tbd.CustomerDetailsActivity;
 import com.sapicons.deepak.tbd.Objects.CustomerItem;
 import com.sapicons.deepak.tbd.R;
 
@@ -59,6 +56,7 @@ public class CustomerDisplayFragment extends ListFragment implements SearchView.
         setHasOptionsMenu(true);
         //populateList();
         Log.d("FRAGMENT","CustomerDisplayFragment");
+
 
     }
 

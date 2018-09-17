@@ -273,7 +273,7 @@ public class AccountItemAdapter extends ArrayAdapter<AccountItem> {
         alertDialog.setView(customView)
                 .create().show();
     }
-    private void deductAmountFromAccount(final AccountItem accountItem, String amount){
+    private void deductAmountFromAccount(final AccountItem accountItem,final  String amount){
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -285,6 +285,8 @@ public class AccountItemAdapter extends ArrayAdapter<AccountItem> {
             newAmt = accountItem.getDueAmt();
 
         accountItem.setDueAmt(newAmt);
+
+        final String newDueAmt = newAmt;
 
 
         //update the new info to db
@@ -298,6 +300,7 @@ public class AccountItemAdapter extends ArrayAdapter<AccountItem> {
 
                         Toasty.success(getContext(),"Amount Updated").show();
                         progressDialog.dismiss();
+                        sendMessage(accountItem,amount,newDueAmt);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -398,6 +401,12 @@ public class AccountItemAdapter extends ArrayAdapter<AccountItem> {
                     }
                 });
 
+
+    }
+
+    private void sendMessage(AccountItem accountItem, String amount, String newDueAmt){
+        String msg= "Rs. "+amount+" collected for Ac/No: "+accountItem.getAccountNumber()+". Due Amt: "+newDueAmt;
+        String phoneNumber = accountItem.getPhoneNumber();
 
     }
 }

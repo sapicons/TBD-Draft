@@ -1,5 +1,6 @@
 package com.sapicons.deepak.tbd;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -8,12 +9,16 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
+import android.support.v4.app.NavUtils;
+import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 
 /**
  * Created by Deepak Prasad on 04-09-2018.
  */
 
-public class SettingsActivity extends AppCompatPreferenceActivity{
+public class SettingsActivity extends AppCompatActivity{
 
     private static final String TAG = SettingsActivity.class.getSimpleName();
 
@@ -23,6 +28,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity{
 
         //load settings fragment
         getFragmentManager().beginTransaction().replace(android.R.id.content, new MainPreferenceFragment()).commit();
+
     }
 
     public static class MainPreferenceFragment extends PreferenceFragment{
@@ -61,4 +67,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity{
         intent.putExtra(Intent.EXTRA_TEXT, body);
         context.startActivity(Intent.createChooser(intent, context.getString(R.string.choose_email_client)));
     }
+
+
 }

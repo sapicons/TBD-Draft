@@ -95,7 +95,9 @@ public class Main2Activity extends AppCompatActivity
 
     private void askForPermissions(){
         ActivityCompat.requestPermissions(Main2Activity.this,
-                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,android.Manifest.permission.READ_CONTACTS},
+                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
+                        android.Manifest.permission.READ_CONTACTS,
+                Manifest.permission.SEND_SMS},
                 1);
     }
 
@@ -115,7 +117,7 @@ public class Main2Activity extends AppCompatActivity
 
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
-                    Toast.makeText(Main2Activity.this, "Permission denied to read your Contacts", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Main2Activity.this, "Permission denied!", Toast.LENGTH_SHORT).show();
                 }
                 return;
             }

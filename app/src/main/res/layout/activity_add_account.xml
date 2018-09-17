@@ -47,7 +47,7 @@
                 android:orientation="horizontal"
                 android:layout_marginLeft="32dp"
                 android:layout_marginRight="32dp"
-                android:layout_marginTop="16dp">
+                android:layout_marginTop="32dp">
                 <TextView
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
@@ -62,6 +62,8 @@
                     />
 
             </LinearLayout>
+
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -83,13 +85,36 @@
                     android:inputType="number"/>
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginLeft="32dp"
                 android:layout_marginRight="32dp"
-                android:layout_marginTop="16dp">
+                android:layout_marginTop="24dp"
+                android:id="@+id/add_acc_cgroup_ll">
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:text="C Group : "/>
+
+                <Spinner
+                    android:id="@+id/add_acc_choose_cgroup_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
+                android:layout_marginTop="16dp"
+                android:id="@+id/add_acc_interest_ll">
                 <TextView
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
