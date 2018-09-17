@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.ProgressDialog;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,14 +14,17 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.PhoneNumberUtils;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,11 +53,13 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import es.dmoral.toasty.Toasty;
+import mehdi.sakout.fancybuttons.FancyButton;
 
 public class CustomerDetailsActivity extends AppCompatActivity {
 
     EditText firstNameET, lastNameEt, phoneEt,addLine1Et, addLine2Et,townEt,pincodeEt;
     Button saveChangesBtn, deleteCustomerBtn;
+    FancyButton contactCustomerBtn;
     CustomerItem selectedCustomer;
 
     CircleImageView customerPicIv;
@@ -107,6 +113,7 @@ public class CustomerDetailsActivity extends AppCompatActivity {
 
         saveChangesBtn  = findViewById(R.id.save_changes_btn);
         deleteCustomerBtn = findViewById(R.id.remove_customer_btn);
+        contactCustomerBtn = findViewById(R.id.acd_contact_customer_btn);
 
 
         //set the edit text fields
@@ -177,10 +184,12 @@ public class CustomerDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                // user switches to edit mode , hide the contact button
                 if(saveChangesBtn.getText().toString().toLowerCase().equals("edit")){
                     setFocusOfET(true);
+                    contactCustomerBtn.setVisibility(View.GONE);
                 }
-                //
+                // user is in display mode, show the contact button
                 else {
                     AlertDialog.Builder builder;
 
@@ -198,6 +207,7 @@ public class CustomerDetailsActivity extends AppCompatActivity {
                                     else
                                         updateCustomer("");
                                     progressDialog.show();
+                                    contactCustomerBtn.setVisibility(View.VISIBLE);
 
                                 }
                             }).setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -254,6 +264,15 @@ public class CustomerDetailsActivity extends AppCompatActivity {
                             .setGuidelines(CropImageView.Guidelines.ON)
                             .start(CustomerDetailsActivity.this);
                 }
+            }
+        });
+
+        contactCustomerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                openIntentChooser();
+
             }
         });
 
@@ -560,4 +579,59 @@ public class CustomerDetailsActivity extends AppCompatActivity {
 
     }
 
+    public void openIntentChooser(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(CustomerDetailsActivity.this);
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View customView=inflater.inflate(R.layout.custom_contact_app_list,null);
+
+        final CircleImageView choosePhone = customView.findViewById(R.id.ccal_open_phone),
+                chooseMessage = customView.findViewById(R.id.ccal_open_message),
+                chooseWhatsapp = customView.findViewById(R.id.ccal_open_whatsapp);
+        builder.setMessage("Choose");
+        builder.setView(customView);
+
+        builder.create();
+        builder.show();
+
+        choosePhone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openDialer(selectedCustomer.getPhone());
+            }
+        });
+
+        chooseMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openMessages(selectedCustomer.getPhone(),"Enter message: ");
+            }
+        });
+
+        chooseWhatsapp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openWhatsapp(selectedCustomer.getPhone(),"Enter Message: ");
+            }
+        });
+
+    }
+
+    public void openDialer(String phoneNumber){
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        intent.setData(Uri.parse("tel:"+phoneNumber));
+        startActivity(intent);
+    }
+
+    public void openWhatsapp(String phoneNumber,String message){
+        Intent sendIntent = new Intent("android.intent.action.MAIN");
+        sendIntent.setComponent(new ComponentName("com.whatsapp","com.whatsapp.Conversation"));
+        sendIntent.putExtra("jid", PhoneNumberUtils.stripSeparators(phoneNumber)+"@s.whatsapp.net");
+        startActivity(sendIntent);
+    }
+
+    public void openMessages(String phoneNumber,String message){
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + phoneNumber));
+        intent.putExtra("sms_body", message);
+        startActivity(intent);
+    }
 }

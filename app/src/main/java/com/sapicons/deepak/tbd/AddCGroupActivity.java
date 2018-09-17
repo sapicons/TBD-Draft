@@ -173,7 +173,7 @@ public class AddCGroupActivity extends AppCompatActivity {
             if(noOfMonthsEt.getText().toString().length() >0){
                 float noOfMonths = Float.parseFloat(noOfMonthsEt.getText().toString());
 
-                // TODO
+
                 setEndDate(noOfMonths);
             }
 

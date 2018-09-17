@@ -99,8 +99,16 @@ public class AddCustomerActivity extends AppCompatActivity {
         if(bundle!=null){
             String name = bundle.getString("full_name");
             String number = bundle.getString("number");
-            String firstName= name.substring(0,name.indexOf(" "));
-            String lastName = name.substring(name.lastIndexOf(" "),name.length());
+            String firstName,lastName;
+            if(name.contains(" ")) {
+                firstName = name.substring(0, name.indexOf(" "));
+                lastName = name.substring(name.lastIndexOf(" "), name.length());
+            }
+            else {
+                firstName = name;
+                lastName = "";
+            }
+
 
 
             firstNameEt.setText(firstName);
