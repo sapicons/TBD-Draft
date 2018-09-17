@@ -1,14 +1,19 @@
 package com.sapicons.deepak.tbd.Fragments;
 
+import android.Manifest;
 import android.app.ListFragment;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -95,6 +100,7 @@ public class AccountsDisplayFragment extends ListFragment implements SearchView.
 
         initialiseViews(view);
         progressDialog.show();
+        checkForMessagePermission();
         //getDataFromFirestore();
 
         //get realtime updates
@@ -115,6 +121,23 @@ public class AccountsDisplayFragment extends ListFragment implements SearchView.
 
     }
 
+
+    public void checkForMessagePermission(){
+
+        if (ContextCompat.checkSelfPermission(getActivity(),
+                Manifest.permission.SEND_SMS)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{Manifest.permission.SEND_SMS},
+                    1);
+        }
+
+        else{
+
+
+        }
+    }
 
 
     //get realtime updates

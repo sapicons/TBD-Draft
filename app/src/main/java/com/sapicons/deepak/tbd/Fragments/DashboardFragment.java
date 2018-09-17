@@ -346,7 +346,6 @@ public class DashboardFragment extends Fragment {
 
         else{
 
-
             Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
             startActivityForResult(intent, PICK_CONTACT);
         }
