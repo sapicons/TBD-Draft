@@ -14,6 +14,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -397,6 +398,7 @@ public class AddAccountActivity extends AppCompatActivity  {
                     public void onSuccess(Void aVoid) {
                         Log.d("TAG","Account added. AccNo: "+ accNumber);
                         addProfitCollectionForDAcc(accountItem);
+                        sendMessageForAccCreation(accountItem);
 
 
                     }
@@ -566,4 +568,19 @@ public class AddAccountActivity extends AppCompatActivity  {
         setEndDate(1);
     }
 
+
+    private  void sendMessageForAccCreation(AccountItem accountItem){
+        String msg= accountItem.getAccoutType()+" Created: "+accountItem.getAccountNumber()+" Due Amount: "+accountItem.getDueAmt();
+        String phoneNumber = accountItem.getPhoneNumber();
+
+        try {
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(phoneNumber, null, msg, null, null);
+            Toasty.success(this,"Message Sent").show();
+        } catch (Exception ex) {
+            //Toast.makeText(getContext(),ex.getMessage().toString(),
+            //      Toast.LENGTH_LONG).show();
+            ex.printStackTrace();
+        }
+    }
 }
