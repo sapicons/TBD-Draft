@@ -8,16 +8,17 @@ import java.io.Serializable;
 
 public class CGroupItem implements Serializable {
 
-    String groupID,groupName,noOfMonths,startDate,endDate;
+    String groupID,groupName,noOfMonths,startDate,endDate,amount;
 
     public CGroupItem(){}
 
-    public CGroupItem(String groupID,String groupName,String noOfMonths, String startDate, String endDate){
+    public CGroupItem(String groupID,String groupName,String noOfMonths, String startDate, String endDate,String amount){
         this.groupID = groupID;
         this.groupName= groupName;
         this.noOfMonths= noOfMonths;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.amount = amount;
     }
 
     public String getGroupID() {
@@ -58,5 +59,13 @@ public class CGroupItem implements Serializable {
 
     public void setEndDate(String endDate) {
         this.endDate = endDate;
+    }
+
+    public String getAmount() {
+        return amount;
+    }
+
+    public void setAmount(String amount) {
+        this.amount = amount;
     }
 }

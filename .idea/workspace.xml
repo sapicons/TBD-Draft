@@ -11,14 +11,14 @@
           <device id="Galaxy Nexus" />
           <device id="pixel_2_xl" />
         </devices>
-        <target>android-25</target>
+        <target>android-26</target>
       </config>
     </shared>
   </component>
   <component name="AndroidLogFilters">
     <option name="TOOL_WINDOW_CUSTOM_FILTER" value="FRAGMENT" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="debug" />
-    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Firebase" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d9e82053-27d3-430c-a852-eb417b04771b" name="Default" comment="">
@@ -31,8 +31,9 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/taskHistory/taskHistory.bin" afterPath="$PROJECT_DIR$/.gradle/4.1/taskHistory/taskHistory.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.1/taskHistory/taskHistory.lock" afterPath="$PROJECT_DIR$/.gradle/4.1/taskHistory/taskHistory.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Adapters/ClubbedAccountsAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Adapters/ClubbedAccountsAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/AddAccountActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/AddAccountActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/AddCGroupActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/AddCGroupActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Objects/CGroupItem.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Objects/CGroupItem.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_cgroup.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_cgroup.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -55,83 +56,7 @@
     </system>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ClubbedCollectionsItemAdapter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Adapters/ClubbedCollectionsItemAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1544">
-              <caret line="86" column="93" lean-forward="false" selection-start-line="86" selection-start-column="93" selection-end-line="86" selection-end-column="93" />
-              <folding>
-                <element signature="class#ViewHolder#0;class#ClubbedCollectionsItemAdapter#0" expanded="false" />
-                <element signature="method#getView#0;class#ClubbedCollectionsItemAdapter#0" expanded="false" />
-                <element signature="method#findCollectionsForAccount#0;class#ClubbedCollectionsItemAdapter#0" expanded="false" />
-                <element signature="method#getAccountsFromFirebase#0;class#ClubbedCollectionsItemAdapter#0" expanded="false" />
-                <element signature="method#clubCollections#0;class#ClubbedCollectionsItemAdapter#0" expanded="false" />
-                <element signature="method#setupPopupWindow#0;class#ClubbedCollectionsItemAdapter#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AccountItemAdapter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Adapters/AccountItemAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="440" column="114" lean-forward="false" selection-start-line="440" selection-start-column="8" selection-end-line="440" selection-end-column="114" />
-              <folding>
-                <element signature="method#setCollectBtnColor#0;class#AccountItemAdapter#0" expanded="false" />
-                <element signature="method#getAmountToBeCollected#0;class#AccountItemAdapter#0" expanded="false" />
-                <element signature="method#setUpPopupWindow#0;class#AccountItemAdapter#0" expanded="false" />
-                <element signature="method#addCollectionToFirestore#0;class#AccountItemAdapter#0" expanded="false" />
-                <element signature="method#updateTotalCollectedAmt#0;class#AccountItemAdapter#0" expanded="false" />
-                <element signature="method#checkPermissionAndSendMessage#0;class#AccountItemAdapter#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AddAccountActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/AddAccountActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="578" column="31" lean-forward="false" selection-start-line="578" selection-start-column="31" selection-end-line="578" selection-end-column="31" />
-              <folding>
-                <element signature="method#onCreate#0;class#AddAccountActivity#0" expanded="false" />
-                <element signature="class#8635:8823" expanded="false" />
-                <element signature="class#9544:10317" expanded="false" />
-                <element signature="method#setDate#0;class#AddAccountActivity#0" expanded="false" />
-                <element signature="method#updateStartDate#0;class#AddAccountActivity#0" expanded="false" />
-                <element signature="method#setEndDate#0;class#AddAccountActivity#0" expanded="false" />
-                <element signature="method#popupWindowsort#0;class#AddAccountActivity#0" expanded="false" />
-                <element signature="method#addProfitCollectionForDAcc#0;class#AddAccountActivity#0" expanded="false" />
-                <element signature="method#getCGroupsFromFirestore#0;class#AddAccountActivity#0" expanded="false" />
-                <element signature="method#setCGroupDropDown#0;class#AddAccountActivity#0" expanded="false" />
-                <element signature="method#setStartAndEndDateForCAccount#0;class#AddAccountActivity#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ClubbedAccountsAdapter.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Adapters/ClubbedAccountsAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="538" column="37" lean-forward="false" selection-start-line="538" selection-start-column="37" selection-end-line="538" selection-end-column="37" />
-              <folding>
-                <element signature="method#getView#0;class#ClubbedAccountsAdapter#0" expanded="false" />
-                <element signature="method#findAccountsOfCustomer#0;class#ClubbedAccountsAdapter#0" expanded="false" />
-                <element signature="method#getAccountsFromFirebase#0;class#ClubbedAccountsAdapter#0" expanded="false" />
-                <element signature="method#clubAccounts#0;class#ClubbedAccountsAdapter#0" expanded="false" />
-                <element signature="method#setUpPopupWindow#0;class#ClubbedAccountsAdapter#0" expanded="false" />
-                <element signature="method#addCollectionToFirestore#0;class#ClubbedAccountsAdapter#0" expanded="false" />
-                <element signature="method#resetUI#0;class#ClubbedAccountsAdapter#0" expanded="false" />
-                <element signature="method#updateTotalCollectedAmt#0;class#ClubbedAccountsAdapter#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -1990,10 +1915,7 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_reports.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/CManagerActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_cmanager.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_add_cgroup.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Objects/CGroupItem.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_add_account.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/AddCGroupActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/AddCustomerActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/item_expense.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/SettingsActivity.java" />
@@ -2008,6 +1930,9 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Adapters/AccountItemAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/AddAccountActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Adapters/ClubbedAccountsAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_add_cgroup.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Objects/CGroupItem.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/AddCGroupActivity.java" />
       </list>
     </option>
   </component>
@@ -2035,8 +1960,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane" />
-      <pane id="Scratches" />
       <pane id="PackagesPane">
         <subPane>
           <PATH>
@@ -2051,6 +1974,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -2072,6 +1996,28 @@
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Sapicons" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layout" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidResFolderTypeNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -2123,7 +2069,7 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Fragments" />
+              <option name="myItemId" value="Objects" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -2135,23 +2081,12 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tbd" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Adapters" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="ProjectPane" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2249,7 +2184,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1537259183330" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1537377362055" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -2297,7 +2232,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1537259183330" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1537377362063" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -2493,7 +2428,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1537259183333" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1537377362101" />
       </method>
     </configuration>
     <list size="1">
@@ -2739,7 +2674,14 @@
       <option name="project" value="LOCAL" />
       <updated>1537171294793</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="extended sms sending feature to create account, close account, collect amount.">
+      <created>1537259192857</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1537259192857</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TodoView">
@@ -2753,13 +2695,12 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.49183005" sideWeight="0.5060514" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Flutter Outline" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.54575163" sideWeight="0.49394855" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.54575163" sideWeight="0.49394855" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -2770,13 +2711,13 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32843137" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3214826" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32843137" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32843137" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32843137" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32843137" sideWeight="0.5030257" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22390318" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.45424837" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22390318" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -2787,7 +2728,7 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3214826" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.45424837" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -2893,13 +2834,13 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_profit_statement.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="100" column="39" lean-forward="false" selection-start-line="100" selection-start-column="39" selection-end-line="100" selection-end-column="39" />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/ProfitStatementActivity.java">
@@ -2934,7 +2875,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="362">
           <caret line="147" column="23" lean-forward="false" selection-start-line="147" selection-start-column="21" selection-end-line="147" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2942,7 +2882,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="37" column="14" lean-forward="true" selection-start-line="37" selection-start-column="14" selection-end-line="37" selection-end-column="14" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2950,12 +2889,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="24" lean-forward="false" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="24" />
-          <folding>
-            <element signature="method#listenToChanges#0;class#CollectActivityFragment#0" expanded="false" />
-            <element signature="method#onCreateOptionsMenu#0;class#CollectActivityFragment#0" expanded="false" />
-            <element signature="method#onQueryTextChange#0;class#CollectActivityFragment#0" expanded="false" />
-            <element signature="method#resetSearch#0;class#CollectActivityFragment#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2970,16 +2903,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="263">
           <caret line="80" column="56" lean-forward="false" selection-start-line="80" selection-start-column="56" selection-end-line="80" selection-end-column="56" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="method#onCreate#0;class#ClubAccountsDisplayFragment#0" expanded="false" />
-            <element signature="e#2369#2378#0" expanded="false" />
-            <element signature="method#onViewCreated#0;class#ClubAccountsDisplayFragment#0" expanded="false" />
-            <element signature="method#initialiseViews#0;class#ClubAccountsDisplayFragment#0" expanded="false" />
-            <element signature="method#onCreateOptionsMenu#0;class#ClubAccountsDisplayFragment#0" expanded="false" />
-            <element signature="method#onQueryTextChange#0;class#ClubAccountsDisplayFragment#0" expanded="false" />
-            <element signature="method#resetSearch#0;class#ClubAccountsDisplayFragment#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2987,7 +2910,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="26" column="22" lean-forward="false" selection-start-line="26" selection-start-column="22" selection-end-line="26" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3001,54 +2923,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/AddCManagerActivity.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_reports.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="57" lean-forward="false" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="57" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_cmanager.xml">
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_cmanager.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="175">
           <caret line="13" column="39" lean-forward="false" selection-start-line="13" selection-start-column="39" selection-end-line="13" selection-end-column="39" />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/CManagerActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
           <caret line="31" column="88" lean-forward="false" selection-start-line="31" selection-start-column="88" selection-end-line="31" selection-end-column="88" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_add_cgroup.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="75" column="42" lean-forward="false" selection-start-line="75" selection-start-column="42" selection-end-line="75" selection-end-column="42" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/AddCGroupActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="175" column="0" lean-forward="false" selection-start-line="175" selection-start-column="0" selection-end-line="175" selection-end-column="0" />
-          <folding>
-            <element signature="class#2835:3023" expanded="false" />
-            <element signature="method#setStartDate#0;class#AddCGroupActivity#0" expanded="false" />
-            <element signature="method#updateStartDate#0;class#AddCGroupActivity#0" expanded="false" />
-            <element signature="method#setEndDate#0;class#AddCGroupActivity#0" expanded="false" />
-            <element signature="method#setNoOfMonths#0;class#AddCGroupActivity#0" expanded="false" />
-            <element signature="method#addGroupToFirestore#0;class#AddCGroupActivity#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3063,32 +2960,27 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="182" column="19" lean-forward="false" selection-start-line="152" selection-start-column="8" selection-end-line="182" selection-end-column="19" />
-          <folding>
-            <element signature="method#onCreateView#0;class#CustomerDisplayFragment#0" expanded="false" />
-            <element signature="method#onViewCreated#0;class#CustomerDisplayFragment#0" expanded="false" />
-            <element signature="method#getDataFromFirestore#0;class#CustomerDisplayFragment#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_add_account.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="108" column="27" lean-forward="false" selection-start-line="108" selection-start-column="27" selection-end-line="108" selection-end-column="27" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_expense.xml">
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_expense.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="177">
           <caret line="27" column="16" lean-forward="false" selection-start-line="27" selection-start-column="16" selection-end-line="27" selection-end-column="16" />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/AppCompatPreferenceActivity.java">
@@ -3102,7 +2994,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="5101" column="28" lean-forward="false" selection-start-line="5101" selection-start-column="28" selection-end-line="5101" selection-end-column="28" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3114,43 +3005,43 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_dashboard.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="57" lean-forward="true" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="57" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_customer_details.xml">
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_customer_details.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="228">
           <caret line="192" column="44" lean-forward="false" selection-start-line="192" selection-start-column="44" selection-end-line="192" selection-end-column="44" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/custom_contact_app_list.xml">
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/custom_contact_app_list.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="56">
           <caret line="4" column="37" lean-forward="false" selection-start-line="4" selection-start-column="37" selection-end-line="4" selection-end-column="37" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_customer.xml">
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_customer.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
           <caret line="20" column="17" lean-forward="true" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Fragments/ExpensesFragment.java">
@@ -3161,79 +3052,72 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/main2.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" column="26" lean-forward="true" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/activity_main2_drawer.xml">
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/activity_main2_drawer.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/navigation.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/search_menu.xml">
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/search_menu.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="10" column="28" lean-forward="false" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/sort_menu.xml">
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/sort_menu.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" column="17" lean-forward="false" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/custom_sort_options.xml">
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/custom_sort_options.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="53" selection-end-column="15" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/sort_expenses_menu.xml">
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/sort_expenses_menu.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" column="33" lean-forward="false" selection-start-line="8" selection-start-column="33" selection-end-line="8" selection-end-column="33" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Objects/CGroupItem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="32" lean-forward="false" selection-start-line="22" selection-start-column="32" selection-end-line="22" selection-end-column="32" />
         </state>
       </provider>
     </entry>
@@ -3241,20 +3125,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="618" column="46" lean-forward="true" selection-start-line="618" selection-start-column="46" selection-end-line="618" selection-end-column="46" />
-          <folding>
-            <element signature="class#5693:6573" expanded="false" />
-            <element signature="method#setOnClickListeners#0;class#CustomerDetailsActivity#0" expanded="false" />
-            <element signature="method#updateCustomer#0;class#CustomerDetailsActivity#0" expanded="false" />
-            <element signature="method#uploadToDBwithPic#0;class#CustomerDetailsActivity#0" expanded="false" />
-            <element signature="method#deleteCustomer#0;class#CustomerDetailsActivity#0" expanded="false" />
-            <element signature="method#hideKeyboard#0;class#CustomerDetailsActivity#0" expanded="false" />
-            <element signature="method#getNoOfAccounts#0;class#CustomerDetailsActivity#0" expanded="false" />
-            <element signature="method#setNoOfAccounts#0;class#CustomerDetailsActivity#0" expanded="false" />
-            <element signature="method#setFocusOfET#0;class#CustomerDetailsActivity#0" expanded="false" />
-            <element signature="method#onActivityResult#0;class#CustomerDetailsActivity#0" expanded="false" />
-            <element signature="method#updateCustomersExistingAccounts#0;class#CustomerDetailsActivity#0" expanded="false" />
-            <element signature="method#updateAccounts#0;class#CustomerDetailsActivity#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3262,15 +3132,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="287" column="0" lean-forward="true" selection-start-line="287" selection-start-column="0" selection-end-line="287" selection-end-column="0" />
-          <folding>
-            <element signature="method#initialiseViews#0;class#CustomerFragment#0" expanded="false" />
-            <element signature="method#getDataFromFirestore#0;class#CustomerFragment#0" expanded="false" />
-            <element signature="method#listenToChanges#0;class#CustomerFragment#0" expanded="false" />
-            <element signature="method#onCreateOptionsMenu#0;class#CustomerFragment#0" expanded="false" />
-            <element signature="method#onQueryTextChange#0;class#CustomerFragment#0" expanded="false" />
-            <element signature="method#resetSearch#0;class#CustomerFragment#0" expanded="false" />
-            <element signature="method#onActivityResult#0;class#CustomerFragment#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3285,20 +3146,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2295">
           <caret line="347" column="0" lean-forward="false" selection-start-line="347" selection-start-column="0" selection-end-line="347" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="method#onViewCreated#0;class#DashboardFragment#0" expanded="false" />
-            <element signature="method#updatePER#0;class#DashboardFragment#0" expanded="false" />
-            <element signature="method#onResume#0;class#DashboardFragment#0" expanded="false" />
-            <element signature="method#displayOrHidePER#0;class#DashboardFragment#0" expanded="false" />
-            <element signature="method#updateProfit#0;class#DashboardFragment#0" expanded="false" />
-            <element signature="method#updateRevenue#0;class#DashboardFragment#0" expanded="false" />
-            <element signature="method#updateExpenses#0;class#DashboardFragment#0" expanded="false" />
-            <element signature="method#updateTotalDue#0;class#DashboardFragment#0" expanded="false" />
-            <element signature="method#onActivityResult#0;class#DashboardFragment#0" expanded="false" />
-            <element signature="method#formatPhoneNumber#0;class#DashboardFragment#0" expanded="false" />
-            <element signature="method#addCustomerWithContactsDetails#0;class#DashboardFragment#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3306,22 +3153,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="816">
           <caret line="102" column="36" lean-forward="false" selection-start-line="102" selection-start-column="36" selection-end-line="102" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#2779#2780#0" expanded="false" />
-            <element signature="e#2811#2812#0" expanded="false" />
-            <element signature="e#2818#2827#0" expanded="false" />
-            <element signature="method#listenToChanges#0;class#AccountsDisplayFragment#0" expanded="false" />
-            <element signature="method#onCreateOptionsMenu#0;class#AccountsDisplayFragment#0" expanded="false" />
-            <element signature="e#6429#6430#0" expanded="false" />
-            <element signature="e#6456#6457#0" expanded="false" />
-            <element signature="e#6536#6537#0" expanded="false" />
-            <element signature="e#6563#6564#0" expanded="false" />
-            <element signature="e#6627#6628#0" expanded="false" />
-            <element signature="e#6654#6655#0" expanded="false" />
-            <element signature="method#onQueryTextChange#0;class#AccountsDisplayFragment#0" expanded="false" />
-            <element signature="method#resetSearch#0;class#AccountsDisplayFragment#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3329,7 +3160,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="394">
           <caret line="218" column="28" lean-forward="true" selection-start-line="218" selection-start-column="28" selection-end-line="218" selection-end-column="28" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3337,7 +3167,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" column="59" lean-forward="false" selection-start-line="7" selection-start-column="59" selection-end-line="7" selection-end-column="59" />
-          <folding />
         </state>
       </provider>
       <provider editor-type-id="android-manifest">
@@ -3348,41 +3177,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-136">
           <caret line="68" column="9" lean-forward="false" selection-start-line="68" selection-start-column="9" selection-end-line="68" selection-end-column="9" />
-          <folding>
-            <element signature="method#initialiseViews#0;class#ClosedAccountsDisplayFragment#0" expanded="false" />
-            <element signature="method#listenToChanges#0;class#ClosedAccountsDisplayFragment#0" expanded="false" />
-            <element signature="e#4203#5484#0" expanded="true" />
-            <element signature="e#5483#5484#0" expanded="true" />
-            <element signature="method#onCreateOptionsMenu#0;class#ClosedAccountsDisplayFragment#0" expanded="false" />
-            <element signature="method#onOptionsItemSelected#0;class#ClosedAccountsDisplayFragment#0" expanded="false" />
-            <element signature="method#askForSortOptionsWindow#0;class#ClosedAccountsDisplayFragment#0" expanded="false" />
-            <element signature="e#7055#7247#0" expanded="true" />
-            <element signature="e#7246#7247#0" expanded="true" />
-            <element signature="e#7287#7480#0" expanded="true" />
-            <element signature="e#7479#7480#0" expanded="true" />
-            <element signature="e#7524#7709#0" expanded="true" />
-            <element signature="e#7708#7709#0" expanded="true" />
-            <element signature="e#7748#7932#0" expanded="true" />
-            <element signature="e#7931#7932#0" expanded="true" />
-            <element signature="method#onQueryTextChange#0;class#ClosedAccountsDisplayFragment#0" expanded="false" />
-            <element signature="e#8495#8508#0" expanded="true" />
-            <element signature="method#resetSearch#0;class#ClosedAccountsDisplayFragment#0" expanded="false" />
-            <element signature="method#sortByRange#0;class#ClosedAccountsDisplayFragment#0" expanded="false" />
-            <element signature="e#9967#10523#0" expanded="true" />
-            <element signature="e#10522#10523#0" expanded="true" />
-            <element signature="e#10550#11298#0" expanded="true" />
-            <element signature="e#11297#11298#0" expanded="true" />
-            <element signature="method#filterAccountsByClosedDate#0;class#ClosedAccountsDisplayFragment#0" expanded="false" />
-            <element signature="e#11792#11805#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/AddAccountActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
+        <state relative-caret-position="4828">
           <caret line="578" column="31" lean-forward="false" selection-start-line="578" selection-start-column="31" selection-end-line="578" selection-end-column="31" />
           <folding>
+            <element signature="imports" expanded="false" />
             <element signature="method#onCreate#0;class#AddAccountActivity#0" expanded="false" />
             <element signature="class#8635:8823" expanded="false" />
             <element signature="class#9544:10317" expanded="false" />
@@ -3400,27 +3203,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Adapters/ClubbedCollectionsItemAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1544">
+        <state relative-caret-position="544">
           <caret line="86" column="93" lean-forward="false" selection-start-line="86" selection-start-column="93" selection-end-line="86" selection-end-column="93" />
           <folding>
+            <element signature="imports" expanded="false" />
             <element signature="class#ViewHolder#0;class#ClubbedCollectionsItemAdapter#0" expanded="false" />
             <element signature="method#getView#0;class#ClubbedCollectionsItemAdapter#0" expanded="false" />
             <element signature="method#findCollectionsForAccount#0;class#ClubbedCollectionsItemAdapter#0" expanded="false" />
             <element signature="method#getAccountsFromFirebase#0;class#ClubbedCollectionsItemAdapter#0" expanded="false" />
             <element signature="method#clubCollections#0;class#ClubbedCollectionsItemAdapter#0" expanded="false" />
             <element signature="method#setupPopupWindow#0;class#ClubbedCollectionsItemAdapter#0" expanded="false" />
+            <element signature="e#12433#12434#0" expanded="false" />
+            <element signature="e#12502#12503#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Adapters/AccountItemAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
+        <state relative-caret-position="2941">
           <caret line="440" column="114" lean-forward="false" selection-start-line="440" selection-start-column="8" selection-end-line="440" selection-end-column="114" />
           <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#5348#5349#0" expanded="false" />
+            <element signature="e#5409#5410#0" expanded="false" />
             <element signature="method#setCollectBtnColor#0;class#AccountItemAdapter#0" expanded="false" />
             <element signature="method#getAmountToBeCollected#0;class#AccountItemAdapter#0" expanded="false" />
             <element signature="method#setUpPopupWindow#0;class#AccountItemAdapter#0" expanded="false" />
+            <element signature="e#12447#12448#0" expanded="false" />
+            <element signature="e#12516#12517#0" expanded="false" />
             <element signature="method#addCollectionToFirestore#0;class#AccountItemAdapter#0" expanded="false" />
             <element signature="method#updateTotalCollectedAmt#0;class#AccountItemAdapter#0" expanded="false" />
             <element signature="method#checkPermissionAndSendMessage#0;class#AccountItemAdapter#0" expanded="false" />
@@ -3436,12 +3247,64 @@
             <element signature="method#getView#0;class#ClubbedAccountsAdapter#0" expanded="false" />
             <element signature="method#findAccountsOfCustomer#0;class#ClubbedAccountsAdapter#0" expanded="false" />
             <element signature="method#getAccountsFromFirebase#0;class#ClubbedAccountsAdapter#0" expanded="false" />
+            <element signature="e#4943#5878#0" expanded="true" />
+            <element signature="e#5877#5878#0" expanded="true" />
             <element signature="method#clubAccounts#0;class#ClubbedAccountsAdapter#0" expanded="false" />
+            <element signature="e#8518#9091#0" expanded="true" />
+            <element signature="e#9090#9091#0" expanded="true" />
             <element signature="method#setUpPopupWindow#0;class#ClubbedAccountsAdapter#0" expanded="false" />
+            <element signature="e#10101#10861#0" expanded="true" />
+            <element signature="e#10860#10861#0" expanded="true" />
+            <element signature="e#12815#13164#0" expanded="true" />
+            <element signature="e#13163#13164#0" expanded="true" />
+            <element signature="e#13869#14084#0" expanded="true" />
+            <element signature="e#14083#14084#0" expanded="true" />
             <element signature="method#addCollectionToFirestore#0;class#ClubbedAccountsAdapter#0" expanded="false" />
+            <element signature="e#15421#15620#0" expanded="true" />
+            <element signature="e#15619#15620#0" expanded="true" />
             <element signature="method#resetUI#0;class#ClubbedAccountsAdapter#0" expanded="false" />
             <element signature="method#updateTotalCollectedAmt#0;class#ClubbedAccountsAdapter#0" expanded="false" />
+            <element signature="e#16754#16999#0" expanded="true" />
+            <element signature="e#16998#16999#0" expanded="true" />
+            <element signature="e#19746#20072#0" expanded="true" />
+            <element signature="e#20071#20072#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/Objects/CGroupItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="63" column="31" lean-forward="false" selection-start-line="63" selection-start-column="31" selection-end-line="63" selection-end-column="31" />
+          <folding>
+            <element signature="e#631#632#0" expanded="true" />
+            <element signature="e#661#662#0" expanded="true" />
+            <element signature="e#1441#1442#0" expanded="true" />
+            <element signature="e#1485#1486#0" expanded="true" />
+            <element signature="e#1521#1522#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sapicons/deepak/tbd/AddCGroupActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="238" column="98" lean-forward="false" selection-start-line="238" selection-start-column="98" selection-end-line="238" selection-end-column="98" />
+          <folding>
+            <element signature="class#5397:6266" expanded="false" />
+            <element signature="method#setStartDate#0;class#AddCGroupActivity#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_add_cgroup.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="447">
+          <caret line="74" column="50" lean-forward="false" selection-start-line="74" selection-start-column="50" selection-end-line="74" selection-end-column="50" />
+          <folding />
         </state>
       </provider>
     </entry>
