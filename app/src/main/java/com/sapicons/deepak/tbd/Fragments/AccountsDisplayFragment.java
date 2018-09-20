@@ -51,6 +51,7 @@ import com.sapicons.deepak.tbd.R;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -322,12 +323,24 @@ public class AccountsDisplayFragment extends ListFragment implements SearchView.
                 lastCollectionDate = Long.parseLong(item.getLatestCollectionTimestamp());
 
 
+            Calendar lastCollectionDayCal = Calendar.getInstance();
+            lastCollectionDayCal.setTimeInMillis(lastCollectionDate);
+
             long day=1000*60*60*24;
-            if(((todaysDate - lastCollectionDate) >= day  &&
+            /*if(((todaysDate - lastCollectionDate) >= day  &&
                     todaysDate<endDate &&
                     Float.parseFloat(item.getDueAmt())>0 &&
                     item.getAccountStatus().equalsIgnoreCase("open")) )
-                return true;
+                return true;*/
+
+            if(item.getAccountStatus().equalsIgnoreCase("open")&&
+                    todaysDate<endDate &&
+                    Float.parseFloat(item.getDueAmt())>0)
+                if(todaysDate > lastCollectionDate){
+                    if(calendar.get(Calendar.DAY_OF_YEAR) != lastCollectionDayCal.get(Calendar.DAY_OF_YEAR))
+                        return true;
+                }
+
 
 
         }
