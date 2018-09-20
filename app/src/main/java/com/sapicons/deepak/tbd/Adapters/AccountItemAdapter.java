@@ -1,14 +1,21 @@
 package com.sapicons.deepak.tbd.Adapters;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.icu.text.NumberFormat;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +34,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.sapicons.deepak.tbd.Fragments.AccountsDisplayFragment;
 import com.sapicons.deepak.tbd.Objects.AccountItem;
 import com.sapicons.deepak.tbd.Objects.CollectItem;
 import com.sapicons.deepak.tbd.Objects.CustomerItem;
@@ -43,6 +51,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import es.dmoral.toasty.Toasty;
 import mehdi.sakout.fancybuttons.FancyButton;
 
+import static com.firebase.ui.auth.AuthUI.getApplicationContext;
+
 /**
  * Created by Deepak Prasad on 04-08-2018.
  */
@@ -58,6 +68,8 @@ public class AccountItemAdapter extends ArrayAdapter<AccountItem> {
     String COLOR_YELLOW ="#c56000";
     String COLOR_BLUE ="#2962ff";
 
+    Context context;
+
 
     ProgressDialog progressDialog;
 
@@ -65,6 +77,7 @@ public class AccountItemAdapter extends ArrayAdapter<AccountItem> {
 
         super(context, resource, objects);
         this.i = i;
+        this.context = context;
     }
 
     @NonNull
@@ -300,7 +313,9 @@ public class AccountItemAdapter extends ArrayAdapter<AccountItem> {
 
                         Toasty.success(getContext(),"Amount Updated").show();
                         progressDialog.dismiss();
+                        //checkPermissionAndSendMessage(accountItem,amount,newDueAmt);
                         sendMessage(accountItem,amount,newDueAmt);
+
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -404,9 +419,41 @@ public class AccountItemAdapter extends ArrayAdapter<AccountItem> {
 
     }
 
+
+    private void checkPermissionAndSendMessage(AccountItem accountItem, String amount, String newDueAmt){
+        if (ContextCompat.checkSelfPermission(getContext(),
+                Manifest.permission.SEND_SMS)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions((Activity)getContext(),
+                    new String[]{Manifest.permission.SEND_SMS},
+                    1);
+            checkPermissionAndSendMessage(accountItem,amount,newDueAmt);
+        }
+
+        else{
+
+            sendMessage(accountItem,amount,newDueAmt);
+        }
+    }
+
     private void sendMessage(AccountItem accountItem, String amount, String newDueAmt){
         String msg= "Rs. "+amount+" collected for Ac/No: "+accountItem.getAccountNumber()+". Due Amt: "+newDueAmt;
         String phoneNumber = accountItem.getPhoneNumber();
 
+        try {
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(phoneNumber, null, msg, null, null);
+            Toasty.success(getContext(),"Message Sent").show();
+        } catch (Exception ex) {
+            //Toast.makeText(getContext(),ex.getMessage().toString(),
+              //      Toast.LENGTH_LONG).show();
+            ex.printStackTrace();
+        }
     }
+
+
+
+
+
 }

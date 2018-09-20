@@ -32,7 +32,7 @@ import es.dmoral.toasty.Toasty;
 public class AddCGroupActivity extends AppCompatActivity {
 
     Calendar startCalendar,endCalender;
-    EditText nameET,noOfMonthsEt,startDateEt,endDateEt;
+    EditText nameET,noOfMonthsEt,startDateEt,endDateEt,amountEt;
     DatePickerDialog.OnDateSetListener startDate,endDate;
     FloatingActionButton saveBtn;
 
@@ -60,10 +60,12 @@ public class AddCGroupActivity extends AppCompatActivity {
         startDateEt = findViewById(R.id.add_cgroup_start_date_et);
         endDateEt = findViewById(R.id.add_cgroup_end_date_et);
         saveBtn = findViewById(R.id.add_cgroup_done_fab);
+        amountEt = findViewById(R.id.add_cgroup_amount_et);
 
 
         nameET.addTextChangedListener(watcher);
         noOfMonthsEt.addTextChangedListener(watcher);
+        amountEt.addTextChangedListener(watcher);
 
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -162,7 +164,8 @@ public class AddCGroupActivity extends AppCompatActivity {
         @Override
         public void afterTextChanged(Editable editable) {
             if(nameET.getText().toString().length()==0 ||
-                    noOfMonthsEt.getText().toString().length()==0 ){
+                    noOfMonthsEt.getText().toString().length()==0 ||
+                    amountEt.getText().toString().length() == 0){
 
                 saveBtn.setVisibility(View.GONE);
 
@@ -228,10 +231,12 @@ public class AddCGroupActivity extends AppCompatActivity {
         final String groupId = timestamp+"";
         String groupName = nameET.getText().toString();
         String noOfmonths= noOfMonthsEt.getText().toString();
+        String amount = amountEt.getText().toString();
         String startDate = startCalendar.getTimeInMillis()+"";
         String endDate= endCalender.getTimeInMillis()+"";
 
-        CGroupItem newGroup = new CGroupItem(groupId,groupName,noOfmonths,startDate,endDate);
+
+        CGroupItem newGroup = new CGroupItem(groupId,groupName,noOfmonths,startDate,endDate,amount);
 
         final DocumentReference newGroupRef = db.collection("users").document(user.getEmail())
                 .collection("groups").document(groupId);

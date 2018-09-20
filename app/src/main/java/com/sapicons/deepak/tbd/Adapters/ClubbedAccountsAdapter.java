@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -299,7 +300,7 @@ public class ClubbedAccountsAdapter  extends ArrayAdapter<CustomerItem> {
                 .create().show();
     }
 
-    private void deductAmountFromAccount(final AccountItem accountItem, String amount,TextView dueAmtTv,
+    private void deductAmountFromAccount(final AccountItem accountItem,final String amount,TextView dueAmtTv,
                                          final View singleAccView, final FancyButton collectBtn){
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -333,6 +334,7 @@ public class ClubbedAccountsAdapter  extends ArrayAdapter<CustomerItem> {
         }
         //dueAmtTv.setText(newAmt);
 
+        final String newDueAmt = newAmt;
 
 
         //update the new info to db
@@ -345,6 +347,7 @@ public class ClubbedAccountsAdapter  extends ArrayAdapter<CustomerItem> {
                     public void onSuccess(Void aVoid) {
                         Toasty.success(context, "Amount Updated!").show();
                         progressDialog.dismiss();
+                        sendMessage(accountItem,amount,newDueAmt);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -528,5 +531,24 @@ public class ClubbedAccountsAdapter  extends ArrayAdapter<CustomerItem> {
     }
 
 
+    private void sendMessage(AccountItem accountItem, String amount, String newDueAmt){
+        String msg1= " Ac/No: "+accountItem.getAccountNumber()+" was closed today.";
+        String msg2= "Rs. "+amount+" collected for Ac/No: "+accountItem.getAccountNumber()+". Due Amt: "+newDueAmt;
+        String phoneNumber = accountItem.getPhoneNumber();
+        String msg="";
+        if(Float.parseFloat(newDueAmt)>1)
+            msg= msg2;
+        else msg=msg1;
+
+        try {
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(phoneNumber, null, msg, null, null);
+            Toasty.success(getContext(),"Message Sent").show();
+        } catch (Exception ex) {
+            //Toast.makeText(getContext(),ex.getMessage().toString(),
+            //      Toast.LENGTH_LONG).show();
+            ex.printStackTrace();
+        }
+    }
 
 }
