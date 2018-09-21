@@ -224,7 +224,8 @@ public class AccountItemAdapter extends ArrayAdapter<AccountItem> {
 
         if(accountItem.getAccoutType().contains("D")) {
 
-            int daysUnpaid =(int) ((currTime-lastCollectionDay)/day );
+            int daysUnpaid =(int) Math.ceil((currTime-lastCollectionDay)/day );
+
             amountToBeCollected = Math.round(daysUnpaid*0.01*loanAmt - totalCollectedAmt)+"";
 
         }
