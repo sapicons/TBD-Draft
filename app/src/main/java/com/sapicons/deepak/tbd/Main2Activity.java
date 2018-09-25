@@ -43,6 +43,7 @@ import com.sapicons.deepak.tbd.Fragments.CustomerFragment;
 import com.sapicons.deepak.tbd.Fragments.DashboardFragment;
 import com.sapicons.deepak.tbd.Fragments.ExpensesFragment;
 import com.sapicons.deepak.tbd.Fragments.ReportsFragment;
+import com.sapicons.deepak.tbd.Services.FindCollectionsTodayService;
 
 import es.dmoral.toasty.Toasty;
 
@@ -80,6 +81,7 @@ public class Main2Activity extends AppCompatActivity
 
         startDashboardFragment();
         askForPermissions();
+        startServices();
 
     }
 
@@ -269,5 +271,11 @@ public class Main2Activity extends AppCompatActivity
                 doubleBackToExitPressedOnce=false;
             }
         }, 2000);
+    }
+
+    public void startServices(){
+
+        //start CollectionsTodayService
+        startService(new Intent(Main2Activity.this, FindCollectionsTodayService.class));
     }
 }

@@ -222,13 +222,24 @@ public class AccountItemAdapter extends ArrayAdapter<AccountItem> {
         if (lastCollectionDay ==0)
             lastCollectionDay= Long.parseLong(accountItem.getStartDate());
 
-        if(accountItem.getAccoutType().contains("D")) {
 
-            int daysUnpaid =(int) Math.ceil((currTime-lastCollectionDay)/day );
+
+
+        /*if(accountItem.getAccoutType().contains("D")) {
+
+            double daysUnpaid = Math.ceil(((float)(currTime-lastCollectionDay))/day );
 
             amountToBeCollected = Math.round(daysUnpaid*0.01*loanAmt - totalCollectedAmt)+"";
 
+
+        }*/
+
+        if(accountItem.getAccoutType().contains("D")) {
+            long startDate = Long.parseLong(accountItem.getStartDate());
+            double noOfDaysAfterStart = Math.ceil(((float)(currTime-startDate))/day);
+            amountToBeCollected = Math.round(noOfDaysAfterStart*0.01*loanAmt - totalCollectedAmt)+"";
         }
+
         else if(accountItem.getAccoutType().contains("M")){
 
             long month = day*30;
@@ -237,10 +248,14 @@ public class AccountItemAdapter extends ArrayAdapter<AccountItem> {
 
             float interestPct = Float.parseFloat(accountItem.getInterestPct());
             amountToBeCollected = Math.round(loanAmt*(interestPct/100)*monthsFromStart - totalCollectedAmt)+"";
+
+
         }
 
         if(amountToBeCollected.contains("-"))
             amountToBeCollected="";
+
+        Log.d("AIA","Amt tbc: "+amountToBeCollected);
         return amountToBeCollected;
     }
 
