@@ -13,7 +13,7 @@ public class AccountItem implements Serializable{
     String accountNumber, startDate,accoutType,firstName, lastName, phoneNumber, amount,interestPct;
     String actualAmt,dueAmt,accountStatus,endDate,customerPicUrl;
     String loanAmt,actualLoanAmt,totalCollectedAmt,latestCollectionTimestamp;
-    String customerId;
+    String customerId,cId;
     public AccountItem(){}
     public AccountItem(String accountNumber, String startDate,String endDate, String accoutType, String firstName, String lastName,
                        String phoneNumber, String amount,String actualAmt,String dueAmt, String interestPct,String accountStatus,
@@ -180,9 +180,19 @@ public class AccountItem implements Serializable{
         return latestCollectionTimestamp;
     }
 
+    public String getcId() {
+        return cId;
+    }
+
+    public void setcId(String cId) {
+        this.cId = cId;
+    }
+
     public void setLatestCollectionTimestamp(String latestCollectionTimestamp) {
         this.latestCollectionTimestamp = latestCollectionTimestamp;
     }
+
+
 
     public static Comparator<AccountItem> AccountNameComparator = new Comparator<AccountItem>() {
         @Override

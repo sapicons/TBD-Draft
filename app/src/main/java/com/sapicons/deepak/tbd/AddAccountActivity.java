@@ -392,6 +392,8 @@ public class AddAccountActivity extends AppCompatActivity  {
                 lastName,phoneNumber,amount,actualAmt,dueAmt,interestPct, accoutStatus,
                 customerPicUrl,loanAmt,actualLoanAmt,"0","0",selectedCustomer.getCustomerId());
 
+        if(accountType.contains("C"))
+            accountItem.setcId(groupItems.get(selectCGroupSpinner.getSelectedItemPosition()).getGroupID());
         newAccRef.set(accountItem)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override

@@ -81,7 +81,7 @@ public class Main2Activity extends AppCompatActivity
 
         startDashboardFragment();
         askForPermissions();
-        startServices();
+        //startServices();
 
     }
 

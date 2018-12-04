@@ -237,6 +237,7 @@ public class AddCGroupActivity extends AppCompatActivity {
 
 
         CGroupItem newGroup = new CGroupItem(groupId,groupName,noOfmonths,startDate,endDate,amount);
+        newGroup.setStatus("open");
 
         final DocumentReference newGroupRef = db.collection("users").document(user.getEmail())
                 .collection("groups").document(groupId);
