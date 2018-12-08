@@ -23,6 +23,7 @@ public class CGroupRecyclerAdapter extends RecyclerView.Adapter<CGroupRecyclerAd
 
     List<CGroupItem> cGroupList;
     Context context;
+    String ACTION=null;
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
@@ -36,6 +37,11 @@ public class CGroupRecyclerAdapter extends RecyclerView.Adapter<CGroupRecyclerAd
 
     public CGroupRecyclerAdapter(List<CGroupItem> cGroupList){
         this.cGroupList = cGroupList;
+    }
+    // another constructor to define the action of a click
+    public CGroupRecyclerAdapter(List<CGroupItem> cGroupList, String ACTION){
+        this.cGroupList = cGroupList;
+        this.ACTION = ACTION;
     }
 
     @NonNull
@@ -58,6 +64,7 @@ public class CGroupRecyclerAdapter extends RecyclerView.Adapter<CGroupRecyclerAd
             public void onClick(View view) {
                 Intent intent = new Intent(context,CCustomers.class);
                 intent.putExtra("c_group",groupItem);
+                intent.putExtra("action",ACTION);
 
                 context.startActivity(intent);
             }

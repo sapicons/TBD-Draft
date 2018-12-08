@@ -28,8 +28,9 @@ public class CCustomers extends AppCompatActivity {
 
     String TAG = "C_CUSTOMERS";
 
-    String GROUPS_STATUS;
+    //String GROUPS_STATUS;
     CGroupItem GROUP_ITEM;
+    String ACTION=null;
 
     RecyclerView recyclerView;
     List<CustomerItem> customerList = new ArrayList<>();
@@ -41,12 +42,14 @@ public class CCustomers extends AppCompatActivity {
         setContentView(R.layout.activity_ccustomers);
 
         Intent intent = getIntent();
-        GROUPS_STATUS = intent.getStringExtra("group_status");
+        //GROUPS_STATUS = intent.getStringExtra("group_status");
+        ACTION = intent.getStringExtra("action");
         // TODO get group object
         Bundle bundle = intent.getExtras();
         GROUP_ITEM = (CGroupItem)bundle.getSerializable("c_group");
-        Log.i(TAG,"STATUS: "+GROUPS_STATUS);
+        Log.i(TAG,"STATUS: "+GROUP_ITEM.getStatus());
         Log.i(TAG,"GROUP_ID: "+GROUP_ITEM.getGroupID());
+        Log.i(TAG,"ACTION: "+ACTION);
 
 
         initialiseViews();
@@ -83,7 +86,17 @@ public class CCustomers extends AppCompatActivity {
                     Log.d(TAG,"Name: "+item.getFirstName());
                     customerList.add(item);
                 }
-                adapter = new CCustomersRecyclerAdapter(customerList);
+
+                // define adapter according to action after customer item is clicked
+
+
+                if(ACTION!=null) {
+                    if (ACTION.equals("C_DAY"))  // this chooses action for C_DAY C_Won collection
+                        adapter = new CCustomersRecyclerAdapter(customerList,GROUP_ITEM, ACTION);
+                }
+                else
+                    adapter = new CCustomersRecyclerAdapter(customerList,GROUP_ITEM);
+
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
                 recyclerView.setLayoutManager(mLayoutManager);
                 recyclerView.setAdapter(adapter);

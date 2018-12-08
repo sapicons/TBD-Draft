@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.sapicons.deepak.tbd.c_manager.CDay;
 import com.sapicons.deepak.tbd.c_manager.CGroups;
 
 import mehdi.sakout.fancybuttons.FancyButton;
@@ -55,5 +56,15 @@ public class CManagerActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        cDayBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CManagerActivity.this,CDay.class);
+                intent.putExtra("group_status","open");
+                startActivity(intent);
+            }
+        });
+
     }
 }

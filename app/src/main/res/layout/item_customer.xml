@@ -11,6 +11,7 @@
         android:layout_margin="5dp">
 
         <RelativeLayout
+            android:id="@+id/item_customer_relative_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <de.hdodenhof.circleimageview.CircleImageView

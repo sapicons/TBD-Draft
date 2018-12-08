@@ -7,4 +7,5 @@
     <color name="color_graylight">#fafafa</color>
     <color name="color_starblue">#09c6df</color>
     <color name="color_endblue">#0bcce6</color>
+    <color name="color_black">#000000</color>
 </resources>
