@@ -182,7 +182,7 @@ public class AccountItemAdapter extends ArrayAdapter<AccountItem> {
 
 
         }
-        else if(accountItem.getAccoutType().contains("M")){
+        else if(accountItem.getAccoutType().contains("M") || accountItem.getAccoutType().contains("C")){
 
             long lastCollectionDate ;
 
@@ -205,12 +205,14 @@ public class AccountItemAdapter extends ArrayAdapter<AccountItem> {
         }
 
 
+
     }
 
     public String getAmountToBeCollected(AccountItem accountItem){
         Calendar calendar = Calendar.getInstance();
         long currTime = calendar.getTimeInMillis();
         long day = 1000 * 60 * 60 * 24;
+        long month = day*30;
 
         String amountToBeCollected="";
         float loanAmt= Float.parseFloat(accountItem.getLoanAmt());
@@ -242,7 +244,7 @@ public class AccountItemAdapter extends ArrayAdapter<AccountItem> {
 
         else if(accountItem.getAccoutType().contains("M")){
 
-            long month = day*30;
+            //long month = day*30;
             long startDate = Long.parseLong(accountItem.getStartDate());
             int monthsFromStart = (int)((currTime-startDate)/month);
 
@@ -250,6 +252,14 @@ public class AccountItemAdapter extends ArrayAdapter<AccountItem> {
             amountToBeCollected = Math.round(loanAmt*(interestPct/100)*monthsFromStart - totalCollectedAmt)+"";
 
 
+        }
+        else if(accountItem.getAccoutType().contains("C")){
+            long startDate = Long.parseLong(accountItem.getStartDate());
+            long endDate = Long.parseLong(accountItem.getEndDate());
+            int totalMonths = (int)((endDate-startDate)/month);
+
+            float monthlyInstallment = loanAmt/totalMonths;
+            amountToBeCollected = (monthlyInstallment-Float.parseFloat(accountItem.getCommissionPerMember()))+"";
         }
 
         if(amountToBeCollected.contains("-"))

@@ -66,7 +66,7 @@ public class AddAccountActivity extends AppCompatActivity  {
     Calendar myCalendar,endCalender;
     EditText amtET,interestPctEt,startDateEt,endDateEt;
     DatePickerDialog.OnDateSetListener date,endDate;
-    LinearLayout interestLL, cGroupLL;
+    LinearLayout interestLL, cGroupLL, amountLL;
     FloatingActionButton saveBtn;
 
     TextView customerNameTV;
@@ -114,6 +114,7 @@ public class AddAccountActivity extends AppCompatActivity  {
 
         interestLL = findViewById(R.id.add_acc_interest_ll);
         cGroupLL = findViewById(R.id.add_acc_cgroup_ll);
+        amountLL = findViewById(R.id.add_acc_amount_ll);
         selectCGroupSpinner = findViewById(R.id.add_acc_choose_cgroup_spinner);
 
 
@@ -157,6 +158,8 @@ public class AddAccountActivity extends AppCompatActivity  {
                     cGroupLL.setVisibility(View.VISIBLE);
                     interestLL.setVisibility(View.GONE);
                     interestPctEt.setText("0");
+                    amtET.setText("10");
+                    amountLL.setVisibility(View.GONE);
 
 
                     getCGroupsFromFirestore();
@@ -379,11 +382,17 @@ public class AddAccountActivity extends AppCompatActivity  {
         String customerPicUrl = selectedCustomer.getPhotoUrl();
 
         String loanAmt = dueAmt;
-        String actualLoanAmt;
+        String actualLoanAmt="";
+
         if(accountType.contains("D")){
             actualLoanAmt = (Float.parseFloat(loanAmt)- (0.1* Float.parseFloat(loanAmt)))+"";
-        }else
+        }else if(accountType.contains("M"))
             actualLoanAmt = dueAmt;
+        else if(accountType.contains("C")){
+            actualAmt=groupItems.get(selectCGroupSpinner.getSelectedItemPosition()).getAmount();
+            dueAmt = actualAmt;
+            actualLoanAmt = actualAmt;
+        }
 
         final DocumentReference newAccRef = db.collection("users").document(user.getEmail())
                 .collection("accounts").document(accNumber);
@@ -394,6 +403,8 @@ public class AddAccountActivity extends AppCompatActivity  {
 
         if(accountType.contains("C"))
             accountItem.setcId(groupItems.get(selectCGroupSpinner.getSelectedItemPosition()).getGroupID());
+
+
         newAccRef.set(accountItem)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override

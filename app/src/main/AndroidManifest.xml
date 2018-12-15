@@ -68,7 +68,7 @@
         <activity android:name=".c_manager.CGroups" />
         <activity android:name=".c_manager.CCustomers" />
         <activity android:name=".c_manager.CDay" />
-        <activity android:name=".c_manager.CommisionCalculation"></activity>
+        <activity android:name=".c_manager.CommissionCalculation"></activity>
     </application>
 
 </manifest>

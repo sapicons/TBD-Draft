@@ -14,6 +14,7 @@ public class AccountItem implements Serializable{
     String actualAmt,dueAmt,accountStatus,endDate,customerPicUrl;
     String loanAmt,actualLoanAmt,totalCollectedAmt,latestCollectionTimestamp;
     String customerId,cId;
+    String commissionPerMember;
     public AccountItem(){}
     public AccountItem(String accountNumber, String startDate,String endDate, String accoutType, String firstName, String lastName,
                        String phoneNumber, String amount,String actualAmt,String dueAmt, String interestPct,String accountStatus,
@@ -37,6 +38,7 @@ public class AccountItem implements Serializable{
         this.totalCollectedAmt=totalCollectedAmt;
         this.latestCollectionTimestamp=latestCollectionTimestamp;
         this.customerId=customerId;
+        this.commissionPerMember="0";
     }
 
     public String getCustomerId() {
@@ -192,7 +194,13 @@ public class AccountItem implements Serializable{
         this.latestCollectionTimestamp = latestCollectionTimestamp;
     }
 
+    public String getCommissionPerMember() {
+        return commissionPerMember;
+    }
 
+    public void setCommissionPerMember(String commissionPerMember) {
+        this.commissionPerMember = commissionPerMember;
+    }
 
     public static Comparator<AccountItem> AccountNameComparator = new Comparator<AccountItem>() {
         @Override

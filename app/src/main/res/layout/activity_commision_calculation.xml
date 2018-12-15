@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.sapicons.deepak.tbd.c_manager.CommisionCalculation">
+    tools:context="com.sapicons.deepak.tbd.c_manager.CommissionCalculation">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -136,7 +136,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="Commision"
+                android:text="Commission"
                 android:textSize="12sp"/>
         </LinearLayout>
     </ScrollView>

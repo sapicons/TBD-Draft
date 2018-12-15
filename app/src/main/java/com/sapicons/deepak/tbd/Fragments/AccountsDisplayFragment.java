@@ -67,7 +67,7 @@ public class AccountsDisplayFragment extends ListFragment implements SearchView.
     private Context mContext;
 
     ProgressDialog progressDialog;
-    String TAG = "TAG";
+    String TAG = "ADF";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -150,6 +150,7 @@ public class AccountsDisplayFragment extends ListFragment implements SearchView.
         //final CollectionReference docRef = db.collection("users").document(user.getEmail()).collection("");
 
         db.collection("users").document(user.getEmail()).collection("accounts")
+                .whereEqualTo("accountStatus","open")
 
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
@@ -341,8 +342,30 @@ public class AccountsDisplayFragment extends ListFragment implements SearchView.
                         return true;
                 }
 
+        }
+        else if(item.getAccoutType().contains("C")){
 
+            long currTime = calendar.getTimeInMillis();
+            long day = 1000 * 60 * 60 * 24;   // a day
+            long lastCollectionDate ;
 
+            if( item.getLatestCollectionTimestamp() ==null || Long.parseLong(item.getLatestCollectionTimestamp()) == 0)
+                lastCollectionDate = Long.parseLong(item.getStartDate());
+            else
+                lastCollectionDate = Long.parseLong(item.getLatestCollectionTimestamp());
+            int noOfDays = (int)((currTime-lastCollectionDate)/(day));
+
+            Log.d("ADF","NO of days: "+noOfDays);
+            Log.d("ADF","last collection date: "+lastCollectionDate);
+            // if started on the same day of the previous months and account is open return true
+
+            Log.d("ADF","amt to be collected: "+getAmountToBeCollected(item));
+
+            //if(getAmountToBeCollected(item)>0)
+              //  return true;
+            if((noOfDays >= 0 && item.getAccountStatus().equalsIgnoreCase("open")) ) {
+                return true;
+            }
         }
 
         return false;

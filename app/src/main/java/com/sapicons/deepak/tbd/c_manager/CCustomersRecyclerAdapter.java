@@ -19,7 +19,6 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import es.dmoral.toasty.Toasty;
-import mehdi.sakout.fancybuttons.FancyButton;
 
 /**
  * Created by Deepak Prasad on 04-12-2018.
@@ -89,10 +88,12 @@ public class CCustomersRecyclerAdapter extends RecyclerView.Adapter<CCustomersRe
     public void chooseAction(CustomerItem customerItem){
         if(ACTION!=null) {
             if (ACTION.equals("C_DAY")) {
-                Toasty.info(context, "C_DAY").show();
-                Intent intent = new Intent(context,CommisionCalculation.class);
+                //Toasty.info(context, "C_DAY").show();
+
+                Intent intent = new Intent(context,CommissionCalculation.class);
                 intent.putExtra("c_group",groupItem);
                 intent.putExtra("customer_item",customerItem);
+                intent.putExtra("no_of_customers",customerList.size());
 
                 context.startActivity(intent);
             }
