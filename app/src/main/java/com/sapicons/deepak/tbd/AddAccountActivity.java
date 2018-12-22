@@ -392,6 +392,8 @@ public class AddAccountActivity extends AppCompatActivity  {
             actualAmt=groupItems.get(selectCGroupSpinner.getSelectedItemPosition()).getAmount();
             dueAmt = actualAmt;
             actualLoanAmt = actualAmt;
+            amount  = actualAmt;
+            loanAmt = actualAmt;
         }
 
         final DocumentReference newAccRef = db.collection("users").document(user.getEmail())

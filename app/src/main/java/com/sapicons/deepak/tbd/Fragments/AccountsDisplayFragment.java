@@ -347,13 +347,14 @@ public class AccountsDisplayFragment extends ListFragment implements SearchView.
 
             long currTime = calendar.getTimeInMillis();
             long day = 1000 * 60 * 60 * 24;   // a day
+            long month = day*30;
             long lastCollectionDate ;
 
             if( item.getLatestCollectionTimestamp() ==null || Long.parseLong(item.getLatestCollectionTimestamp()) == 0)
                 lastCollectionDate = Long.parseLong(item.getStartDate());
             else
                 lastCollectionDate = Long.parseLong(item.getLatestCollectionTimestamp());
-            int noOfDays = (int)((currTime-lastCollectionDate)/(day));
+            int noOfDays = (int)((currTime-lastCollectionDate)/day);
 
             Log.d("ADF","NO of days: "+noOfDays);
             Log.d("ADF","last collection date: "+lastCollectionDate);

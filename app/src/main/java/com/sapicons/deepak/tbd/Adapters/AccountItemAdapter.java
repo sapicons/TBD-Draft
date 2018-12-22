@@ -256,7 +256,10 @@ public class AccountItemAdapter extends ArrayAdapter<AccountItem> {
         else if(accountItem.getAccoutType().contains("C")){
             long startDate = Long.parseLong(accountItem.getStartDate());
             long endDate = Long.parseLong(accountItem.getEndDate());
+
+            //TODO replace day with month. Currently for testing purpose
             int totalMonths = (int)((endDate-startDate)/month);
+            //int totalMonths = (int)((endDate-startDate)/day);
 
             float monthlyInstallment = loanAmt/totalMonths;
             amountToBeCollected = (monthlyInstallment-Float.parseFloat(accountItem.getCommissionPerMember()))+"";
