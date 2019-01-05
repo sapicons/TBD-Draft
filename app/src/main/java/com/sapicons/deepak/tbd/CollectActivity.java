@@ -23,7 +23,7 @@ public class CollectActivity extends AppCompatActivity {
     public void startCollectFragment(){
         Bundle bundle = new Bundle();
         bundle.putInt("is_collect", 1);
-// set Fragmentclass Arguments
+        // set Fragmentclass Arguments
         Fragment fragment =new ClubAccountsDisplayFragment();
         fragment.setArguments(bundle);
         if(fragment!=null) {

@@ -5,11 +5,9 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.icu.text.NumberFormat;
-import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -22,26 +20,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.sapicons.deepak.tbd.Fragments.AccountsDisplayFragment;
 import com.sapicons.deepak.tbd.Objects.AccountItem;
 import com.sapicons.deepak.tbd.Objects.CollectItem;
-import com.sapicons.deepak.tbd.Objects.CustomerItem;
 import com.sapicons.deepak.tbd.R;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -50,8 +42,6 @@ import java.util.Locale;
 import de.hdodenhof.circleimageview.CircleImageView;
 import es.dmoral.toasty.Toasty;
 import mehdi.sakout.fancybuttons.FancyButton;
-
-import static com.firebase.ui.auth.AuthUI.getApplicationContext;
 
 /**
  * Created by Deepak Prasad on 04-08-2018.
@@ -239,7 +229,16 @@ public class AccountItemAdapter extends ArrayAdapter<AccountItem> {
         if(accountItem.getAccoutType().contains("D")) {
             long startDate = Long.parseLong(accountItem.getStartDate());
             double noOfDaysAfterStart = Math.ceil(((float)(currTime-startDate))/day);
-            amountToBeCollected = Math.round(noOfDaysAfterStart*0.01*loanAmt - totalCollectedAmt)+"";
+            float collectionAmt = Math.round(noOfDaysAfterStart*0.01*loanAmt - totalCollectedAmt);
+
+            // if the closure date is passed and the amount hasn't been collected yet, it will show the total due amount
+            // earlier the amount to be collected was becoming more than the due amount due to the fact that noOfDays were
+            // becoming more
+            if(collectionAmt > Float.parseFloat(accountItem.getDueAmt()))
+                amountToBeCollected = accountItem.getDueAmt();
+            else
+                amountToBeCollected = collectionAmt+"";
+
         }
 
         else if(accountItem.getAccoutType().contains("M")){
@@ -343,7 +342,7 @@ public class AccountItemAdapter extends ArrayAdapter<AccountItem> {
                         Toasty.success(getContext(),"Amount Updated").show();
                         progressDialog.dismiss();
                         //checkPermissionAndSendMessage(accountItem,amount,newDueAmt);
-                        sendMessage(accountItem,amount,newDueAmt);
+                        //sendMessage(accountItem,amount,newDueAmt);
 
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -462,7 +461,7 @@ public class AccountItemAdapter extends ArrayAdapter<AccountItem> {
 
         else{
 
-            sendMessage(accountItem,amount,newDueAmt);
+            //sendMessage(accountItem,amount,newDueAmt);
         }
     }
 

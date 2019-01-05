@@ -5,8 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import com.sapicons.deepak.tbd.c_manager.CDay;
-import com.sapicons.deepak.tbd.c_manager.CGroups;
+import com.sapicons.deepak.tbd.c_manager.CDayActivity;
+import com.sapicons.deepak.tbd.c_manager.CGroupsActivity;
 
 import mehdi.sakout.fancybuttons.FancyButton;
 
@@ -42,7 +42,7 @@ public class CManagerActivity extends AppCompatActivity {
         cCustomersBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(CManagerActivity.this,CGroups.class);
+                Intent intent = new Intent(CManagerActivity.this,CGroupsActivity.class);
                 intent.putExtra("group_status","open");
                 startActivity(intent);
             }
@@ -51,7 +51,7 @@ public class CManagerActivity extends AppCompatActivity {
         cClosedBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(CManagerActivity.this,CGroups.class);
+                Intent intent = new Intent(CManagerActivity.this,CGroupsActivity.class);
                 intent.putExtra("group_status","closed");
                 startActivity(intent);
             }
@@ -60,7 +60,7 @@ public class CManagerActivity extends AppCompatActivity {
         cDayBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(CManagerActivity.this,CDay.class);
+                Intent intent = new Intent(CManagerActivity.this,CDayActivity.class);
                 intent.putExtra("group_status","open");
                 startActivity(intent);
             }

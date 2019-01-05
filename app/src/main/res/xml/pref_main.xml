@@ -18,6 +18,10 @@
             android:defaultValue="true"
             android:key="@string/key_show_total_due"
             android:title="@string/show_total_due" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="@string/key_send_sms"
+            android:title="@string/text_send_sms"/>
 
     </PreferenceCategory>
 

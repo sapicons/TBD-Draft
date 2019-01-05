@@ -6,8 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.sapicons.deepak.tbd.Fragments.AccountsDisplayFragment;
-import com.sapicons.deepak.tbd.Fragments.CustomerDisplayFragment;
+import com.sapicons.deepak.tbd.Fragments.TodaysDueFragment;
 
 public class TodaysDueActivity extends AppCompatActivity {
 
@@ -26,7 +25,7 @@ public class TodaysDueActivity extends AppCompatActivity {
     }
 
     private  void startTodaysDueFragment(){
-        Fragment fragment =new AccountsDisplayFragment();
+        Fragment fragment =new TodaysDueFragment();
         if(fragment!=null) {
             fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.activity_todays_due_content_frame, fragment, "").commit();

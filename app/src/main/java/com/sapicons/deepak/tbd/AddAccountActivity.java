@@ -413,7 +413,7 @@ public class AddAccountActivity extends AppCompatActivity  {
                     public void onSuccess(Void aVoid) {
                         Log.d("TAG","Account added. AccNo: "+ accNumber);
                         addProfitCollectionForDAcc(accountItem);
-                        sendMessageForAccCreation(accountItem);
+                        // TODO send message for account creation
 
 
                     }
@@ -584,18 +584,5 @@ public class AddAccountActivity extends AppCompatActivity  {
     }
 
 
-    private  void sendMessageForAccCreation(AccountItem accountItem){
-        String msg= accountItem.getAccoutType()+" Created: "+accountItem.getAccountNumber()+" Due Amount: "+accountItem.getDueAmt();
-        String phoneNumber = accountItem.getPhoneNumber();
 
-        try {
-            SmsManager smsManager = SmsManager.getDefault();
-            smsManager.sendTextMessage(phoneNumber, null, msg, null, null);
-            Toasty.success(this,"Message Sent").show();
-        } catch (Exception ex) {
-            //Toast.makeText(getContext(),ex.getMessage().toString(),
-            //      Toast.LENGTH_LONG).show();
-            ex.printStackTrace();
-        }
-    }
 }

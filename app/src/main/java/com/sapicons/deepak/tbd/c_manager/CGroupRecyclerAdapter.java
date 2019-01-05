@@ -62,7 +62,7 @@ public class CGroupRecyclerAdapter extends RecyclerView.Adapter<CGroupRecyclerAd
         holder.cGroupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context,CCustomers.class);
+                Intent intent = new Intent(context,CCustomersActivity.class);
                 intent.putExtra("c_group",groupItem);
                 intent.putExtra("action",ACTION);
 

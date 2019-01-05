@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.sapicons.deepak.tbd.c_manager.CGroups">
+    tools:context="com.sapicons.deepak.tbd.c_manager.CGroupsActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/activity_cgroups_recycler_view"

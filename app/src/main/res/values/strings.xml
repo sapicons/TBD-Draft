@@ -133,6 +133,8 @@
     <string name="key_show_total_expenses">key_show_total_expenses</string>
 
     <string name="key_show_total_due">key_show_total_due</string>
+    <string name="key_send_sms">key_send_sms</string>
+    <string name="text_send_sms">Send SMS</string>
 
 
 </resources>

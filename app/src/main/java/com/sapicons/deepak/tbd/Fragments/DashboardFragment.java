@@ -252,7 +252,10 @@ public class DashboardFragment extends Fragment {
 
                 for (QueryDocumentSnapshot doc : value) {
                     AccountItem accountItem = doc.toObject(AccountItem.class);
-                    revenue+=Float.parseFloat(accountItem.getActualLoanAmt());
+                    if(accountItem.getAccoutType().contains("C"))
+                        revenue+=Float.parseFloat(accountItem.getTotalCollectedAmt());
+                    else
+                        revenue+=Float.parseFloat(accountItem.getActualLoanAmt());
 
                 }
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
@@ -317,7 +320,8 @@ public class DashboardFragment extends Fragment {
 
                 for (QueryDocumentSnapshot doc : value) {
                     AccountItem accountItem = doc.toObject(AccountItem.class);
-                    due+=Float.parseFloat(accountItem.getDueAmt());
+                    if(!accountItem.getAccoutType().contains("C"))
+                        due+=Float.parseFloat(accountItem.getDueAmt());
 
                 }
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {

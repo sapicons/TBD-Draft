@@ -65,10 +65,10 @@
             android:name=".Services.FindCollectionsTodayService"
             android:exported="false" />
 
-        <activity android:name=".c_manager.CGroups" />
-        <activity android:name=".c_manager.CCustomers" />
-        <activity android:name=".c_manager.CDay" />
-        <activity android:name=".c_manager.CommissionCalculation"></activity>
+        <activity android:name=".c_manager.CGroupsActivity" />
+        <activity android:name=".c_manager.CCustomersActivity" />
+        <activity android:name=".c_manager.CDayActivity" />
+        <activity android:name=".c_manager.CommissionCalculationActivity"></activity>
     </application>
 
 </manifest>
