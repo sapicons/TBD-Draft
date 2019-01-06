@@ -72,7 +72,8 @@ public class CCustomersActivity extends AppCompatActivity {
 
         collectionReference
                 .whereEqualTo("cId",GROUP_ITEM.getGroupID())
-                .whereEqualTo("accoutType","C Account").addSnapshotListener(new EventListener<QuerySnapshot>() {
+                .whereEqualTo("accoutType","C Account")
+                .whereEqualTo("hasAuctionDone",false).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException e) {
 

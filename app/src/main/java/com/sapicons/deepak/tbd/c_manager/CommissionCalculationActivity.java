@@ -30,6 +30,7 @@ import com.sapicons.deepak.tbd.R;
 import com.sapicons.deepak.tbd.c_manager.model.CCommissionItem;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.Nullable;
@@ -166,6 +167,7 @@ public class CommissionCalculationActivity extends AppCompatActivity {
                 }
 
                 updateCommissionPerMemberInCAccounts(commissionPerMember,cAccountsList);
+                updateCustomerAuctionStatus(customerItem,groupItem);
             }
         });
     }
@@ -190,5 +192,41 @@ public class CommissionCalculationActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+
+    public void updateCustomerAuctionStatus(CustomerItem customerItem,CGroupItem cGroupItem){
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        final CollectionReference customerAccRef = FirebaseFirestore.getInstance().collection("users")
+                .document(user.getEmail()).collection("accounts");
+
+        customerAccRef.whereEqualTo("customerId",customerItem.getCustomerId())
+                .whereEqualTo("cId",cGroupItem.getGroupID())
+                .whereEqualTo("accountStatus","open")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                        if(e!=null){
+                            Log.w(TAG,"Fetch failed: E: "+e);
+                            return;
+                        }
+                        for(QueryDocumentSnapshot doc: queryDocumentSnapshots){
+                            AccountItem accountItem = doc.toObject(AccountItem.class);
+                            setAuctionStatusToTrue(accountItem,customerAccRef);
+                        }
+                    }
+                });
+    }
+
+    private void setAuctionStatusToTrue(AccountItem accountItem,CollectionReference customerAccRef){
+        DocumentReference documentReference = customerAccRef.document(accountItem.getAccountNumber());
+        documentReference.update("hasAuctionDone",true)
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e(TAG,"Auction setting to false failed! E: "+e);
+                    }
+                });
     }
 }

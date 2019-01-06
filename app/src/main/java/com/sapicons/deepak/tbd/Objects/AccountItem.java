@@ -15,6 +15,7 @@ public class AccountItem implements Serializable{
     String loanAmt,actualLoanAmt,totalCollectedAmt,latestCollectionTimestamp;
     String customerId,cId;
     String commissionPerMember;
+    boolean hasAuctionDone;
     public AccountItem(){}
     public AccountItem(String accountNumber, String startDate,String endDate, String accoutType, String firstName, String lastName,
                        String phoneNumber, String amount,String actualAmt,String dueAmt, String interestPct,String accountStatus,
@@ -39,6 +40,7 @@ public class AccountItem implements Serializable{
         this.latestCollectionTimestamp=latestCollectionTimestamp;
         this.customerId=customerId;
         this.commissionPerMember="0";
+        this.hasAuctionDone = false;
     }
 
     public String getCustomerId() {
@@ -200,6 +202,15 @@ public class AccountItem implements Serializable{
 
     public void setCommissionPerMember(String commissionPerMember) {
         this.commissionPerMember = commissionPerMember;
+    }
+
+
+    public boolean isHasAuctionDone() {
+        return hasAuctionDone;
+    }
+
+    public void setHasAuctionDone(boolean hasAuctionDone) {
+        this.hasAuctionDone = hasAuctionDone;
     }
 
     public static Comparator<AccountItem> AccountNameComparator = new Comparator<AccountItem>() {
